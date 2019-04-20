@@ -7,7 +7,7 @@ module.exports = router => {
   router.route("/user/:id").get(userController.getUser);
 
   /**
-   * get a user profile
+   * get a user profile (returns user and articles)
    */
   router.route("/user/profile/:id").get(userController.getUserProfile);
 
