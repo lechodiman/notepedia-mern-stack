@@ -9,7 +9,7 @@ export default (state = initialState, action) => {
     case "SET_USER":
       return {
         ...state,
-        isAuth: Object.keys(action.user) > 0,
+        isAuth: action.user ? true : false,
         user: action.user
       };
     case "FOLLOW_USER":

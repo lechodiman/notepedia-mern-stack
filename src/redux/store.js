@@ -1,4 +1,4 @@
-import { applyMiddleware, compose, createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 //import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from "redux-devtools-extension/developmentOnly";
 import thunk from "redux-thunk";
@@ -11,7 +11,7 @@ export const history = createBrowserHistory();
 export default function configureStore() {
   const store = createStore(
     createRootReducer(history), // root reducer with router state
-    compose(
+    composeWithDevTools(
       applyMiddleware(
         routerMiddleware(history),
         thunk // for dispatching history actions
