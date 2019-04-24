@@ -51,7 +51,7 @@ class SignInWith extends Component {
                   onSuccess={responseGoogle}
                   onFailure={responseGoogle}
                 >
-                  <i className="fa fa-google" />
+                  <i className="fab fa-google" />
                   <span> SignIn with Google</span>
                 </GoogleLogin>
               </li>

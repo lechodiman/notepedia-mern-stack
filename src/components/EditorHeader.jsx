@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import storiesLogo from "../assets/img/stories-logo.svg";
 
 class EditorHeader extends Component {
   render() {
@@ -8,11 +9,7 @@ class EditorHeader extends Component {
           <div className="container-fluid col-md-10 col-md-offset-1">
             <div className="navbar-header">
               <a className="navbar-brand" id="logo" href="/">
-                <img
-                  alt="Stories"
-                  src="/assets/img/stories-logo.svg"
-                  height="40"
-                />
+                <img alt="Stories" src={storiesLogo} height="40" />
               </a>
             </div>
             <ul className="nav navbar-nav filter-links">
@@ -36,7 +33,7 @@ class EditorHeader extends Component {
                     aria-expanded="false"
                   >
                     {this.props.loading === true ? "Publishing" : "Publish"}{" "}
-                    <i className="fa fa-globe" />
+                    <i className="fas fa-globe" />
                   </button>
                 </li>
               </ul>

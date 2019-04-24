@@ -60,7 +60,7 @@ class ArticleView extends Component {
                   width="40"
                 />
                 <div className="post-info">
-                  <div data-react-className="PopoverLink" data-react-props="">
+                  <div className="PopoverLink" data-react-props="">
                     <span className="popover-link" data-reactroot="">
                       <a href={`/profile/${author_id}`}>{author_name}</a>
                     </span>
@@ -95,7 +95,7 @@ class ArticleView extends Component {
                       data-behavior="trigger-overlay"
                       type="submit"
                     >
-                      <i className="fa fa-heart-o" />
+                      <i className="far fa-heart" />
                       <span className="hide-text">Like</span>
                     </button>
                     <span className="like-count">{claps}</span>
@@ -103,7 +103,7 @@ class ArticleView extends Component {
                 </div>
                 <div className="pull-left">
                   <a className="response-icon-wrapper">
-                    <i className="fa fa-comment-o" />
+                    <i className="far fa-comment" />
                     <span
                       className="response-count"
                       data-behavior="response-count"
@@ -204,7 +204,7 @@ class ArticleView extends Component {
                       type="submit"
                     >
                       {" "}
-                      <i className="fa fa-heart-o" />
+                      <i className="far fa-heart" />
                       <span className="hide-text">Like</span>
                     </button>
                   </form>{" "}
@@ -216,7 +216,7 @@ class ArticleView extends Component {
                     className="response-icon-wrapper"
                     href="https://my-medium-clone.herokuapp.com/posts/it-s-looking-good#responses"
                   >
-                    <i className="fa fa-comment-o" />
+                    <i className="far fa-comment" />
                     <span
                       className="response-count"
                       data-behavior="response-count"
@@ -250,13 +250,13 @@ class ArticleView extends Component {
                     height="35"
                     width="35"
                   />
-                  <div data-react-className="PopoverLink">
+                  <div className="PopoverLink">
                     <span className="popover-link" data-reactroot="">
                       <a href={`/profile/${author_img}`}>{author_name}</a>
                     </span>
                   </div>
                 </div>
-                <div data-react-className="UserFollowButton">
+                <div className="UserFollowButton">
                   {this.props.user ? (
                     <FollowButton
                       user={`${this.props.user.following}`}

@@ -26,7 +26,7 @@ class Feed extends Component {
             width="40"
           />
           <div className="post-info">
-            <div data-react-className="PopoverLink">
+            <div className="PopoverLink">
               <span className="popover-link" data-reactroot="">
                 <a href={`/profile/${article.author._id}`}>
                   {article.author.name}
@@ -66,7 +66,7 @@ class Feed extends Component {
                   data-behavior="trigger-overlay"
                   type="submit"
                 >
-                  <i className="fa fa-heart-o" />
+                  <i className="fas fa-heart" />
                   <span className="hide-text">Like</span>
                 </button>
               </form>

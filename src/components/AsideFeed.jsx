@@ -26,7 +26,7 @@ class AsideFeed extends Component {
           </a>
           <br />
           <small>
-            <div data-react-className="PopoverLink" data-react-props="">
+            <div className="PopoverLink" data-react-props="">
               <span className="popover-link" data-reactroot="">
                 <a href={`/profile/${_article.author._id}`}>
                   {_article.author.name}
@@ -41,7 +41,7 @@ class AsideFeed extends Component {
       <div>
         <aside className="col-md-4 main-sidebar">
           <h4 className="small-heading border-top">Featured Authors</h4>
-          <div data-react-className="TagList" data-react-props="">
+          <div className="TagList" data-react-props="">
             <div className="tags-wrapper undefined" data-reactroot="">
               {authors}
             </div>

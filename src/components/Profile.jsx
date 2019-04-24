@@ -40,7 +40,7 @@ function ItemList({ items }) {
                 <h1 className="hero-title">{items.profile.user.name}</h1>
                 <p className="hero-description">{items.profile.user.email}</p>
                 <div className="hero-location">
-                  <i className="fa fa-map-marker" />
+                  <i className="fas fa-map-marker" />
                   {items.profile.user.provider}
                 </div>
               </div>
@@ -56,7 +56,7 @@ function ItemList({ items }) {
             </header>
             <div>
               <div
-                data-react-className="UserFollowContainer"
+                className="UserFollowContainer"
                 data-react-props='{"followerCount":6,"followingCount":2,"following":false,"followed_id":396,"hideButton":false,"username":"mark","overlayTrigger":true}'
               >
                 <div data-reactroot="">
@@ -108,7 +108,7 @@ function ItemList({ items }) {
                   width="40"
                 />
                 <div className="post-info">
-                  <div data-react-className="PopoverLink">
+                  <div className="PopoverLink">
                     <span className="popover-link" data-reactroot="">
                       <a href="#">{items.profile.user.name}</a>
                     </span>
@@ -147,7 +147,7 @@ function ItemList({ items }) {
                         data-behavior="trigger-overlay"
                         type="submit"
                       >
-                        <i className="fa fa-heart-o" />
+                        <i className="far fa-heart" />
                         <span className="hide-text">Like</span>
                       </button>
                     </form>

@@ -144,7 +144,7 @@ class Editor extends Component {
                   width="40"
                 />
                 <div className="post-info">
-                  <div data-react-className="PopoverLink" data-react-props="">
+                  <div className="PopoverLink" data-react-props="">
                     <span className="popover-link" data-reactroot="">
                       <a href="">{this.props.user.name}</a>
                     </span>
@@ -168,7 +168,7 @@ class Editor extends Component {
                 />
                 <div className="form-group">
                   <span className="picture_upload">
-                    <i className="fa fa-camera" onClick={this.handleClick} />
+                    <i className="fas fa-camera" onClick={this.handleClick} />
                   </span>
                 </div>
                 <div className="form-group">
