@@ -34,7 +34,7 @@ class FollowButton extends Component {
                   ? "button green-border-button follow-button"
                   : "button green-inner-button follow-button"
               }
-              href="javascript:void(0);"
+              href="#"
             >
               {f === -1 ? "Follow" : "Following"}
             </a>

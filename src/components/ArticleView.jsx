@@ -83,12 +83,8 @@ class ArticleView extends Component {
                 <p />
               </div>
               <div className="post-tags">
-                <a className="tag" href="">
-                  Story
-                </a>
-                <a className="tag" href="">
-                  Community
-                </a>
+                <a className="tag">Story</a>
+                <a className="tag">Community</a>
               </div>
               <div className="post-stats clearfix">
                 <div className="pull-left">
@@ -106,7 +102,7 @@ class ArticleView extends Component {
                   </div>
                 </div>
                 <div className="pull-left">
-                  <a className="response-icon-wrapper" href="#">
+                  <a className="response-icon-wrapper">
                     <i className="fa fa-comment-o" />
                     <span
                       className="response-count"

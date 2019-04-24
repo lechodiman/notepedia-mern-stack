@@ -17,7 +17,7 @@ class EditorHeader extends Component {
             </div>
             <ul className="nav navbar-nav filter-links">
               <li>
-                <a href="javascript:void(0);" data-behavior="editor-message" />
+                <a href="#" data-behavior="editor-message" />
               </li>
             </ul>
             <div className="collapse navbar-collapse">

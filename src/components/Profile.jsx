@@ -110,9 +110,7 @@ function ItemList({ items }) {
                 <div className="post-info">
                   <div data-react-className="PopoverLink">
                     <span className="popover-link" data-reactroot="">
-                      <a href="javascript:void(0);">
-                        {items.profile.user.name}
-                      </a>
+                      <a href="#">{items.profile.user.name}</a>
                     </span>
                   </div>
                   <small>Published • a must read</small>
@@ -171,7 +169,7 @@ function ItemList({ items }) {
                   </div>
                 </div>
                 <div className="response-count pull-right">
-                  <a className="response-count" href="javascript:void(0);">
+                  <a className="response-count" href="#">
                     0 responses
                   </a>
                 </div>
