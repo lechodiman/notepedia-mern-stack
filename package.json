@@ -12,6 +12,7 @@
     "express": "^4.16.4",
     "helmet": "^3.16.0",
     "history": "^4.9.0",
+    "medium-editor": "^5.23.3",
     "mongoose": "^5.5.2",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
