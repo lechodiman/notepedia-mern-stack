@@ -8,7 +8,7 @@ class Header extends Component {
         <div className="UserOverlay" data-react-props="{}">
           <div className="overlay overlay-hugeinc " data-reactroot="">
             <button className="overlay-close">
-              <span className="glyphicon glyphicon-remove" />
+              <i className="fas fa-minus-circle" />
             </button>
             <nav className="users-overlay">
               <h2 className="grayed-heading center" />

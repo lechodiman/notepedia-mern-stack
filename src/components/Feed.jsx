@@ -15,8 +15,8 @@ class Feed extends Component {
   }
 
   render() {
-    const articles = this.props.articles.reverse().map(article => (
-      <div className="post-panel">
+    const articles = this.props.articles.reverse().map((article, index) => (
+      <div className="post-panel" key={index}>
         <div className="post-metadata">
           <img
             alt=""
@@ -82,7 +82,7 @@ class Feed extends Component {
                   type="submit"
                 >
                   {" "}
-                  <span className="icon-bookmark-o" />
+                  <i className="far fa-bookmark" />
                   <span className="hide-text">Bookmark</span>
                 </button>
               </form>

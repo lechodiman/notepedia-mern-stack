@@ -39,7 +39,7 @@ class SignInWith extends Component {
             type="button"
             className="overlay-close"
           >
-            <span className="glyphicon glyphicon-remove" />
+            <i className="fas fa-minus-circle" />
           </button>
           <nav>
             <h2 className="grayed-heading center">Sign In</h2>
