@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadArticles } from "./../redux/actions/actions";
 import AsideFeed from "./AsideFeed";
+
 const mapStateToProps = state => {
   return {
     articles: state.articles.articles
