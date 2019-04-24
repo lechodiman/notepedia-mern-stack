@@ -27,15 +27,15 @@ class Editor extends Component {
       process.env.NODE_ENV === "production"
         ? "/api/"
         : "http://localhost:5000/api/";
-    const formdata = new FormData();
-    formdata.append("text", this.state.text);
-    formdata.append("image", this.state.imgSrc);
-    formdata.append("title", document.getElementById("editor-title").value);
-    formdata.append("author_id", this.props.user._id);
-    formdata.append("description", this.state.description);
-    formdata.append("claps", 0);
+    const data = new FormData();
+    data.append("text", this.state.text);
+    data.append("image", this.state.imgSrc);
+    data.append("title", document.getElementById("editor-title").value);
+    data.append("author_id", this.props.user._id);
+    data.append("description", this.state.description);
+    data.append("claps", 0);
     axios
-      .post(`${_url}article`, formdata)
+      .post(`${_url}article`, data)
       .then(res => {
         this.setState({
           loading: false
