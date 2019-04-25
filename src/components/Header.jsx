@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import storiesLogo from "../assets/img/stories-logo.svg";
+import { SignOutUser, toggleOpen } from "../redux/actions/actions";
+
 class Header extends Component {
   render() {
     return (
       <div>
-        <div className="UserOverlay" data-react-props="{}">
+        <div className="UserOverlay">
           <div className="overlay overlay-hugeinc " data-reactroot="">
             <button className="overlay-close">
               <i className="fas fa-minus-circle" />
@@ -52,10 +54,15 @@ class Header extends Component {
                   ""
                 )}
                 {this.props.isAuth ? (
-                  ""
+                  <button
+                    className="new-post-button button"
+                    onClick={this.props.SignOutUser}
+                  >
+                    <span>Logout</span>
+                  </button>
                 ) : (
                   <li
-                    onClick={this.props.openSignInWith}
+                    onClick={this.props.toggleOpen}
                     className="sign-in-button"
                   >
                     <a
@@ -81,14 +88,8 @@ const mapStateToProps = state => {
     isAuth: state.authUser.isAuth
   };
 };
-const mapDispatchToProps = dispatch => {
-  return {
-    openSignInWith: () => {
-      dispatch({ type: "TOGGLE_MODAL", modalMode: true });
-    }
-  };
-};
+
 export default connect(
   mapStateToProps,
-  mapDispatchToProps
+  { toggleOpen, SignOutUser }
 )(Header);

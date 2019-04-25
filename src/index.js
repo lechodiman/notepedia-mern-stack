@@ -11,6 +11,7 @@ import { getUser } from "./redux/actions/actions";
 
 const store = configureStore();
 
+// Check if user is already logged in and update state accordingly
 if (localStorage.Auth) {
   store.dispatch({ type: "SET_USER", user: JSON.parse(localStorage.Auth) });
   let userId = JSON.parse(localStorage.Auth)._id;

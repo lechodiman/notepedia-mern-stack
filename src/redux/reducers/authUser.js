@@ -7,9 +7,10 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case "SET_USER":
+      console.log("SET_USER", action);
       return {
         ...state,
-        isAuth: action.user ? true : false,
+        isAuth: Object.keys(action.user).length !== 0,
         user: action.user
       };
     case "FOLLOW_USER":

@@ -95,6 +95,13 @@ export function SignInUser(user_data) {
   };
 }
 
+export function SignOutUser() {
+  return dispatch => {
+    localStorage.removeItem("Auth");
+    dispatch({ type: "SET_USER", user: {} });
+  };
+}
+
 export function toggleClose() {
   return dispatch => {
     dispatch({ type: "TOGGLE_MODAL", modalMode: false });
