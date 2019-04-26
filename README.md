@@ -2,6 +2,19 @@
 
 Web app to create, share and read the best notes you can think of!
 
+- [Notepedia](#notepedia)
+  - [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installing](#installing)
+  - [Running the tests](#running-the-tests)
+  - [Deployment](#deployment)
+  - [Built With](#built-with)
+  - [Contributing](#contributing)
+  - [Versioning](#versioning)
+  - [Authors](#authors)
+  - [License](#license)
+  - [Acknowledgments](#acknowledgments)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
@@ -18,6 +31,12 @@ Give examples
 
 ### Installing
 
+Install MongoDb
+
+```
+
+```
+
 Install dependencies
 
 ```
@@ -25,6 +44,14 @@ yarn
 ```
 
 And to run locally
+
+Run MongoDB
+
+```
+mongod
+```
+
+Run server and client
 
 ```
 yarn dev
@@ -34,23 +61,7 @@ Go to localhost:3000 and start browsing!
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
+No tests for now :)
 
 ## Deployment
 
