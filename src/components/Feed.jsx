@@ -2,12 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { loadArticles } from "./../redux/actions/actions";
 import AsideFeed from "./AsideFeed";
-
-const mapStateToProps = state => {
-  return {
-    articles: state.articles.articles
-  };
-};
+import { Link } from "react-router-dom";
 
 class Feed extends Component {
   componentWillMount() {
@@ -28,9 +23,9 @@ class Feed extends Component {
           <div className="post-info">
             <div className="PopoverLink">
               <span className="popover-link" data-reactroot="">
-                <a href={`/profile/${article.author._id}`}>
+                <Link to={`/profile/${article.author._id}`}>
                   {article.author.name}
-                </a>
+                </Link>
               </span>
             </div>
             <small>Posted • A must read</small>
@@ -45,7 +40,7 @@ class Feed extends Component {
         )}
         <div className="main-body">
           <h3 className="post-title">
-            <a href={`/articleview/${article._id}`}>{article.title}</a>
+            <Link to={`/articleview/${article._id}`}>{article.title}</Link>
           </h3>
           <div className="post-body">
             <p
@@ -53,9 +48,9 @@ class Feed extends Component {
               dangerouslySetInnerHTML={{ __html: article.description }}
             />
           </div>
-          <a className="read-more" href={`/articleview/${article._id}`}>
+          <Link className="read-more" to={`/articleview/${article._id}`}>
             Read more
-          </a>
+          </Link>
         </div>
         <div className="post-stats clearfix">
           <div className="pull-left">
@@ -114,6 +109,13 @@ class Feed extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    articles: state.articles.articles
+  };
+};
+
 export default connect(
   mapStateToProps,
   { loadArticles }

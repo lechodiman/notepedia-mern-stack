@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import storiesLogo from "../assets/img/stories-logo.svg";
 import { SignOutUser, toggleOpen } from "../redux/actions/actions";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
   render() {
@@ -27,28 +28,26 @@ class Header extends Component {
         >
           <div className="container-fluid col-md-10 col-md-offset-1">
             <div className="navbar-header">
-              <a className="navbar-brand" id="logo" href="/">
+              <Link className="navbar-brand" id="logo" to="/">
                 <img alt="Stories" src={storiesLogo} height="40" />
-              </a>
+              </Link>
             </div>
             <ul className="nav navbar-nav filter-links">
               <li>
-                <a className="" href="/">
-                  Top stories
-                </a>
+                <Link to="/">Top stories</Link>
               </li>
             </ul>
             <div className="folding-nav">
               <ul className="nav navbar-nav navbar-right">
                 {this.props.isAuth ? (
                   <li className="new-post-button">
-                    <a
+                    <Link
                       className="button"
                       data-behavior="trigger-overlay"
-                      href="/editor"
+                      to="/editor"
                     >
                       Write a story
-                    </a>
+                    </Link>
                   </li>
                 ) : (
                   ""
@@ -65,13 +64,13 @@ class Header extends Component {
                     onClick={this.props.toggleOpen}
                     className="sign-in-button"
                   >
-                    <a
+                    <Link
                       className="button green-border-button"
                       data-behavior="trigger-overlay"
-                      href="#"
+                      to="#"
                     >
                       Sign in / Sign up
-                    </a>
+                    </Link>
                   </li>
                 )}
               </ul>

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getArticle, clap, follow } from "./../redux/actions/actions";
 import PropTypes from "prop-types";
 import FollowButton from "./FollowButton";
+import { Link } from "react-router-dom";
 
 const mapStateToProps = state => {
   return {
@@ -62,7 +63,7 @@ class ArticleView extends Component {
                 <div className="post-info">
                   <div className="PopoverLink" data-react-props="">
                     <span className="popover-link" data-reactroot="">
-                      <a href={`/profile/${author_id}`}>{author_name}</a>
+                      <Link to={`/profile/${author_id}`}>{author_name}</Link>
                     </span>
                   </div>
                   <small>Published • nice story</small>
@@ -252,7 +253,7 @@ class ArticleView extends Component {
                   />
                   <div className="PopoverLink">
                     <span className="popover-link" data-reactroot="">
-                      <a href={`/profile/${author_img}`}>{author_name}</a>
+                      <Link to={`/profile/${author_img}`}>{author_name} </Link>
                     </span>
                   </div>
                 </div>

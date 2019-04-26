@@ -13,9 +13,7 @@ export default function(InputComponent) {
       return <InputComponent {...this.props} />;
     }
   }
-  Authenticate.contextTypes = {
-    router: PropTypes.object.isRequired
-  };
+
   const mapStateToProps = state => {
     return {
       isAuth: state.authUser.isAuth

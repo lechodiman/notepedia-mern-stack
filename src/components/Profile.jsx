@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import FollowButton from "./FollowButton";
 import { getUserProfile, follow } from "./../redux/actions/actions";
+import { Link } from "react-router-dom";
 
 class Profile extends Component {
   componentDidMount() {
@@ -97,8 +97,8 @@ function ItemList({ items }) {
           data-animation="fadeInUp-fadeOutDown"
         >
           <h4 className="small-heading border-top">latest</h4>
-          {items.profile.articles.map(article => (
-            <div className="post-panel">
+          {items.profile.articles.map((article, index) => (
+            <div className="post-panel" key={index}>
               <div className="post-metadata">
                 <img
                   alt="mark"
@@ -110,7 +110,7 @@ function ItemList({ items }) {
                 <div className="post-info">
                   <div className="PopoverLink">
                     <span className="popover-link" data-reactroot="">
-                      <a href="#">{items.profile.user.name}</a>
+                      <Link to="#">{items.profile.user.name}</Link>
                     </span>
                   </div>
                   <small>Published • a must read</small>
@@ -126,7 +126,9 @@ function ItemList({ items }) {
               )}
               <div className="main-body">
                 <h3 className="post-title">
-                  <a href={`/articleview/${article._id}`}>{article.title}</a>
+                  <Link to={`/articleview/${article._id}`}>
+                    {article.title}
+                  </Link>
                 </h3>
                 <div className="post-body">
                   <p
@@ -134,9 +136,9 @@ function ItemList({ items }) {
                     dangerouslySetInnerHTML={{ __html: article.description }}
                   />
                 </div>
-                <a className="read-more" href={`/articleview/${article._id}`}>
+                <Link className="read-more" to={`/articleview/${article._id}`}>
                   Read more
-                </a>
+                </Link>
               </div>
               <div className="post-stats clearfix">
                 <div className="pull-left">
@@ -169,9 +171,7 @@ function ItemList({ items }) {
                   </div>
                 </div>
                 <div className="response-count pull-right">
-                  <a className="response-count" href="#">
-                    0 responses
-                  </a>
+                  <a className="response-count">0 responses</a>
                 </div>
               </div>
             </div>
@@ -181,9 +181,7 @@ function ItemList({ items }) {
     </div>
   );
 }
-Profile.propTypes = {
-  params: PropTypes.object.isRequired
-};
+
 const mapStateToProps = state => {
   return {
     _article: state.articles.article,

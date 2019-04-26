@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class AsideFeed extends Component {
   render() {
@@ -11,7 +12,7 @@ class AsideFeed extends Component {
         return self.indexOf(a) === b;
       })
       .map((__article, index) => (
-        <a href="javascript:void(0);" className="tag" key={index}>
+        <a className="tag" key={index}>
           {__article}
         </a>
       ));
@@ -21,16 +22,16 @@ class AsideFeed extends Component {
           <span className="count-button">{i}</span>
         </div>
         <div className="top-stories-links">
-          <a className="post-title" href={`/articleview/${_article._id}`}>
+          <Link className="post-title" to={`/articleview/${_article._id}`}>
             {_article.title}
-          </a>
+          </Link>
           <br />
           <small>
             <div className="PopoverLink" data-react-props="">
               <span className="popover-link" data-reactroot="">
-                <a href={`/profile/${_article.author._id}`}>
+                <Link to={`/profile/${_article.author._id}`}>
                   {_article.author.name}
-                </a>
+                </Link>
               </span>
             </div>
           </small>

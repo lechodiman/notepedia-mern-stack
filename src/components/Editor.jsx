@@ -152,7 +152,7 @@ class Editor extends Component {
                   <small>{this.props.user.email}</small>
                 </div>
               </div>
-              <form className="editor-form main-editor" autocomplete="off">
+              <form className="editor-form main-editor" autoComplete="off">
                 <div
                   className={
                     this.state.imgSrc != null
@@ -182,7 +182,7 @@ class Editor extends Component {
                 <div className="form-group">
                   <textarea id="medium-editable" className="medium-editable" />
                 </div>
-                <div class="hidden">
+                <div className="hidden">
                   <input
                     type="file"
                     onChange={() => this.previewImg()}
