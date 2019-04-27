@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import storiesLogo from "../assets/img/stories-logo.svg";
-import { SignOutUser, toggleOpen } from "../redux/actions/actions";
+import { SignOutUser } from "./../actions/authActions";
+import { toggleOpen } from "./../actions/commonActions";
+
 import { Link } from "react-router-dom";
 
 class Header extends Component {

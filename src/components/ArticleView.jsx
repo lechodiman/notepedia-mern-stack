@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getArticle, clap, follow } from "./../redux/actions/actions";
-import PropTypes from "prop-types";
+import { getArticle, clap } from "./../actions/articleActions";
+import { follow } from "./../actions/userActions";
 import FollowButton from "./FollowButton";
 import { Link } from "react-router-dom";
 

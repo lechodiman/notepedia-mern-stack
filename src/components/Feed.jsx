@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { loadArticles } from "./../redux/actions/actions";
+import { loadArticles } from "./../actions/articleActions";
 import AsideFeed from "./AsideFeed";
 import { Link } from "react-router-dom";
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { follow, toggleOpen } from "./../redux/actions/actions";
+import { follow } from "./../actions/userActions";
+import { toggleOpen } from "./../actions/commonActions";
+
 /** renders bg white when user not follow, render green when followed */
 class FollowButton extends Component {
   constructor(props) {

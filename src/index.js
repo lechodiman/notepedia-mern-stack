@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "connected-react-router";
-import configureStore, { history } from "./redux/store";
+import configureStore, { history } from "./store";
 import { Switch, Route } from "react-router-dom";
 import "./assets/medium.css";
 import App from "./App";
 
-import { getUser } from "./redux/actions/actions";
+import { getUser } from "./actions/userActions";
 
 const store = configureStore();
 

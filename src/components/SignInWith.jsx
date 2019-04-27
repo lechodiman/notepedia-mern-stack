@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import GoogleLogin from "react-google-login";
-import {
-  SignInUser,
-  toggleClose,
-  toggleOpen
-} from "./../redux/actions/actions";
+import { SignInUser } from "./../actions/authActions";
+import { toggleClose, toggleOpen } from "./../actions/commonActions";
 
 class SignInWith extends Component {
   render() {
