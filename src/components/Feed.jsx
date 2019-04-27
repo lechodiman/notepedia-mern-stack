@@ -32,7 +32,7 @@ class Feed extends Component {
           </div>
         </div>
         {article.feature_img.length > 0 ? (
-          <div class="post-picture-wrapper">
+          <div className="post-picture-wrapper">
             <img src={article.feature_img} alt="Thumb" />
           </div>
         ) : (
