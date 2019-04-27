@@ -63,6 +63,7 @@ class Editor extends Component {
   componentDidMount() {
     const editor = new MediumEditor(/*dom, */ ".medium-editable", {
       autoLink: true,
+      imageDragging: true,
       delay: 1000,
       targetBlank: true,
       toolbar: {
