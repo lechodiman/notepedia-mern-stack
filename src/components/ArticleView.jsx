@@ -5,13 +5,6 @@ import PropTypes from "prop-types";
 import FollowButton from "./FollowButton";
 import { Link } from "react-router-dom";
 
-const mapStateToProps = state => {
-  return {
-    _article: state.articles.article,
-    user: state.authUser.user
-  };
-};
-
 class ArticleView extends Component {
   componentDidMount() {
     document.body.className = "posts show";
@@ -275,9 +268,14 @@ class ArticleView extends Component {
     );
   }
 }
-ArticleView.propTypes = {
-  params: PropTypes.object.isRequired
+
+const mapStateToProps = state => {
+  return {
+    _article: state.articles.article,
+    user: state.authUser.user
+  };
 };
+
 export default connect(
   mapStateToProps,
   {
