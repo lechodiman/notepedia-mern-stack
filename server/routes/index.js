@@ -1,5 +1,5 @@
-const user = require("./user");
-const article = require("./article");
+const user = require("./api/user");
+const article = require("./api/article");
 
 module.exports = router => {
   user(router);
