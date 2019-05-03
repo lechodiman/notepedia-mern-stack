@@ -2,7 +2,7 @@
 const express = require("express");
 const routes = require("./routes/");
 
-const connectDB = require("../config/db");
+const connectDB = require("./config/db");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
