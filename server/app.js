@@ -1,15 +1,17 @@
 /** require dependencies */
 const express = require("express");
 const routes = require("./routes/");
-const mongoose = require("mongoose");
+
+const connectDB = require("../config/db");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const helmet = require("helmet");
 const cloudinary = require("cloudinary");
 
 const app = express();
+connectDB();
 const router = express.Router();
-const url = process.env.MONGODB_URI || "mongodb://localhost:27017/medium";
+
 
 /** configure cloudinary */
 cloudinary.config({
@@ -17,14 +19,6 @@ cloudinary.config({
   api_key: "621964442761743",
   api_secret: "owSxzmx6zvozdTxnGmGwlRfipZo"
 });
-
-try {
-  mongoose.connect(url, {
-    useNewUrlParser: true
-  });
-} catch (error) {
-  console.log("Could not connect to mongo DB");
-}
 
 let port = 5000 || process.env.PORT;
 
