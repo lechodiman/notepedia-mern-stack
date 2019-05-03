@@ -15,7 +15,7 @@ let NoteSchema = new Schema({
     {
       author: {
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "user"
       },
       text: String
     }
@@ -29,14 +29,14 @@ NoteSchema.methods.comment = function(comment) {
   this.comments.push(comment);
   return this.save();
 };
-NoteSchema.methods.addAuthor = function(author_id) {
-  this.author = author_id;
+NoteSchema.methods.addAuthor = function(authorId) {
+  this.author = authorId;
   return this.save();
 };
-NoteSchema.methods.getUserNotes = function(_id) {
-  Note.find({ author: _id }).then(notes => {
+NoteSchema.methods.getUserNotes = function(authorId) {
+  Note.find({ author: authorId }).then(notes => {
     return notes;
   });
 };
 
-module.exports = mongoose.model("Article", NoteSchema);
+module.exports = Note = mongoose.model("note", NoteSchema);
