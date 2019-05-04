@@ -1,0 +1,60 @@
+# Create a new note
+POST http://localhost:5000/api/notes/
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzYwOCwiZXhwIjoxNTU3Mjk3NjA4fQ.W3eZX5nPSs4P3Y8ER_K69bLaTFjw9f4Sdx4UuudqdiQ
+Content-Type: application/json
+
+{
+  "title": "Intro to Machine Learning v3",
+  "text": "Yeah this is a nice intro"
+}
+
+###
+
+# Get all notes
+GET http://localhost:5000/api/notes/ HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzYwOCwiZXhwIjoxNTU3Mjk3NjA4fQ.W3eZX5nPSs4P3Y8ER_K69bLaTFjw9f4Sdx4UuudqdiQ
+
+###
+
+# Get single note by ID
+GET http://localhost:5000/api/notes/5cccfc3eda06bb3094d448ef HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzYwOCwiZXhwIjoxNTU3Mjk3NjA4fQ.W3eZX5nPSs4P3Y8ER_K69bLaTFjw9f4Sdx4UuudqdiQ
+
+### 
+
+# Delete note by ID
+
+DELETE http://localhost:5000/api/notes/5cccfc3eda06bb3094d448ef HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzYwOCwiZXhwIjoxNTU3Mjk3NjA4fQ.W3eZX5nPSs4P3Y8ER_K69bLaTFjw9f4Sdx4UuudqdiQ
+
+###
+
+# Like a note
+
+PUT http://localhost:5000/api/notes/like/5cca0b524e5eeb2ab8c47d59 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjODlkZjdiZDQxMjMxODVjZGMzMmU1In0sImlhdCI6MTU1NjY3MjA5MywiZXhwIjoxNTU3MDMyMDkzfQ.tBsMVB1wmGl9BVLc9HY7cq8WNx3VTQZXaOnaIJqm8pE
+
+###
+
+# Unlike a note
+
+PUT http://localhost:5000/api/notes/unlike/5cca0b524e5eeb2ab8c47d59 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjODlkZjdiZDQxMjMxODVjZGMzMmU1In0sImlhdCI6MTU1NjY3MjA5MywiZXhwIjoxNTU3MDMyMDkzfQ.tBsMVB1wmGl9BVLc9HY7cq8WNx3VTQZXaOnaIJqm8pE
+
+###
+
+# Comment a note
+
+PUT http://localhost:5000/api/notes/comment/5cccff96ebf4bc09b40b04a7 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzYwOCwiZXhwIjoxNTU3Mjk3NjA4fQ.W3eZX5nPSs4P3Y8ER_K69bLaTFjw9f4Sdx4UuudqdiQ
+Content-Type: application/json
+
+{
+  "text": "Delete me v4"
+}
+###
+
+# Delete a comment on a post by ID
+
+DELETE  http://localhost:5000/api/notes/comment/5cccff96ebf4bc09b40b04a7/5cccffa3ebf4bc09b40b04a8 HTTP/1.1
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzYwOCwiZXhwIjoxNTU3Mjk3NjA4fQ.W3eZX5nPSs4P3Y8ER_K69bLaTFjw9f4Sdx4UuudqdiQ

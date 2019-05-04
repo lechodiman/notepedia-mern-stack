@@ -1,32 +1,47 @@
 const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-let UserSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  provider: String,
-  provider_id: String,
-  token: String,
-  provider_pic: String,
+const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  avatar: {
+    type: String
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
   followers: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      type: Schema.Types.ObjectId,
+      ref: "user"
     }
   ],
   following: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User"
+      type: Schema.Types.ObjectId,
+      ref: "user"
     }
   ]
 });
-UserSchema.methods.follow = function(user_id) {
-  if (this.following.indexOf(user_id) === -1) {
-    this.following.push(user_id);
+UserSchema.methods.follow = function(userId) {
+  if (this.following.indexOf(userId) === -1) {
+    this.following.push(userId);
   }
   return this.save();
 };
-UserSchema.methods.addFollower = function(fs) {
-  this.followers.push(fs);
+UserSchema.methods.addFollower = function(follower) {
+  this.followers.push(follower);
 };
-module.exports = mongoose.model("User", UserSchema);
+module.exports = User = mongoose.model("user", UserSchema);

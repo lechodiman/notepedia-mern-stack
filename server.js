@@ -1,17 +1,18 @@
-/** require dependencies */
 const express = require("express");
-const routes = require("./routes/");
 
 const connectDB = require("./config/db");
+const users = require("./routes/api/users");
+const notes = require("./routes/api/notes");
+const auth = require("./routes/api/auth");
 const cors = require("cors");
-const bodyParser = require("body-parser");
-const helmet = require("helmet");
 const cloudinary = require("cloudinary");
 
 const app = express();
 connectDB();
-const router = express.Router();
 
+app.use(cors());
+// Init Middleware (now body-parser comes with express)
+app.use(express.json({ extended: false }));
 
 /** configure cloudinary */
 cloudinary.config({
@@ -20,17 +21,12 @@ cloudinary.config({
   api_secret: "owSxzmx6zvozdTxnGmGwlRfipZo"
 });
 
+// User Routes
+app.use("/api/users", users);
+app.use("/api/notes", notes);
+app.use("/api/auth", auth);
+
 let port = 5000 || process.env.PORT;
-
-/* set up routes */
-routes(router);
-
-/* set up middlewares */
-app.use(cors());
-app.use(bodyParser.json());
-app.use(helmet());
-
-app.use("/api", router);
 
 /** start server */
 app.listen(port, () => {
