@@ -133,13 +133,15 @@ router.get("/profile/:id", async (req, res) => {
 
 // Follow a user
 // TODO: Check if this routes works as expected
-router.post("/follow", auth, async (req, res) => {
+router.post("/follow/:id", auth, async (req, res) => {
   try {
-    const userToFollowId = req.body.user_id;
+    const userToFollowId = req.params.id;
 
     const user = User.findById(req.user.id);
 
     user.follow(userToFollowId);
+
+    // TODO: Followed user must have this user as a follower
 
     return res.json({
       msg: "User followed"
