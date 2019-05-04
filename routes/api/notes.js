@@ -4,7 +4,7 @@ const cloudinary = require("cloudinary");
 
 const express = require("express");
 const router = express.Router();
-
+const { check, validationResult } = require("express-validator/check");
 const auth = require("../../middleware/auth");
 const Note = require("../../models/Note");
 const User = require("../../models/User");

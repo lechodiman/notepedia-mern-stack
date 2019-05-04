@@ -87,7 +87,7 @@ router.post(
 );
 
 // Get a user
-// TODO: check if useful
+// TODO: Check if get single user is used in frontend
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -111,7 +111,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Get user profile (user and articles)
-// TODO: maybe create separate routes for profiles
+// TODO: Maybe create separate route to get user profiles ?
 router.get("/profile/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -132,7 +132,7 @@ router.get("/profile/:id", async (req, res) => {
 });
 
 // Follow a user
-// TODO: check if user is following and the other user is being followed afterwards
+// TODO: Check if this routes works as expected
 router.post("/follow", auth, async (req, res) => {
   try {
     const userToFollowId = req.body.user_id;
