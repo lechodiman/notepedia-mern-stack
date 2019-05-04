@@ -12,7 +12,11 @@ const User = require("../../models/User");
 // @route    POST api/notes
 // @desc     Create a note
 // @access   Private
-router.post("/", multipartWare, async (req, res) => {
+router.post("/", [multipartWare, auth,     [
+      check("text", "Text is required")
+        .not()
+        .isEmpty()
+    ]], async (req, res) => {
   try {
     const user = await User.findById(req.user.id).select("-password");
 
@@ -69,7 +73,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", auth, async (req, res) => {
   try {
     const note = await Note.findById(req.params.id)
-      .populate("author")
+      .populate("author", "-password")
       .populate("comments.author");
 
     if (!note) {
@@ -141,7 +145,7 @@ router.put(
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
-        user: req.user.id
+        author: req.user.id
       };
 
       note.comments = [newComment, ...note.comments];
@@ -174,13 +178,13 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     }
 
     // Check user
-    if (comment.user.toString() !== req.user.id) {
+    if (comment.author.toString() !== req.user.id) {
       return res.status(401).json({ message: "User not authorized" });
     }
 
     // Get remove index
     const removeIndex = note.comments
-      .map(comment => comment.user.toString())
+      .map(comment => comment.author.toString())
       .indexOf(req.user.id);
 
     note.comments.splice(removeIndex, 1);
