@@ -10,7 +10,7 @@ const { check, validationResult } = require("express-validator/check");
 const User = require("../../models/User");
 
 // @route   GET api/users/
-// @desc    Register route
+// @desc    Register a user
 // @access  Public
 router.post(
   "/",
@@ -132,7 +132,7 @@ router.get("/profile/:id", async (req, res) => {
 });
 
 // Follow a user
-// TODO: check if user is following and the other user is being followed
+// TODO: check if user is following and the other user is being followed afterwards
 router.post("/follow", auth, async (req, res) => {
   try {
     const userToFollowId = req.body.user_id;

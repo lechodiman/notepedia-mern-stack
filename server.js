@@ -3,6 +3,7 @@ const express = require("express");
 const connectDB = require("./config/db");
 const users = require("./routes/api/users");
 const notes = require("./routes/api/notes");
+const auth = require("./routes/api/auth");
 const cors = require("cors");
 const cloudinary = require("cloudinary");
 
@@ -23,6 +24,7 @@ cloudinary.config({
 // User Routes
 app.use("/api/users", users);
 app.use("/api/notes", notes);
+app.use("/api/auth", auth);
 
 let port = 5000 || process.env.PORT;
 

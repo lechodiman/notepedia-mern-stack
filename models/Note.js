@@ -17,7 +17,17 @@ let NoteSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "user"
       },
-      text: String
+      text: { type: String, required: true },
+      name: {
+        type: String
+      },
+      avatar: {
+        type: String
+      },
+      date: {
+        type: Date,
+        default: Date.now
+      }
     }
   ]
 });
