@@ -5,7 +5,6 @@ const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const secretOrKey = config.get("secretOrKey");
 const { check, validationResult } = require("express-validator/check");
 
 const User = require("../../models/User");
@@ -88,6 +87,7 @@ router.post(
 );
 
 // Get a user
+// TODO: check if useful
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -111,6 +111,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Get user profile (user and articles)
+// TODO: maybe create separate routes for profiles
 router.get("/profile/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -131,6 +132,7 @@ router.get("/profile/:id", async (req, res) => {
 });
 
 // Follow a user
+// TODO: check if user is following and the other user is being followed
 router.post("/follow", auth, async (req, res) => {
   try {
     const userToFollowId = req.body.user_id;
