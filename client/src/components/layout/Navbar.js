@@ -3,23 +3,31 @@ import { Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="navbar bg-dark">
-      <h1>
-        <Link to="/">
-          <i className="fas fa-code" /> DevConnector
-        </Link>
-      </h1>
-      <ul>
-        <li>
-          <Link to="profiles.html">Developers</Link>
-        </li>
-        <li>
-          <Link to="/register">Register</Link>
-        </li>
-        <li>
-          <Link to="/login">Login</Link>
-        </li>
-      </ul>
+    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+      <Link to="/" className="navbar-brand">
+        Notepedia
+      </Link>
+      <button
+        className="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span className="navbar-toggler-icon" />
+      </button>
+      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div className="navbar-nav">
+          <Link to="/register" className="nav-item nav-link">
+            Sign In
+          </Link>
+          <Link to="/login" className="nav-item nav-link">
+            Get Started
+          </Link>
+        </div>
+      </div>
     </nav>
   );
 }

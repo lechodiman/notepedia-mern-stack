@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import FollowButton from "./FollowButton";
-import { getUserProfile, follow } from "./../actions/userActions";
+import { getUserProfile, follow } from "../../actions/userActions";
 import { Link } from "react-router-dom";
 
 class Profile extends Component {

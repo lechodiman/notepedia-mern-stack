@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import storiesLogo from "../assets/img/stories-logo.svg";
-import { SignOutUser } from "./../actions/authActions";
-import { toggleOpen } from "./../actions/commonActions";
+import { SignOutUser } from "../../actions/authActions";
+import { toggleOpen } from "../../actions/commonActions";
 
 import { Link } from "react-router-dom";
 
@@ -31,7 +30,7 @@ class Header extends Component {
           <div className="container-fluid col-md-10 col-md-offset-1">
             <div className="navbar-header">
               <Link className="navbar-brand" id="logo" to="/">
-                <img alt="Stories" src={storiesLogo} height="40" />
+                Logo
               </Link>
             </div>
             <ul className="nav navbar-nav filter-links">
