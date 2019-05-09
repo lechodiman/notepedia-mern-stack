@@ -1,31 +1,52 @@
+import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
+  USER_LOADED,
+  LOGIN_SUCCESS
+} from "../actions/types";
+
 const initialState = {
-  user: {},
-  isAuth: false,
-  profile: {}
+  // The jwt token is store in the localStorage
+  token: localStorage.getItem("token"),
+  isAuthenticated: null,
+  // loading will change if we get data back
+  loading: true,
+  // the current user
+  user: null
 };
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case "SET_USER":
-      console.log("SET_USER", action);
+export default function(state = initialState, action) {
+  const { type, payload } = action;
+  switch (type) {
+    case USER_LOADED:
       return {
         ...state,
-        isAuth: Object.keys(action.user).length !== 0,
-        user: action.user
+        isAuthenticated: true,
+        loading: false,
+        user: payload
       };
-    case "FOLLOW_USER":
-      let user = Object.assign({}, state.user);
-      user.following.push(action.user_id);
+    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
+      // For both REGISTER_SUCCESS and LOGIN_SUCCESS we want to do the following:
+
+      // Save token to local storage
+      localStorage.setItem("token", payload.token);
+
       return {
         ...state,
-        user: user
+        ...payload,
+        isAuthenticated: true,
+        loading: false
       };
-    case "SET_PROFILE":
+    case REGISTER_FAIL:
+      localStorage.removeItem("token");
       return {
         ...state,
-        profile: action.profile
+        token: null,
+        isAuthenticated: false,
+        loading: false
       };
     default:
       return state;
   }
-};
+}
