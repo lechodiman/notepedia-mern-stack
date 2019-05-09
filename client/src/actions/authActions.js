@@ -7,8 +7,33 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   CLEAR_PROFILE,
-  LOGOUT
+  LOGOUT,
+  AUTH_ERROR
 } from "./types";
+import setAuthToken from "../utils/setAuthToken";
+
+// Load user: hit GET /api/auth to check if user is authenticated
+export const loadUser = () => async dispatch => {
+  // Check if there is a token in localStorage
+  if (localStorage.token) {
+    // Set token to headers as default
+    setAuthToken(localStorage.token);
+  }
+
+  try {
+    const res = await axios.get("/api/auth");
+
+    // if no errors, update state
+    dispatch({
+      type: USER_LOADED,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: AUTH_ERROR
+    });
+  }
+};
 
 // Register a user
 export const register = ({ name, email, password }) => async dispatch => {
@@ -31,6 +56,7 @@ export const register = ({ name, email, password }) => async dispatch => {
     });
 
     // TODO: LOAD USER
+    loadUser();
   } catch (err) {
     const errors = err.response.data.errors;
 
