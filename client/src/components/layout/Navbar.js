@@ -1,45 +1,69 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { logout } from "../../actions/authActions";
 
+import {
+  Collapse,
+  Navbar as BootNavbar,
+  NavbarToggler,
+  Nav,
+  NavItem
+} from "reactstrap";
+
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onToggle = e => {
+    setIsOpen(!isOpen);
+  };
+
   const authLinks = (
-    <ul>
-      <li>
-        <Link to="/">Profile</Link>
-      </li>
-      <li>
-        <a href="#!" onClick={logout}>
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <Link to="/" className="nav-link">
+          Profile
+        </Link>
+      </NavItem>
+      <NavItem>
+        <a href="#!" onClick={logout} className="nav-link">
           <i className="fas fa-sign-out-alt" />{" "}
           <span className="hide-sm">Logout</span>
         </a>
-      </li>
-    </ul>
+      </NavItem>
+    </Nav>
   );
 
   const guestLinks = (
-    <ul>
-      <li>
-        <Link to="/register">Register</Link>
-      </li>
-      <li>
-        <Link to="/login">Login</Link>
-      </li>
-    </ul>
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <Link to="/register" className="nav-link">
+          Register
+        </Link>
+      </NavItem>
+      <NavItem>
+        <Link to="/login" className="nav-link">
+          Login
+        </Link>
+      </NavItem>
+    </Nav>
   );
 
   return (
-    <Navbar className="navbar navbar-expand-lg navbar-light bg-light">
+    <BootNavbar className="navbar navbar-expand-lg navbar-light bg-light">
       <Link to="/" className="navbar-brand">
         Notepedia
       </Link>
 
-      {!loading && (
-        <Fragment>{isAuthenticated ? authLinks : guestLinks} </Fragment>
-      )}
-    </Navbar>
+      <NavbarToggler onClick={onToggle} />
+
+      <Collapse isOpen={isOpen} navbar>
+        {!loading && (
+          <Fragment>{isAuthenticated ? authLinks : guestLinks} </Fragment>
+        )}
+      </Collapse>
+    </BootNavbar>
   );
 };
 
