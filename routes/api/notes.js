@@ -223,17 +223,13 @@ router.patch('/:id', auth, async (req, res) => {
       return res.status(401).json({ message: 'User not authorized' });
     }
 
-    if (req.body.title) {
-      note.title = req.body.title;
-    }
-    if (req.body.text) {
-      note.text = req.body.text;
-    }
-    if (req.body.feature_img) {
-      note.feature_img = req.body.feature_img;
-    }
-    await note.save();
-    res.json(note);
+    const updatedNote = await Note.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      { new: true }
+    );
+
+    res.json(updatedNote);
   } catch (err) {
     console.log(err);
     res.status(500).send('Server Error');
