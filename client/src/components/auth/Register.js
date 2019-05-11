@@ -23,10 +23,6 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     setFormData(newState);
   };
 
-  if (isAuthenticated) {
-    return <Redirect to="/" />;
-  }
-
   const onSubmit = async e => {
     e.preventDefault();
     if (password !== password2) {
@@ -36,6 +32,10 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       register({ name, email, password });
     }
   };
+
+  if (isAuthenticated) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <Fragment>
