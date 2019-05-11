@@ -15,9 +15,9 @@ const Feed = (props) => {
       const description2 = "Im describing my note";
 
     // TODO: Create action loadNotes (and the rest of the workflow)
-    useEffect(() => {
-        const loadedNotes = loadNotes();
-    }, [])
+    // useEffect(() => {
+    //     const loadedNotes = loadNotes();
+    // }, [])
 
     const feedLayout = {
         display: 'grid',

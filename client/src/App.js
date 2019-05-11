@@ -24,9 +24,7 @@ function App() {
         
         <Feed />
         
-        {/* <div>
-          <NotePost title="My First Note" text="This is my first note." description="asd" />
-        </div> */}
+        
       </Fragment>
     </Router>
   );
