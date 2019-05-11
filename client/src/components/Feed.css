@@ -1,0 +1,8 @@
+.feed-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr 440px 1fr 300px;
+}
+
+.feed-layout > * {
+    grid-column: 3;
+}
