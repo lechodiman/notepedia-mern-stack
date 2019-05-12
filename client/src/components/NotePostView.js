@@ -29,6 +29,8 @@ const NotePost = props => {
     marginBottom: "8px"
   }
 
+  // TODO: work on css for notePost & add button to read note
+  // TODO: add bookmark button feature
   return (
     <div>
       <div style={myContainer}>
@@ -36,8 +38,8 @@ const NotePost = props => {
           <h1 style={titleStyle}>{props.title}</h1>
         </div>
           <div style={descriptionStyle}>{props.description}</div>
-          <Button color="primary">Clap</Button>
-          <i class="far fa-heart" />
+          <Button color="primary">Bookmark</Button>
+          <i class="far fa-bookmark" />
       </div>
     </div>
   );
