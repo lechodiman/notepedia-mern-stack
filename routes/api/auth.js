@@ -9,7 +9,7 @@ const router = express.Router();
 const User = require("../../models/User");
 
 // @route   GET api/auth
-// @desc    Tests post route
+// @desc    Validate user and send it back
 // @access  Public
 router.get("/", auth, async (req, res) => {
   try {

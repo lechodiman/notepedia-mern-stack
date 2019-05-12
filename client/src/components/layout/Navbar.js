@@ -1,35 +1,82 @@
-import React from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { logout } from "../../actions/authActions";
 
-function Navbar() {
+import {
+  Collapse,
+  Navbar as BootNavbar,
+  NavbarToggler,
+  Nav,
+  NavItem
+} from "reactstrap";
+
+const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const onToggle = e => {
+    setIsOpen(!isOpen);
+  };
+
+  const authLinks = (
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <Link to="/" className="nav-link">
+          Profile
+        </Link>
+      </NavItem>
+      <NavItem>
+        <a href="#!" onClick={logout} className="nav-link">
+          <i className="fas fa-sign-out-alt" />{" "}
+          <span className="hide-sm">Logout</span>
+        </a>
+      </NavItem>
+    </Nav>
+  );
+
+  const guestLinks = (
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <Link to="/register" className="nav-link">
+          Register
+        </Link>
+      </NavItem>
+      <NavItem>
+        <Link to="/login" className="nav-link">
+          Login
+        </Link>
+      </NavItem>
+    </Nav>
+  );
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <BootNavbar className="navbar navbar-expand-lg navbar-light bg-light">
       <Link to="/" className="navbar-brand">
         Notepedia
       </Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div className="navbar-nav">
-          <Link to="/register" className="nav-item nav-link">
-            Get Started
-          </Link>
-          <Link to="/login" className="nav-item nav-link">
-            Log In
-          </Link>
-        </div>
-      </div>
-    </nav>
-  );
-}
 
-export default Navbar;
+      <NavbarToggler onClick={onToggle} />
+
+      <Collapse isOpen={isOpen} navbar>
+        {!loading && (
+          <Fragment>{isAuthenticated ? authLinks : guestLinks} </Fragment>
+        )}
+      </Collapse>
+    </BootNavbar>
+  );
+};
+
+Navbar.propTypes = {
+  logout: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logout }
+)(Navbar);

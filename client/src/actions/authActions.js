@@ -55,8 +55,7 @@ export const register = ({ name, email, password }) => async dispatch => {
       payload: res.data
     });
 
-    // TODO: LOAD USER
-    loadUser();
+    dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -87,7 +86,7 @@ export const login = (email, password) => async dispatch => {
       payload: res.data
     });
 
-    // TODO: load User
+    dispatch(loadUser());
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -100,6 +99,8 @@ export const login = (email, password) => async dispatch => {
     });
   }
 };
+
+// Logout / Clear Profile
 export const logout = () => dispatch => {
   dispatch({ type: CLEAR_PROFILE });
   dispatch({ type: LOGOUT });
