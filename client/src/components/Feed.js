@@ -16,12 +16,13 @@ const Feed = () => {
 
     // TODO: Create action loadNotes (and the rest of the workflow)
     useEffect(() => {
-      console.log("Im inside my effect hook.");
+        console.log("Im inside my effect hook.");
+        const loadedNotes = loadNotes();
+        console.log("loadedNotes:");
+        console.log(JSON.stringify(loadedNotes));
     })
 
-    const loadedNotes = loadNotes();
-    console.log("loadedNotes:");
-    console.log(JSON.stringify(loadedNotes));
+    
 
     const feedLayout = {
         display: 'grid',
