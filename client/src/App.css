@@ -6,3 +6,6 @@
   --danger-color: #dc3545;
   --success-color: #28a745;
 }
+.app {
+  border: 1px solid red;
+}
