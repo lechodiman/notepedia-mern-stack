@@ -1,15 +1,13 @@
 import axios from "axios";
+import { LOAD_NOTES } from "./types";
 
-const url =
-  process.env.NODE_ENV === "production"
-    ? "/api/"
-    : "http://localhost:5000/api/";
+// const url =
+//   process.env.NODE_ENV === "production"
+//     ? "/api/"
+//     : "http://localhost:5000/api/";
 
 // Loads all notes from the DB
-export function loadNotes() {
-    return  async dispatch => {
-        let res = axios.get('${url}notes');
-        let notes = await res.data;
-        dispatch({ type: "LOAD_NOTES", notes});
-    }
-}
+export const loadNotes = () => async dispatch => {
+    const res = await axios.get("/api/notes");
+    dispatch({ type: LOAD_NOTES, payload: res.data});
+};

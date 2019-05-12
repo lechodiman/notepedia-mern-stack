@@ -1,14 +1,10 @@
 import { combineReducers } from "redux";
 import articles from "./articleReducer";
-import authUser from "./authReducer";
-import common from "./commonReducer";
-import { connectRouter } from "connected-react-router";
+import auth from "./authReducer";
+import alert from "./alertReducer";
 
-export default history => {
-  return combineReducers({
-    router: connectRouter(history),
-    articles,
-    authUser,
-    common
-  });
-};
+export default combineReducers({
+  articles,
+  auth,
+  alert
+});

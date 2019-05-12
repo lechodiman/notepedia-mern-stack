@@ -21,10 +21,10 @@ function Navbar() {
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
           <Link to="/register" className="nav-item nav-link">
-            Sign In
+            Get Started
           </Link>
           <Link to="/login" className="nav-item nav-link">
-            Get Started
+            Log In
           </Link>
         </div>
       </div>
