@@ -40,9 +40,9 @@ function App() {
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Feed} />
             </Switch>
           </section>
-          <Route exact path="/" component={Feed} />
         </Fragment>
       </Router>
     </Provider>
