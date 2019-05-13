@@ -5,6 +5,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "cd client && yarn start",
+    "client-install": "cd client && yarn",
     "dev": "concurrently \"yarn server\" \"yarn client\" "
   },
   "dependencies": {

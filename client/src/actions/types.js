@@ -16,3 +16,5 @@ export const LOGOUT = "LOGOUT";
 
 // Note types
 export const LOAD_NOTES = "LOAD_NOTES";
+
+export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
