@@ -3,11 +3,10 @@ import { loadNotes } from "../actions/noteActions";
 import NotePost from "./NotePostView";
 import { connect } from "react-redux";
 
-const Feed = ({ notes, loadNotes }) => {
+const Feed = ({ allNotes, loadNotes }) => {
 
   useEffect(() => {
     loadNotes();
-    console.log("Im inside my effect hook.");
   }, []);
 
   const feedLayout = {
@@ -20,7 +19,7 @@ const Feed = ({ notes, loadNotes }) => {
   };
 
   // Maps notes retrieved from the DB into NotePost components to display in feed
-  const displayNotes = notes.map(note => (
+  const displayNotes = allNotes.map(note => (
     <NotePost title={note.title} description={note.description} />
   ));
 
@@ -34,7 +33,7 @@ const Feed = ({ notes, loadNotes }) => {
 };
 
 const mapStateToProps = state => ({
-  notes: state.notes.notes
+  allNotes: state.notes.allNotes
 });
 
 export default connect(

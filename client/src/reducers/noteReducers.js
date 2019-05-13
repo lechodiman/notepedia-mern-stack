@@ -1,8 +1,8 @@
 import { LOAD_NOTES } from "../actions/types";
 
 const initialState = {
-  notes: [],
-  note: {}
+  allNotes: [],
+  myNote: {}
 };
 
 export default (state = initialState, action) => {
@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
     case LOAD_NOTES:
       return {
         ...state,
-        notes: payload
+        allNotes: payload
       };
     default:
       return state;

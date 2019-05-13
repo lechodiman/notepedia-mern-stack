@@ -42,7 +42,7 @@ function App() {
               <Route exact path="/login" component={Login} />
             </Switch>
           </section>
-          <Feed />
+          <Route exact path="/" component={Feed} />
         </Fragment>
       </Router>
     </Provider>
