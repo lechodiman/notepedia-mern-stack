@@ -12,47 +12,55 @@ const User = require("../../models/User");
 // @route    POST api/notes
 // @desc     Create a note
 // @access   Private
-router.post("/", [multipartWare, auth,     [
+router.post(
+  "/",
+  [
+    multipartWare,
+    auth,
+    [
       check("text", "Text is required")
         .not()
-        .isEmpty()
-    ]], async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select("-password");
+        .isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    try {
+      const user = await User.findById(req.user.id).select("-password");
 
-    const { text, title, claps, description } = req.body;
+      const { text, title, claps, description } = req.body;
 
-    let noteParameters = {
-      text,
-      title,
-      claps,
-      description,
-      feature_img: "",
-      author: req.user.id
-    };
-
-    if (req.files && req.files.image) {
-      const uploadedImage = cloudinary.uploader.upload(req.files.image.path, {
-        resource_type: "image",
-        eager: [{ effect: "sepia" }]
-      });
-
-      noteParameters = {
-        ...noteParameters,
-        feature_img: uploadedImage.url
+      let noteParameters = {
+        text,
+        title,
+        claps,
+        description,
+        feature_img: "",
+        author: req.user.id,
       };
+
+      if (req.files && req.files.image) {
+        const uploadedImage = cloudinary.uploader.upload(req.files.image.path, {
+          resource_type: "image",
+          eager: [{ effect: "sepia" }],
+        });
+
+        noteParameters = {
+          ...noteParameters,
+          feature_img: uploadedImage.url,
+        };
+      }
+
+      const note = new Note(noteParameters);
+
+      const savedNote = await note.save();
+
+      res.json(savedNote);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server Error");
     }
-
-    const note = new Note(noteParameters);
-
-    const savedNote = await note.save();
-
-    res.json(savedNote);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
   }
-});
+);
 
 // @route    GET api/notes
 // @desc     Get all notes
@@ -128,8 +136,8 @@ router.put(
     [
       check("text", "Text is required")
         .not()
-        .isEmpty()
-    ]
+        .isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -145,7 +153,7 @@ router.put(
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
-        author: req.user.id
+        author: req.user.id,
       };
 
       note.comments = [newComment, ...note.comments];
@@ -194,6 +202,36 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     res.json(note.comments);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    PATCH api/notes/:id/
+// @desc     Update a note
+// @access   Private
+router.patch("/:id", auth, async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+
+    // Check if the note exists
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
+
+    // Check user
+    if (note.author.toString() !== req.user.id) {
+      return res.status(401).json({ message: "User not authorized" });
+    }
+
+    const updatedNote = await Note.findByIdAndUpdate(
+      { _id: req.params.id },
+      { $set: req.body },
+      { new: true }
+    );
+
+    res.json(updatedNote);
+  } catch (err) {
+    console.log(err);
     res.status(500).send("Server Error");
   }
 });
