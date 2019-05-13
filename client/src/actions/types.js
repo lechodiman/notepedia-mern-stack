@@ -13,4 +13,8 @@ export const USER_LOADED = "USER_LOADED";
 export const AUTH_ERROR = "AUTH_ERROR";
 export const CLEAR_PROFILE = "CLEAR_PROFILE";
 export const LOGOUT = "LOGOUT";
+
+// Note types
+export const LOAD_NOTES = "LOAD_NOTES";
+
 export const ACCOUNT_DELETED = "ACCOUNT_DELETED";

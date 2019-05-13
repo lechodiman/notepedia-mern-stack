@@ -5,6 +5,7 @@ import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
+import Feed from "./components/Feed"
 import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
@@ -31,6 +32,7 @@ function App() {
   }, []);
 
   return (
+
     <Provider store={store}>
       <Router>
         <Fragment>
@@ -41,6 +43,7 @@ function App() {
             <Switch>
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Feed} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
           </section>
