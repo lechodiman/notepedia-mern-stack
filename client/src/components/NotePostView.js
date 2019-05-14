@@ -1,26 +1,23 @@
-import React, { Fragment } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
   CardTitle,
   CardBody,
   CardText,
-  CardImg
 } from 'reactstrap';
 
-
+// TODO: Add feature_img to the view
 const NotePost = props => {
 
   const myContainer = {
-    display: "grid"
-  }
-  const myRow = {
-    gridTemplateRows: "5px 1fr 2px"
+    marginBottom: "10px"
   }
 
   const descriptionStyle = {
     fontFamily: "Lato sans-serif",
-    fontSize: "26px",
+    fontSize: "18px",
     fontWeight: "700",
     padding: "0",
     margin: "56px 0 -13px -1.883px",
@@ -31,23 +28,26 @@ const NotePost = props => {
 
   const titleStyle = {
     fontFamily: "Playfair Display serif",
-    fontSize: "48px",
+    fontSize: "40px",
     textAlign: "left",
     marginBottom: "8px"
   }
 
-  // TODO: work on css for notePost & add button to read note
+  // TODO: work on css for notePost
   // TODO: add bookmark button feature
+  // TODO: fix warnings/errors
   return (
-    <Fragment>
-      <Card>
-        <CardBody>
-          <CardTitle style={titleStyle}>{props.title}</CardTitle>
-          <CardText style={descriptionStyle}>{props.description}</CardText>
-          <Button color="primary">Bookmark</Button>
-        </CardBody>
-      </Card>
-    </Fragment>
+    <Card style={myContainer}>
+      <CardBody>
+        <li key={props.id}>
+          <Link to={'/notes/${props._id}'} style={{ textDecoration: 'none', color: 'black' }}>
+            <CardTitle style={titleStyle}>{props.title}</CardTitle>
+          </Link>
+        </li>
+        <CardText style={descriptionStyle}>{props.description}</CardText>
+        <Button color="primary">Bookmark</Button>
+      </CardBody>
+    </Card>
   );
 };
 

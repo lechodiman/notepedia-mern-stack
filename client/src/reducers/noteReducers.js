@@ -1,4 +1,4 @@
-import { LOAD_NOTES } from "../actions/types";
+import { LOAD_NOTES, LOAD_SINGLE_NOTE } from "../actions/types";
 
 const initialState = {
   allNotes: [],
@@ -12,6 +12,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         allNotes: payload
+      };
+    case LOAD_SINGLE_NOTE:
+      return {
+        ...state,
+        myNote: payload
       };
     default:
       return state;

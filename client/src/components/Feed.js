@@ -7,7 +7,7 @@ const Feed = ({ allNotes, loadNotes }) => {
 
   useEffect(() => {
     loadNotes();
-  }, []);
+  }, [loadNotes]);
 
   const feedLayout = {
     display: "grid",
