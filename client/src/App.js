@@ -43,11 +43,8 @@ function App() {
               <Route exact path="/" component={Feed} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-<<<<<<< HEAD
-=======
               <Route exact path="/" component={Feed} />
               <Route exact path="/notes/new" component={NoteEditor} />
->>>>>>> origin/note-editor
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <Route path="/notes/:id" component={NoteReadView}/>
             </Switch>
