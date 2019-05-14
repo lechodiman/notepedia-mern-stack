@@ -1,84 +1,105 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { createNote, getNote } from "../../actions/noteActions";
+import { createNote } from "../../actions/noteActions";
+import MediumEditor from "medium-editor";
+import { Form, FormGroup, Label, Input } from "reactstrap";
 
-const NoteEditor = ({ createNote, history }) => {
-  const [editorData, setEditorData] = useState({
-    text: "",
+const NoteEditor = ({ createNote }) => {
+  const [formData, setFormData] = useState({
     title: "",
-    claps: "",
-    description: "",
-    feature_img: "",
-    author: ""
+    description: ""
   });
 
-  //   useEffect(() => {
-  //     getNote();
+  const [text, setText] = useState("");
 
-  //     setEditorData({
-  //       text: loading || !note.text ? "" : note.text,
-  //       title: loading || !note.title ? "" : note.title,
-  //       claps: loading || !note.claps ? "" : note.claps,
-  //       description: loading || !note.description ? "" : note.description,
-  //       feature_img: loading || !note.feature_img ? "" : note.feature_img,
-  //       author: loading || !note.author ? "" : note.author,
-  //     });
-  //   }, [loading, getNote]);
+  const { title, description } = formData;
 
-  const { text, title, claps, description, feature_img, author } = editorData;
+  useEffect(() => {
+    const editor = new MediumEditor(".editable", {
+      autoLink: true,
+      imageDragging: true,
+      delay: 1000,
+      toolbar: {
+        buttons: [
+          "bold",
+          "italic",
+          "quote",
+          "underline",
+          "anchor",
+          "h1",
+          "h2",
+          "h3",
+          "strikethrough"
+        ],
+        diffLeft: 25,
+        diffTop: 10
+      },
+      placeholder: {
+        text: "Write your note..."
+      }
+    });
 
-  const onSubmit = e => {
-    e.preventDefault();
-    createNote(editorData, history, true);
+    // subscribe to changes in editable div, ie, update formData state
+    editor.subscribe("editableInput", () => {
+      if (typeof document !== "undefined") {
+        setText(editor.getContent(0));
+      }
+    });
+    console.log("UseEffect");
+  }, []);
+
+  const onChange = e => {
+    const newState = {
+      ...formData,
+      [e.target.name]: e.target.value
+    };
+
+    setFormData(newState);
   };
 
-  const onChange = e =>
-    setEditorData({ ...editorData, [e.target.name]: e.target.value });
+  const onSubmit = async e => {
+    e.preventDefault();
+    console.log({ ...formData, text });
+    createNote({ ...formData, text });
+  };
 
   return (
     <Fragment>
       <h1 className="large text-primary">Notepedia Editor</h1>
-      <form className="form" onSubmit={e => onSubmit(e)}>
-        <div className="form-group">
-          <input
+      <Form onSubmit={e => onSubmit(e)}>
+        <FormGroup>
+          <Label for="exampleTitle">Title</Label>
+          <Input
             type="text"
             placeholder="Title"
             name="title"
             value={title}
             onChange={e => onChange(e)}
           />
-          <small className="form-text">Note Title</small>
-        </div>
-        <div className="form-group">
-          <textarea
-            placeholder="Write a description"
+        </FormGroup>
+        <FormGroup>
+          <Label>Description for your note</Label>
+          <Input
+            type="textarea"
             name="description"
+            placeholder="Write a description"
             value={description}
             onChange={e => onChange(e)}
           />
-          <small className="form-text">Description for your note</small>
-        </div>
-        <div className="form-group">
-          <textarea
-            placeholder="Write a note"
-            name="text"
-            value={text}
-            onChange={e => onChange(e)}
-          />
-          <small className="form-text">The body of your note</small>
-        </div>
+        </FormGroup>
+        <FormGroup>
+          <Label for="exampleBody">Note: </Label>
+          <div className="editable" />
+        </FormGroup>
         <input type="submit" className="btn btn-primary my-1" value="Save" />
-      </form>
+      </Form>
     </Fragment>
   );
 };
 
 NoteEditor.propTypes = {
-  createNote: PropTypes.func.isRequired,
-  getNote: PropTypes.func.isRequired,
-  note: PropTypes.object.isRequired
+  createNote: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -87,5 +108,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { createNote, getNote }
-)(withRouter(NoteEditor));
+  { createNote }
+)(NoteEditor);
