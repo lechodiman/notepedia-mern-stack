@@ -11,7 +11,7 @@ const NoteEditor = ({ createNote, history }) => {
     claps: "",
     description: "",
     feature_img: "",
-    author: "",
+    author: ""
   });
 
   //   useEffect(() => {
@@ -78,11 +78,11 @@ const NoteEditor = ({ createNote, history }) => {
 NoteEditor.propTypes = {
   createNote: PropTypes.func.isRequired,
   getNote: PropTypes.func.isRequired,
-  note: PropTypes.object.isRequired,
+  note: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  note: state.note,
+  note: state.note
 });
 
 export default connect(

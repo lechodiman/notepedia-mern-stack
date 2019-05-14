@@ -6,6 +6,7 @@ import {
   CardTitle,
   CardBody,
   CardText,
+  CardImg
 } from 'reactstrap';
 
 // TODO: Add feature_img to the view
@@ -28,9 +29,15 @@ const NotePost = ({ note }) => {
 
   const titleStyle = {
     fontFamily: "Playfair Display serif",
-    fontSize: "40px",
+    fontSize: "34px",
     textAlign: "left",
     marginBottom: "8px"
+  };
+
+  const imgStyle = {
+    width: "100%",
+    height: "12vw",
+    objectFit: "cover"
   };
 
   // TODO: work on css for notePost
@@ -39,9 +46,10 @@ const NotePost = ({ note }) => {
   return (
     <Card style={myContainer}>
       <CardBody>
-          <Link to={`/notes/${note._id}`} style={{ textDecoration: 'none', color: 'black' }}>
-            <CardTitle style={titleStyle}>{note.title}</CardTitle>
-          </Link>
+        <CardImg style={imgStyle} src={note.feature_img} onError={(e)=>{e.target.onerror = null; e.target.src="https://cdn-images-1.medium.com/max/2560/1*uFINNsYNbYuPIC3sUMyy6w.jpeg"}} />
+        <Link to={`/notes/${note._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+          <CardTitle style={titleStyle}>{note.title}</CardTitle>
+        </Link>
         <CardText style={descriptionStyle}>{note.description}</CardText>
         <Button color="primary">Bookmark</Button>
       </CardBody>
