@@ -1,7 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { Button, Card, CardTitle, CardBody, CardText } from "reactstrap";
 
-const NotePost = props => {
+const NotePost = ({ note }) => {
   const descriptionStyle = {
     fontFamily: "Lato sans-serif",
     fontSize: "26px",
@@ -23,15 +23,13 @@ const NotePost = props => {
   // TODO: work on css for notePost & add button to read note
   // TODO: add bookmark button feature
   return (
-    <Fragment>
-      <Card>
-        <CardBody>
-          <CardTitle style={titleStyle}>{props.title}</CardTitle>
-          <CardText style={descriptionStyle}>{props.description}</CardText>
-          <Button color="primary">Bookmark</Button>
-        </CardBody>
-      </Card>
-    </Fragment>
+    <Card className="mt-3">
+      <CardBody>
+        <CardTitle style={titleStyle}>{note.title}</CardTitle>
+        <CardText style={descriptionStyle}>{note.description}</CardText>
+        <Button color="primary">Bookmark</Button>
+      </CardBody>
+    </Card>
   );
 };
 
