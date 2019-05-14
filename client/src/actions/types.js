@@ -16,6 +16,11 @@ export const LOGOUT = "LOGOUT";
 
 // Note types
 export const LOAD_NOTES = "LOAD_NOTES";
+export const GET_NOTE = "GET_NOTE";
+export const ADD_NOTE = "ADD_NOTE";
+export const DELETE_NOTE = "DELETE_NOTE";
+export const NOTE_ERROR = "NOTE_ERROR";
+
 export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
 
 // Profile

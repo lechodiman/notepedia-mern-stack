@@ -20,13 +20,13 @@ router.post(
     [
       check("text", "Text is required")
         .not()
-        .isEmpty(),
-    ],
+        .isEmpty()
+    ]
   ],
   async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select("-password");
-
+      console.log(user);
       const { text, title, claps, description } = req.body;
 
       let noteParameters = {
@@ -35,18 +35,18 @@ router.post(
         claps,
         description,
         feature_img: "",
-        author: req.user.id,
+        author: req.user.id
       };
 
       if (req.files && req.files.image) {
         const uploadedImage = cloudinary.uploader.upload(req.files.image.path, {
           resource_type: "image",
-          eager: [{ effect: "sepia" }],
+          eager: [{ effect: "sepia" }]
         });
 
         noteParameters = {
           ...noteParameters,
-          feature_img: uploadedImage.url,
+          feature_img: uploadedImage.url
         };
       }
 
@@ -67,7 +67,9 @@ router.post(
 // @access   Private
 router.get("/", async (req, res) => {
   try {
-    const notes = await Note.find().sort({ date: -1 });
+    const notes = await Note.find()
+      .populate("author", "-password")
+      .sort({ date: -1 });
     res.json(notes);
   } catch (err) {
     console.error(err.message);
@@ -136,8 +138,8 @@ router.put(
     [
       check("text", "Text is required")
         .not()
-        .isEmpty(),
-    ],
+        .isEmpty()
+    ]
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -153,7 +155,7 @@ router.put(
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
-        author: req.user.id,
+        author: req.user.id
       };
 
       note.comments = [newComment, ...note.comments];

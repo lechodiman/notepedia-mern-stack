@@ -2,16 +2,21 @@ import React, { useEffect, Fragment } from "react";
 import { loadNotes } from "../actions/noteActions";
 import NotePost from "./NotePostView";
 import { connect } from "react-redux";
+import Spinner from "../components/layout/Spinner";
 
-const Feed = ({ allNotes, loadNotes }) => {
+const Feed = ({ notes: { notes, loading }, loadNotes }) => {
   useEffect(() => {
     loadNotes();
   }, [loadNotes]);
 
   // Maps notes retrieved from the DB into NotePost components to display in feed
-  const displayNotes = allNotes.map(note => (
-    <NotePost note={note} key={note._id} />
-  ));
+  const displayNotes = notes
+    .map(note => <NotePost note={note} key={note._id} />)
+    .reverse();
+
+  if (loading) {
+    return <Spinner />;
+  }
 
   return (
     <Fragment>
@@ -22,7 +27,7 @@ const Feed = ({ allNotes, loadNotes }) => {
 };
 
 const mapStateToProps = state => ({
-  allNotes: state.notes.allNotes
+  notes: state.notes
 });
 
 export default connect(
