@@ -111,20 +111,19 @@ router.get("/:id", async (req, res) => {
 });
 
 // Get user profile (user and articles)
-// TODO: Maybe create separate route to get user profiles ?
 router.get("/profile/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
 
-    const following = await User.find({ following: req.params.id });
+    if (!user) {
+      return res.status(404).json({
+        msg: "User not found"
+      });
+    }
 
-    following.forEach(person => {
-      user.addFollower(person);
-    });
+    const notes = await Note.find({ author: req.params.id });
 
-    const articles = await Article.find({ author: req.params.id });
-
-    return res.json(user, articles);
+    return res.json({ user, notes });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

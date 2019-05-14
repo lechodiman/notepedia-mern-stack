@@ -1,6 +1,6 @@
 # Get authenticated user
 GET http://localhost:5000/api/auth/ HTTP/1.1
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzU2NywiZXhwIjoxNTU3Mjk3NTY3fQ.gKgkc3QMsri6c2C_ClhKfN9fO8Ekv5r04i7P_jMV0Ic
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNkYWMwZmQ0ZDcwNjQyNDIwOTU5MzAxIn0sImlhdCI6MTU1Nzg0MDEyNSwiZXhwIjoxNTU4MjAwMTI1fQ.TztaGPsJvh-hqzGb3aj-ZnPjjBlUjFefMdAGb7SlFUs
 
 ###
 
