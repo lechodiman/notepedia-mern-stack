@@ -7,8 +7,8 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  allNotes: [],
-  myNote: {},
+  notes: [],
+  note: {},
   loading: true,
   error: {}
 };
@@ -19,7 +19,7 @@ export default (state = initialState, action) => {
     case LOAD_NOTES:
       return {
         ...state,
-        allNotes: payload,
+        notes: payload,
         loading: false
       };
     case GET_NOTE:
@@ -31,13 +31,13 @@ export default (state = initialState, action) => {
     case ADD_NOTE:
       return {
         ...state,
-        allNotes: [payload, ...state.allNotes],
+        notes: [payload, ...state.notes],
         loading: false
       };
     case DELETE_NOTE:
       return {
         ...state,
-        allNotes: state.allNotes.filter(note => note._id !== payload),
+        notes: state.notes.filter(note => note._id !== payload),
         loading: false
       };
     case NOTE_ERROR:
