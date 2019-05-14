@@ -1,23 +1,7 @@
 import React, { Fragment } from "react";
-import {
-  Button,
-  Card,
-  CardTitle,
-  CardBody,
-  CardText,
-  CardImg
-} from 'reactstrap';
-
+import { Button, Card, CardTitle, CardBody, CardText } from "reactstrap";
 
 const NotePost = props => {
-
-  const myContainer = {
-    display: "grid"
-  }
-  const myRow = {
-    gridTemplateRows: "5px 1fr 2px"
-  }
-
   const descriptionStyle = {
     fontFamily: "Lato sans-serif",
     fontSize: "26px",
@@ -34,7 +18,7 @@ const NotePost = props => {
     fontSize: "48px",
     textAlign: "left",
     marginBottom: "8px"
-  }
+  };
 
   // TODO: work on css for notePost & add button to read note
   // TODO: add bookmark button feature
