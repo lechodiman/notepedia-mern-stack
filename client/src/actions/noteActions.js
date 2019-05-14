@@ -10,7 +10,6 @@ export const loadNotes = () => async dispatch => {
 // Get note by id
 export const getNote = id => async dispatch => {
   const res = await axios.get(`/api/notes/${id}`);
-  console.log(res.data);
   dispatch({ type: GET_NOTE, payload: res.data });
 };
 
