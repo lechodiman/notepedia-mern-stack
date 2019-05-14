@@ -22,8 +22,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <Nav className="ml-auto" navbar>
       <NavItem>
-        <Link to="/" className="nav-link" onClick={onToggle}>
-          Profile
+        <Link to="/dashboard" className="nav-link" onClick={onToggle}>
+          Dashboard
         </Link>
       </NavItem>
       <NavItem>

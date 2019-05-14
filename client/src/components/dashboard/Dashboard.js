@@ -1,8 +1,6 @@
-import React from "react";
 import PropTypes from "prop-types";
 import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
-import Spinner from "../layout/Spinner";
 import Spinner from "../layout/Spinner";
 import { getCurrentProfile } from "../../actions/profileActions";
 
@@ -24,7 +22,7 @@ const Dashboard = ({
       <h1 className="large text-primary">Dashboard</h1>
 
       <p className="lead">
-        <i className="fas fa-user"> Welcome {user & user.name}</i>
+        <i className="fas fa-user"> Welcome {user && user.name}</i>
       </p>
     </Fragment>
   );
