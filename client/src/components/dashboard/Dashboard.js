@@ -3,6 +3,7 @@ import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getCurrentProfile } from "../../actions/profileActions";
+import NotePostView from "../NotePostView";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -17,6 +18,10 @@ const Dashboard = ({
     return <Spinner />;
   }
 
+  const userNotes = profile.notes.map(note => {
+    return <NotePostView note={note} key={note._id} />;
+  });
+
   return (
     <Fragment>
       <h1 className="large text-primary">Dashboard</h1>
@@ -24,6 +29,10 @@ const Dashboard = ({
       <p className="lead">
         <i className="fas fa-user"> Welcome {user && user.name}</i>
       </p>
+
+      <h2 className="large text-secondary text-center">My notes</h2>
+
+      <div className="user-notes">{userNotes}</div>
     </Fragment>
   );
 };
