@@ -86,42 +86,38 @@ router.post(
   }
 );
 
-// Get a user
-// TODO: Check if get single user is used in frontend
+// Get user profile (user and notes)
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
 
     if (!user) {
       return res.status(404).json({
-        msg: "User not found"
-      });
-    }
-
-    return res.json(user);
-  } catch (err) {
-    console.error(err.message);
-
-    if (error.kind == "ObjectId") {
-      return res.status(400).json({ message: "Profile not found" });
-    }
-
-    return res.status(500).send("Server Error");
-  }
-});
-
-// Get user profile (user and notes)
-router.get("/profile/:id", async (req, res) => {
-  try {
-    const user = await User.findById(req.params.id);
-
-    if (!user) {
-      return res.status(404).json({
-        msg: "User not found"
+        message: "User not found"
       });
     }
 
     const notes = await Note.find({ author: req.params.id });
+
+    return res.json({ user, notes });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Get current user profile (user and notes)
+router.get("/profile/me", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found"
+      });
+    }
+
+    const notes = await Note.find({ author: req.user.id });
 
     return res.json({ user, notes });
   } catch (err) {
@@ -143,7 +139,7 @@ router.post("/follow/:id", auth, async (req, res) => {
     // TODO: Followed user must have this user as a follower
 
     return res.json({
-      msg: "User followed"
+      message: "User followed"
     });
   } catch (err) {
     console.error(err.message);

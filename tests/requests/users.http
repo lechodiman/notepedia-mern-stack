@@ -10,6 +10,11 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:5000/api/users/profile/5cdac0fd4d70642420959301
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzU2NywiZXhwIjoxNTU3Mjk3NTY3fQ.gKgkc3QMsri6c2C_ClhKfN9fO8Ekv5r04i7P_jMV0Ic
+GET http://localhost:5000/api/users/5cdac0fd4d70642420959301
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNkYWMwZmQ0ZDcwNjQyNDIwOTU5MzAxIn0sImlhdCI6MTU1Nzg0MzcxMywiZXhwIjoxNTU4MjAzNzEzfQ.0H647cPYAtk9RT7zGTlbWNQQ4Fqy9YhTcShTnuo6-Pg
+
+###
+
+GET http://localhost:5000/api/users/profile/me
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNkYWMwZmQ0ZDcwNjQyNDIwOTU5MzAxIn0sImlhdCI6MTU1Nzg0MzcxMywiZXhwIjoxNTU4MjAzNzEzfQ.0H647cPYAtk9RT7zGTlbWNQQ4Fqy9YhTcShTnuo6-Pg
 
