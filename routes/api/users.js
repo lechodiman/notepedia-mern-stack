@@ -110,7 +110,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Get user profile (user and articles)
+// Get user profile (user and notes)
 router.get("/profile/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
