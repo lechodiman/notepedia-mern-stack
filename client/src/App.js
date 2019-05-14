@@ -5,6 +5,7 @@ import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import Feed from "./components/Feed";
+import NoteEditor from "./components/note/NoteEditor";
 import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
@@ -42,6 +43,11 @@ function App() {
               <Route exact path="/" component={Feed} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+<<<<<<< HEAD
+=======
+              <Route exact path="/" component={Feed} />
+              <Route exact path="/notes/new" component={NoteEditor} />
+>>>>>>> origin/note-editor
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <Route path="/notes/:id" component={NoteReadView}/>
             </Switch>
