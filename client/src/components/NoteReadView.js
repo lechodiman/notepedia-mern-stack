@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import { getNote } from "../actions/noteActions";
 import Spinner from "./layout/Spinner";
 
-// TODO: Add a correct route to the component
-// TODO: Create loadSingleNote action/reducer
-// TODO: Connect NoteReadView with a specific note - via onClick event on NotePost
 // TODO: Display note content (Analize note model and how to display it correctly, considering images, fonts, quotes, etc)
 // TODO: Add clap & bookmark button
 // TODO: Add comments section
@@ -61,13 +58,18 @@ const NoteReadView = ({ notes: {note, loading}, match, getNote }) => {
     return <Spinner />
   }
 
+  let featureImg = null;
+  if (note.feature_img) {
+    featureImg = (<img style={imgStyle} src={note.feature_img} alt="feature_img" />)
+  }
+
   // TODO: Add author avatar and name with link to profile
   return (
     <Fragment>
       <div style={myLayout}>
         <div style={titleStyle}>{note.title}</div>
         <div style={descriptionStyle}>{note.description}</div>
-        <img style={imgStyle} src={note.feature_img} alt="feature_img" onError={(e)=>{e.target.onerror = null; e.target.src="https://cdn-images-1.medium.com/max/2560/1*uFINNsYNbYuPIC3sUMyy6w.jpeg"}} />
+        {featureImg}
       </div>
     </Fragment>
   );

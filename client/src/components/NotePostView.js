@@ -40,13 +40,18 @@ const NotePost = ({ note }) => {
     objectFit: "cover"
   };
 
+  let featureImg = null;
+  if (note.feature_img) {
+    featureImg = (<CardImg style={imgStyle} src={note.feature_img} />)
+  }
+
   // TODO: work on css for notePost
   // TODO: add bookmark button feature
   // TODO: fix warnings/errors
   return (
     <Card style={myContainer}>
       <CardBody>
-        <CardImg style={imgStyle} src={note.feature_img} onError={(e)=>{e.target.onerror = null; e.target.src="https://cdn-images-1.medium.com/max/2560/1*uFINNsYNbYuPIC3sUMyy6w.jpeg"}} />
+        {featureImg}
         <Link to={`/notes/${note._id}`} style={{ textDecoration: 'none', color: 'black' }}>
           <CardTitle style={titleStyle}>{note.title}</CardTitle>
         </Link>
