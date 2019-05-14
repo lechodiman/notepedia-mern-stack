@@ -43,7 +43,6 @@ function App() {
               <Route exact path="/" component={Feed} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
-              <Route exact path="/" component={Feed} />
               <Route exact path="/notes/new" component={NoteEditor} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
               <Route path="/notes/:id" component={NoteReadView}/>
