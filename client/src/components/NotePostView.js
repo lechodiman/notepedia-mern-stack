@@ -21,7 +21,6 @@ const NotePost = ({ note }) => {
     fontSize: "18px",
     fontWeight: "700",
     padding: "0",
-    margin: "56px 0 -13px -1.883px",
     textAlign: "left",
     lineHeight: "34.5px",
     letterSpacing: "-0.45px"

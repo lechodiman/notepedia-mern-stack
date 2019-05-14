@@ -43,7 +43,6 @@ const NoteReadView = ({ notes: {note, loading}, match, getNote }) => {
     fontWeight: "700",
     margin: "56px 0 -13px -1.883px",
     textAlign: "left",
-    letterSpacing: "-0.45px"
   };
 
   const titleStyle = {
@@ -53,6 +52,10 @@ const NoteReadView = ({ notes: {note, loading}, match, getNote }) => {
     textAlign: "center",
     marginTop: "10px"
   };
+
+  const bodyStyle = {
+    gridColumn: "4"
+  }
 
   if (loading) {
     return <Spinner />
@@ -70,6 +73,9 @@ const NoteReadView = ({ notes: {note, loading}, match, getNote }) => {
         <div style={titleStyle}>{note.title}</div>
         <div style={descriptionStyle}>{note.description}</div>
         {featureImg}
+        <div className="body" style={bodyStyle}>
+          <p dangerouslySetInnerHTML={{ __html: note.text }} />
+        </div>
       </div>
     </Fragment>
   );
