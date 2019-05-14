@@ -9,11 +9,11 @@ import {
 } from 'reactstrap';
 
 // TODO: Add feature_img to the view
-const NotePost = props => {
+const NotePost = ({ note }) => {
 
   const myContainer = {
     marginBottom: "10px"
-  }
+  };
 
   const descriptionStyle = {
     fontFamily: "Lato sans-serif",
@@ -31,7 +31,7 @@ const NotePost = props => {
     fontSize: "40px",
     textAlign: "left",
     marginBottom: "8px"
-  }
+  };
 
   // TODO: work on css for notePost
   // TODO: add bookmark button feature
@@ -39,12 +39,10 @@ const NotePost = props => {
   return (
     <Card style={myContainer}>
       <CardBody>
-        <li key={props.id}>
-          <Link to={'/notes/${props._id}'} style={{ textDecoration: 'none', color: 'black' }}>
-            <CardTitle style={titleStyle}>{props.title}</CardTitle>
+          <Link to={`/notes/${note._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+            <CardTitle style={titleStyle}>{note.title}</CardTitle>
           </Link>
-        </li>
-        <CardText style={descriptionStyle}>{props.description}</CardText>
+        <CardText style={descriptionStyle}>{note.description}</CardText>
         <Button color="primary">Bookmark</Button>
       </CardBody>
     </Card>

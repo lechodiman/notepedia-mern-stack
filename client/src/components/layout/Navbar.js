@@ -22,8 +22,8 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <Nav className="ml-auto" navbar>
       <NavItem>
-        <Link to="/" className="nav-link">
-          Profile
+        <Link to="/dashboard" className="nav-link" onClick={onToggle}>
+          Dashboard
         </Link>
       </NavItem>
       <NavItem>
@@ -38,12 +38,12 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const guestLinks = (
     <Nav className="ml-auto" navbar>
       <NavItem>
-        <Link to="/register" className="nav-link">
+        <Link to="/register" className="nav-link" onClick={onToggle}>
           Register
         </Link>
       </NavItem>
       <NavItem>
-        <Link to="/login" className="nav-link">
+        <Link to="/login" className="nav-link" onClick={onToggle}>
           Login
         </Link>
       </NavItem>

@@ -1,10 +1,10 @@
 # Create a new note
 POST http://localhost:5000/api/notes/
-x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNjY2ZiNWZlZjQ0MzIxN2RjN2MxM2M0In0sImlhdCI6MTU1NjkzNzYwOCwiZXhwIjoxNTU3Mjk3NjA4fQ.W3eZX5nPSs4P3Y8ER_K69bLaTFjw9f4Sdx4UuudqdiQ
+x-auth-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWNkYWMwZmQ0ZDcwNjQyNDIwOTU5MzAxIn0sImlhdCI6MTU1Nzg0MDEyNSwiZXhwIjoxNTU4MjAwMTI1fQ.TztaGPsJvh-hqzGb3aj-ZnPjjBlUjFefMdAGb7SlFUs
 Content-Type: application/json
 
 {
-  "title": "Intro to Machine Learning v3",
+  "title": "Intro to Machine Learning v4",
   "text": "Yeah this is a nice intro"
 }
 
