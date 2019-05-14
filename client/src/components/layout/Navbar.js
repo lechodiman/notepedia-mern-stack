@@ -22,13 +22,16 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <Nav className="ml-auto" navbar>
       <NavItem>
-        <Link to="/notes/new" className="nav-link">
+        <Link to="/notes/new" className="nav-link" onClick={onToggle}>
           New Note
         </Link>
       </NavItem>
       <NavItem>
-        <Link to="/" className="nav-link" />
-        Profile
+        <Link to="/" className="nav-link" onClick={onToggle}>
+          Profile
+        </Link>
+      </NavItem>
+      <NavItem>
         <Link to="/dashboard" className="nav-link" onClick={onToggle}>
           Dashboard
         </Link>
