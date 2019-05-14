@@ -35,10 +35,10 @@ function App() {
       <Router>
         <Fragment>
           <Navbar />
-          <Route exact path="/" component={Feed} />
           <section className="container">
             <Alert />
             <Switch>
+              <Route exact path="/" component={Feed} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
