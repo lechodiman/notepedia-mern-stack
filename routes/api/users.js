@@ -86,45 +86,40 @@ router.post(
   }
 );
 
-// Get a user
-// TODO: Check if get single user is used in frontend
+// Get user profile (user and notes)
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
 
     if (!user) {
       return res.status(404).json({
-        msg: "User not found"
+        message: "User not found"
       });
     }
 
-    return res.json(user);
+    const notes = await Note.find({ author: req.params.id });
+
+    return res.json({ user, notes });
   } catch (err) {
     console.error(err.message);
-
-    if (error.kind == "ObjectId") {
-      return res.status(400).json({ message: "Profile not found" });
-    }
-
-    return res.status(500).send("Server Error");
+    res.status(500).send("Server Error");
   }
 });
 
-// Get user profile (user and articles)
-// TODO: Maybe create separate route to get user profiles ?
-router.get("/profile/:id", async (req, res) => {
+// Get current user profile (user and notes)
+router.get("/profile/me", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.user.id);
 
-    const following = await User.find({ following: req.params.id });
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found"
+      });
+    }
 
-    following.forEach(person => {
-      user.addFollower(person);
-    });
+    const notes = await Note.find({ author: req.user.id });
 
-    const articles = await Article.find({ author: req.params.id });
-
-    return res.json(user, articles);
+    return res.json({ user, notes });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -144,7 +139,7 @@ router.post("/follow/:id", auth, async (req, res) => {
     // TODO: Followed user must have this user as a follower
 
     return res.json({
-      msg: "User followed"
+      message: "User followed"
     });
   } catch (err) {
     console.error(err.message);
