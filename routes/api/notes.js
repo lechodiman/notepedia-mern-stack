@@ -26,7 +26,7 @@ router.post(
   async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select("-password");
-
+      console.log(user);
       const { text, title, claps, description } = req.body;
 
       let noteParameters = {

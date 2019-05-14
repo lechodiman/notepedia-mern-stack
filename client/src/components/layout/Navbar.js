@@ -9,7 +9,7 @@ import {
   Navbar as BootNavbar,
   NavbarToggler,
   Nav,
-  NavItem
+  NavItem,
 } from "reactstrap";
 
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
@@ -21,6 +21,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const authLinks = (
     <Nav className="ml-auto" navbar>
+      <NavItem>
+        <Link to="/notes/new" className="nav-link">
+          New Note
+        </Link>
+      </NavItem>
       <NavItem>
         <Link to="/" className="nav-link">
           Profile
@@ -69,11 +74,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
 Navbar.propTypes = {
   logout: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 export default connect(
