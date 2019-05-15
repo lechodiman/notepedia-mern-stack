@@ -80,7 +80,7 @@ router.get("/", async (req, res) => {
 // @route    GET api/notes/:id
 // @desc     Get note by ID
 // @access   Private
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const note = await Note.findById(req.params.id)
       .populate("author", "-password")
