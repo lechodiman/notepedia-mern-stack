@@ -27,11 +27,6 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </Link>
       </NavItem>
       <NavItem>
-        <Link to="/" className="nav-link" onClick={onToggle}>
-          Profile
-        </Link>
-      </NavItem>
-      <NavItem>
         <Link to="/dashboard" className="nav-link" onClick={onToggle}>
           Dashboard
         </Link>
