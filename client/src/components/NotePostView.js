@@ -7,11 +7,12 @@ import {
   CardBody,
   CardText,
   CardImg
-} from 'reactstrap';
+} from "reactstrap";
+import { connect } from "react-redux";
+import { deleteNote } from "../actions/noteActions";
 
 // TODO: Add feature_img to the view
-const NotePost = ({ note }) => {
-
+const NotePost = ({ note, deleteNote }) => {
   const myContainer = {
     marginBottom: "10px"
   };
@@ -41,7 +42,7 @@ const NotePost = ({ note }) => {
 
   let featureImg = null;
   if (note.feature_img) {
-    featureImg = (<CardImg style={imgStyle} src={note.feature_img} />)
+    featureImg = <CardImg style={imgStyle} src={note.feature_img} />;
   }
 
   // TODO: work on css for notePost
@@ -51,14 +52,22 @@ const NotePost = ({ note }) => {
     <Card style={myContainer}>
       <CardBody>
         {featureImg}
-        <Link to={`/notes/${note._id}`} style={{ textDecoration: 'none', color: 'black' }}>
+        <Link
+          to={`/notes/${note._id}`}
+          style={{ textDecoration: "none", color: "black" }}
+        >
           <CardTitle style={titleStyle}>{note.title}</CardTitle>
         </Link>
         <CardText style={descriptionStyle}>{note.description}</CardText>
         <Button color="primary">Bookmark</Button>
       </CardBody>
+
+      <Button onClick={() => deleteNote(note._id)}> Delete note</Button>
     </Card>
   );
 };
 
-export default NotePost;
+export default connect(
+  null,
+  { deleteNote }
+)(NotePost);
