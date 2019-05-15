@@ -1,4 +1,4 @@
 {
-  "mongoURI": "mongodb://luis:luis@notepedia-shard-00-00-uqsgz.mongodb.net:27017,notepedia-shard-00-01-uqsgz.mongodb.net:27017,notepedia-shard-00-02-uqsgz.mongodb.net:27017/test?ssl=true&replicaSet=notepedia-shard-0&authSource=admin&retryWrites=true",
+  "mongoURI": "mongodb://klaus:klaus@cluster0-shard-00-00-5ybcz.mongodb.net:27017,cluster0-shard-00-01-5ybcz.mongodb.net:27017,cluster0-shard-00-02-5ybcz.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true",
   "secretOrKey": "secret"
 }

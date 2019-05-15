@@ -9,6 +9,7 @@ import NoteEditor from "./components/note/NoteEditor";
 import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
+import NoteReadView from "./components/NoteReadView"
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -44,6 +45,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <Route exact path="/notes/new" component={NoteEditor} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
+              <Route path="/notes/:id" component={NoteReadView}/>
             </Switch>
           </section>
         </Fragment>
