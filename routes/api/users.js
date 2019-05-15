@@ -117,7 +117,10 @@ router.get("/profile/me", auth, async (req, res) => {
       });
     }
 
-    const notes = await Note.find({ author: req.user.id });
+    const notes = await Note.find({ author: req.user.id }).populate(
+      "author",
+      "-password"
+    );
 
     return res.json({ user, notes });
   } catch (err) {

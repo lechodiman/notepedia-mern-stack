@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createNote } from "../../actions/noteActions";
 import MediumEditor from "medium-editor";
+import { withRouter } from "react-router";
 import { Form, FormGroup, Label, Input } from "reactstrap";
 
-const NoteEditor = ({ createNote }) => {
+const NoteEditor = ({ createNote, history }) => {
   const [formData, setFormData] = useState({
     title: "",
     description: ""
@@ -46,7 +47,6 @@ const NoteEditor = ({ createNote }) => {
         setText(editor.getContent(0));
       }
     });
-    console.log("UseEffect");
   }, []);
 
   const onChange = e => {
@@ -60,8 +60,8 @@ const NoteEditor = ({ createNote }) => {
 
   const onSubmit = async e => {
     e.preventDefault();
-    console.log({ ...formData, text });
-    createNote({ ...formData, text });
+    await createNote({ ...formData, text });
+    history.push("/");
   };
 
   return (
@@ -76,6 +76,7 @@ const NoteEditor = ({ createNote }) => {
             name="title"
             value={title}
             onChange={e => onChange(e)}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -86,6 +87,7 @@ const NoteEditor = ({ createNote }) => {
             placeholder="Write a description"
             value={description}
             onChange={e => onChange(e)}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -109,4 +111,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { createNote }
-)(NoteEditor);
+)(withRouter(NoteEditor));

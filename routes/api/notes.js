@@ -26,7 +26,6 @@ router.post(
   async (req, res) => {
     try {
       const user = await User.findById(req.user.id).select("-password");
-      console.log(user);
       const { text, title, claps, description } = req.body;
 
       let noteParameters = {
@@ -54,7 +53,9 @@ router.post(
 
       const savedNote = await note.save();
 
-      res.json(savedNote);
+      const noteWithAuthor = savedNote.populate("author", "-password");
+
+      res.json(noteWithAuthor);
     } catch (err) {
       console.error(err.message);
       res.status(500).send("Server Error");
@@ -80,7 +81,7 @@ router.get("/", async (req, res) => {
 // @route    GET api/notes/:id
 // @desc     Get note by ID
 // @access   Private
-router.get("/:id", auth, async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const note = await Note.findById(req.params.id)
       .populate("author", "-password")
