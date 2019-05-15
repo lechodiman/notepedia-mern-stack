@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
     case ADD_NOTE:
       return {
         ...state,
-        notes: [payload, ...state.notes],
+        notes: [...state.notes, payload],
         loading: false
       };
     case DELETE_NOTE:
