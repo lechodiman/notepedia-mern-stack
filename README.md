@@ -19,36 +19,16 @@ Web app to create, share and read the best notes you can think of!
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
-
-MongoDB (soon we will be using Atlas)
-
-```
-Give examples
-```
 
 ### Installing
 
-Install MongoDb
-
-```
-
-```
 
 Install dependencies
 
 ```
-yarn
-```
+yarn 
 
-And to run locally
-
-Run MongoDB
-
-```
-mongod
+yarn client-install
 ```
 
 Run server and client
@@ -61,38 +41,27 @@ Go to localhost:3000 and start browsing!
 
 ## Running the tests
 
-No tests for now :)
+
+[Plantilla testing](https://docs.google.com/spreadsheets/d/1ncOg6tTx2fEsYCd9E8zE16eI-HMc4wh7zqUK0YcE3VY/edit#gid=478071020)
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+Pending...
 
 ## Built With
 
-- [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-- [Maven](https://maven.apache.org/) - Dependency Management
-- [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+- [React](https://reactjs.org/) - The web framework used
+- [Express](https://expressjs.com/es/) - Backend framework
 
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
 
 ## Authors
 
-- **Billie Thompson** - _Initial work_ - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+- **Luis Chodiman** - _Initial work_ - [lechodiman](https://github.com/lechodiman)
+- **Klaus Ribbeck** - _Initial work_ - [kpribbeck](https://github.com/kpribbeck)
+- **Cesar Meneses** - _Initial work_ - [cnmeneses](https://github.com/cnmeneses)
 
 ## Acknowledgments
 
 - Hat tip to anyone whose code was used
-- Inspiration
+- Rodrigo Sandoval
 - etc
