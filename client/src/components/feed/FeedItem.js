@@ -2,19 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { CardImg } from "reactstrap";
 import { connect } from "react-redux";
-import { deleteNote } from "../actions/noteActions";
+import { deleteNote } from "../../actions/noteActions";
+import "./feed.css";
 
-const NotePost = ({ auth: { user }, note, deleteNote }) => {
-  const readingFont = {
-    fontFamily: "Lato sans-serif"
-  };
-
-  const imgStyle = {
-    width: "100%",
-    height: "12vw",
-    objectFit: "cover"
-  };
-
+const FeedItem = ({ auth: { user }, note, deleteNote }) => {
   const onDeleteNote = async () => {
     await deleteNote(note._id);
 
@@ -23,7 +14,7 @@ const NotePost = ({ auth: { user }, note, deleteNote }) => {
 
   let featureImg;
   if (note.feature_img) {
-    featureImg = <CardImg style={imgStyle} src={note.feature_img} />;
+    featureImg = <CardImg className="feed-item-img" src={note.feature_img} />;
   }
 
   return (
@@ -47,16 +38,9 @@ const NotePost = ({ auth: { user }, note, deleteNote }) => {
 
       <div className="feed-item-body">
         <h2 className="large">
-          <Link
-            to={`/notes/${note._id}`}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            {note.title}
-          </Link>
+          <Link to={`/notes/${note._id}`}>{note.title}</Link>
         </h2>
-        <p className="lead" style={readingFont}>
-          {note.description}
-        </p>
+        <p className="lead reading-font">{note.description}</p>
       </div>
 
       <div className="feed-item-footer row justify-content-end">
@@ -87,4 +71,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { deleteNote }
-)(NotePost);
+)(FeedItem);

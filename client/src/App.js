@@ -4,12 +4,12 @@ import "./App.css";
 import Navbar from "./components/layout/Navbar";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
-import Feed from "./components/Feed";
+import Feed from "./components/feed/Feed";
 import NoteEditor from "./components/note/NoteEditor";
 import Alert from "./components/layout/Alert";
 import Dashboard from "./components/dashboard/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
-import NoteReadView from "./components/NoteReadView";
+import Note from "./components/note/Note";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -45,7 +45,7 @@ function App() {
               <Route exact path="/login" component={Login} />
               <PrivateRoute exact path="/notes/new" component={NoteEditor} />
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <Route path="/notes/:id" component={NoteReadView} />
+              <Route path="/notes/:id" component={Note} />
             </Switch>
           </section>
         </Fragment>

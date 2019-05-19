@@ -1,25 +1,17 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getNote } from "../actions/noteActions";
-import Spinner from "./layout/Spinner";
+import { getNote } from "../../actions/noteActions";
+import Spinner from "../layout/Spinner";
+import "./note.css";
 
-// TODO: Display note content (Analize note model and how to display it correctly, considering images, fonts, quotes, etc)
+// TODO: Display note content (Analyze note model and how to display it correctly, considering images, fonts, quotes, etc)
 // TODO: Add clap & bookmark button
 // TODO: Add comments section
 // TODO: Add Highlight feature
-const NoteReadView = ({ notes: { note, loading }, match, getNote }) => {
+const Note = ({ notes: { note, loading }, match, getNote }) => {
   useEffect(() => {
     getNote(match.params.id);
   }, [getNote, match.params.id]);
-
-  const imgStyle = {
-    margin: "20px 0",
-    width: "100%"
-  };
-
-  const noteStyle = {
-    fontFamily: "Lato sans-serif"
-  };
 
   if (loading) {
     return <Spinner />;
@@ -29,17 +21,16 @@ const NoteReadView = ({ notes: { note, loading }, match, getNote }) => {
   if (note.feature_img) {
     featureImg = (
       <img
-        style={imgStyle}
         src={note.feature_img}
         alt="feature_img"
-        className="img-responsive"
+        className="img-responsive note-feature-img"
       />
     );
   }
 
   // TODO: Add author avatar and name with link to profile
   return (
-    <div style={noteStyle}>
+    <div className="note">
       <div className="row d-flex justify-content-center">
         <h1 className="large text-primary">{note.title}</h1>
       </div>
@@ -74,4 +65,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   { getNote }
-)(NoteReadView);
+)(Note);
