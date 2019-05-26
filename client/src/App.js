@@ -2,15 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "./components/layout/Navbar";
-import Register from "./components/auth/Register";
-import Login from "./components/auth/Login";
-import Feed from "./components/feed/Feed";
-import NoteEditor from "./components/note/NoteEditor";
-import Alert from "./components/layout/Alert";
-import Dashboard from "./components/dashboard/Dashboard";
-import PrivateRoute from "./components/routing/PrivateRoute";
-import Note from "./components/note/Note";
-
+import Routes from "./components/routing/Routes";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Redux
@@ -37,17 +29,9 @@ function App() {
       <Router>
         <Fragment>
           <Navbar />
-          <section className="container">
-            <Alert />
-            <Switch>
-              <Route exact path="/" component={Feed} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <PrivateRoute exact path="/notes/new" component={NoteEditor} />
-              <PrivateRoute exact path="/dashboard" component={Dashboard} />
-              <Route path="/notes/:id" component={Note} />
-            </Switch>
-          </section>
+          <Switch>
+            <Route component={Routes} />
+          </Switch>
         </Fragment>
       </Router>
     </Provider>
