@@ -12,7 +12,7 @@ import {
   NavItem
 } from "reactstrap";
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onToggle = e => {
