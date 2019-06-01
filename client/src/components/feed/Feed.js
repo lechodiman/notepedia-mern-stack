@@ -1,8 +1,8 @@
 import React, { useEffect, Fragment } from "react";
-import { loadNotes } from "../actions/noteActions";
-import NotePost from "./NotePostView";
+import { loadNotes } from "../../actions/noteActions";
+import FeedItem from "./FeedItem";
 import { connect } from "react-redux";
-import Spinner from "../components/layout/Spinner";
+import Spinner from "../layout/Spinner";
 
 const Feed = ({ notes: { notes, loading }, loadNotes }) => {
   useEffect(() => {
@@ -11,7 +11,7 @@ const Feed = ({ notes: { notes, loading }, loadNotes }) => {
 
   // Maps notes retrieved from the DB into NotePost components to display in feed
   const displayNotes = notes
-    .map(note => <NotePost note={note} key={note._id} />)
+    .map(note => <FeedItem note={note} key={note._id} />)
     .reverse();
 
   if (loading) {
@@ -21,7 +21,11 @@ const Feed = ({ notes: { notes, loading }, loadNotes }) => {
   return (
     <Fragment>
       <h1 className="large text-secondary text-center">Recent Notes</h1>
-      {displayNotes}
+      {displayNotes.length > 0 ? (
+        displayNotes
+      ) : (
+        <p className="text-center"> We don't have notes here yet!</p>
+      )}
     </Fragment>
   );
 };
