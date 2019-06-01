@@ -2,7 +2,9 @@ import React, { Fragment, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "./components/layout/Navbar";
+
 import Routes from "./components/routing/Routes";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 // Redux
@@ -29,9 +31,11 @@ function App() {
       <Router>
         <Fragment>
           <Navbar />
+
           <Switch>
             <Route component={Routes} />
           </Switch>
+
         </Fragment>
       </Router>
     </Provider>
