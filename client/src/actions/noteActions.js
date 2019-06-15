@@ -4,7 +4,8 @@ import {
   GET_NOTE,
   NOTE_ERROR,
   DELETE_NOTE,
-  ADD_NOTE
+  ADD_NOTE,
+  UPDATE_LIKES
 } from "./types";
 import { setAlert } from "./alertActions";
 
@@ -13,6 +14,46 @@ export const loadNotes = () => async dispatch => {
   try {
     const res = await axios.get("/api/notes");
     dispatch({ type: LOAD_NOTES, payload: res.data });
+  } catch (err) {
+    dispatch({
+      type: NOTE_ERROR,
+      payload: {
+        msg: err.response.statusText,
+        status: err.response.status
+      }
+    });
+  }
+};
+
+// Add like
+export const addLike = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/notes/like/${id}`);
+
+    dispatch({
+      type: UPDATE_LIKES,
+      payload: { id, likes: res.data }
+    });
+  } catch (err) {
+    dispatch({
+      type: NOTE_ERROR,
+      payload: {
+        msg: err.response.statusText,
+        status: err.response.status
+      }
+    });
+  }
+};
+
+// Remove like
+export const removeLike = id => async dispatch => {
+  try {
+    const res = await axios.put(`/api/notes/unlike/${id}`);
+
+    dispatch({
+      type: UPDATE_LIKES,
+      payload: { id, likes: res.data }
+    });
   } catch (err) {
     dispatch({
       type: NOTE_ERROR,

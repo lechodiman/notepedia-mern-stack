@@ -20,6 +20,7 @@ export const GET_NOTE = "GET_NOTE";
 export const ADD_NOTE = "ADD_NOTE";
 export const DELETE_NOTE = "DELETE_NOTE";
 export const NOTE_ERROR = "NOTE_ERROR";
+export const UPDATE_LIKES = "UPDATE_LIKES";
 
 export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
 

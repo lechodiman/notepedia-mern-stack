@@ -1,9 +1,10 @@
 import {
-  LOAD_NOTES,
-  GET_NOTE,
   ADD_NOTE,
   DELETE_NOTE,
-  NOTE_ERROR
+  GET_NOTE,
+  LOAD_NOTES,
+  NOTE_ERROR,
+  UPDATE_LIKES
 } from "../actions/types";
 
 const initialState = {
@@ -44,6 +45,19 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: payload,
+        loading: false
+      };
+    case UPDATE_LIKES:
+      return {
+        ...state,
+        notes: state.notes.map(note => {
+          // Update likes of notes in the state
+          if (note._id === payload.id) {
+            return { ...note, likes: payload.likes };
+          }
+
+          return note;
+        }),
         loading: false
       };
     default:
