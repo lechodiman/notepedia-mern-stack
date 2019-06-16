@@ -27,6 +27,11 @@ export const UPDATE_LIKES = "UPDATE_LIKES";
 export const ADD_COMMENT = "ADD_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
 
+// Bookmarks
+export const GET_BOOKMARKS = "GET_BOOKMARKS";
+export const ADD_BOOKMARK = "ADD_BOOKMARK";
+export const DELETE_BOOKMARK = "DELETE_BOOKMARK";
+
 // Profile
 export const GET_PROFILE = "GET_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";
