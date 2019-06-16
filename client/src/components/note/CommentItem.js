@@ -6,7 +6,7 @@ import Moment from "react-moment";
 import { deleteComment } from "../../actions/post";
 
 const CommentItem = ({
-  postId,
+  noteId,
   comment: { _id, text, name, avatar, user, date },
   auth,
   deleteComment
@@ -25,7 +25,7 @@ const CommentItem = ({
       </p>
       {!auth.loading && user === auth.user._id && (
         <button
-          onClick={e => deleteComment(postId, _id)}
+          onClick={e => deleteComment(noteId, _id)}
           type="button"
           className="btn btn-danger"
         >
@@ -37,7 +37,7 @@ const CommentItem = ({
 );
 
 CommentItem.propTypes = {
-  postId: PropTypes.number.isRequired,
+  noteId: PropTypes.number.isRequired,
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
   deleteComment: PropTypes.func.isRequired
