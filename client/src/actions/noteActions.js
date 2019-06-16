@@ -5,7 +5,9 @@ import {
   NOTE_ERROR,
   DELETE_NOTE,
   ADD_NOTE,
-  UPDATE_LIKES
+  UPDATE_LIKES,
+  ADD_COMMENT,
+  REMOVE_COMMENT
 } from "./types";
 import { setAlert } from "./alertActions";
 
@@ -118,6 +120,54 @@ export const createNote = editorData => async dispatch => {
         message: err.response.statusText,
         status: err.response.status
       }
+    });
+  }
+};
+
+// Add comment
+export const addComment = (noteId, formData) => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  try {
+    const res = await axios.post(
+      `/api/notes/comment/${noteId}`,
+      formData,
+      config
+    );
+
+    dispatch({
+      type: ADD_COMMENT,
+      payload: res.data
+    });
+
+    dispatch(setAlert("Comment Added", "success"));
+  } catch (err) {
+    dispatch({
+      type: NOTE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+// Delete comment
+export const deleteComment = (noteId, commentId) => async dispatch => {
+  try {
+    await axios.delete(`/api/notes/comment/${noteId}/${commentId}`);
+
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: commentId
+    });
+
+    dispatch(setAlert("Comment Removed", "success"));
+  } catch (err) {
+    dispatch({
+      type: NOTE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };
