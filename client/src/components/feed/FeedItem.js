@@ -40,7 +40,7 @@ const FeedItem = ({ auth: { user }, note, deleteNote }) => {
         <h2 className="large">
           <Link to={`/notes/${note._id}`}>{note.title}</Link>
         </h2>
-        <p className="lead reading-font">{note.description}</p>
+        <p className="lead reading-font text-secondary">{note.description}</p>
       </div>
 
       <div className="feed-item-footer row justify-content-end">
