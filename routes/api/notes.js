@@ -65,7 +65,7 @@ router.post(
 
 // @route    GET api/notes
 // @desc     Get all notes
-// @access   Private
+// @access   Public
 router.get("/", async (req, res) => {
   try {
     const notes = await Note.find()
@@ -80,7 +80,7 @@ router.get("/", async (req, res) => {
 
 // @route    GET api/notes/:id
 // @desc     Get note by ID
-// @access   Private
+// @access   Public
 router.get("/:id", async (req, res) => {
   try {
     const note = await Note.findById(req.params.id)
@@ -95,7 +95,7 @@ router.get("/:id", async (req, res) => {
   } catch (err) {
     console.error(err.message);
     if (err.kind === "ObjectId") {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json({ message: "Note not found" });
     }
     res.status(500).send("Server Error");
   }
