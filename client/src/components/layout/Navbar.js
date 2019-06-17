@@ -61,6 +61,10 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         Notepedia
       </Link>
 
+      <Link to="/information" className="nav-link">
+        All about Notepedia
+      </Link>
+
       <NavbarToggler onClick={onToggle} />
 
       <Collapse isOpen={isOpen} navbar>
