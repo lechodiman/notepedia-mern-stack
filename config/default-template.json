@@ -1,4 +1,4 @@
 {
-  "mongoURI": "yourMongoURI",
-  "secretOrKey": ""
+  "mongoURI": "yourURI",
+  "secretOrKey": "secret"
 }

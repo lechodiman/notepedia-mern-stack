@@ -7326,6 +7326,11 @@ react-scripts@3.0.0:
   optionalDependencies:
     fsevents "2.0.6"
 
+react-sidemenu@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-sidemenu/-/react-sidemenu-1.1.0.tgz#3c8c9ccd51e38eed99e127a5548a0643b5f82952"
+  integrity sha512-jELlbJ07iKRAcOMgcC4xw3f3wVbpC4XoIbs1cn/zK4ujPfC0ZJnL9oePrXibf+dHIcfeByfiETpjmepvfBz3uA==
+
 react-test-renderer@^16.0.0-0, react-test-renderer@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-test-renderer/-/react-test-renderer-16.8.6.tgz#188d8029b8c39c786f998aa3efd3ffe7642d5ba1"
