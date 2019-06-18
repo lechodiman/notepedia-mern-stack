@@ -20,8 +20,8 @@ router.post(
     [
       check("text", "Text is required")
         .not()
-        .isEmpty(),
-    ],
+        .isEmpty()
+    ]
   ],
   async (req, res) => {
     try {
@@ -34,18 +34,18 @@ router.post(
         claps,
         description,
         feature_img: "",
-        author: req.user.id,
+        author: req.user.id
       };
 
       if (req.files && req.files.image) {
         const uploadedImage = cloudinary.uploader.upload(req.files.image.path, {
           resource_type: "image",
-          eager: [{ effect: "sepia" }],
+          eager: [{ effect: "sepia" }]
         });
 
         noteParameters = {
           ...noteParameters,
-          feature_img: uploadedImage.url,
+          feature_img: uploadedImage.url
         };
       }
 
@@ -139,8 +139,8 @@ router.put(
     [
       check("text", "Text is required")
         .not()
-        .isEmpty(),
-    ],
+        .isEmpty()
+    ]
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -156,7 +156,7 @@ router.put(
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
-        author: req.user.id,
+        author: req.user.id
       };
 
       note.comments = [newComment, ...note.comments];

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 let NoteSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
-    ref: "user",
+    ref: "user"
   },
   text: { type: String, required: true },
   title: { type: String, required: true },
@@ -14,29 +14,29 @@ let NoteSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: "users",
-      },
-    },
+        ref: "users"
+      }
+    }
   ],
   comments: [
     {
       author: {
         type: Schema.Types.ObjectId,
-        ref: "user",
+        ref: "user"
       },
       text: { type: String, required: true },
       name: {
-        type: String,
+        type: String
       },
       avatar: {
-        type: String,
+        type: String
       },
       date: {
         type: Date,
-        default: Date.now,
-      },
-    },
-  ],
+        default: Date.now
+      }
+    }
+  ]
 });
 NoteSchema.methods.clap = function() {
   this.claps++;
