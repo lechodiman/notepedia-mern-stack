@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let NoteSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
-    ref: 'user',
+    ref: "user",
   },
   text: { type: String, required: true },
   title: { type: String, required: true },
@@ -14,7 +14,7 @@ let NoteSchema = new Schema({
     {
       user: {
         type: Schema.Types.ObjectId,
-        ref: 'users',
+        ref: "users",
       },
     },
   ],
@@ -22,7 +22,7 @@ let NoteSchema = new Schema({
     {
       author: {
         type: Schema.Types.ObjectId,
-        ref: 'user',
+        ref: "user",
       },
       text: { type: String, required: true },
       name: {
@@ -56,4 +56,4 @@ NoteSchema.methods.getUserNotes = function(authorId) {
   });
 };
 
-module.exports = Note = mongoose.model('note', NoteSchema);
+module.exports = Note = mongoose.model("note", NoteSchema);
