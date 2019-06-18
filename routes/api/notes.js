@@ -1,31 +1,31 @@
-const multipart = require("connect-multiparty");
+const multipart = require('connect-multiparty');
 const multipartWare = multipart();
-const cloudinary = require("cloudinary");
+const cloudinary = require('cloudinary');
 
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { check, validationResult } = require("express-validator/check");
-const auth = require("../../middleware/auth");
-const Note = require("../../models/Note");
-const User = require("../../models/User");
+const { check, validationResult } = require('express-validator/check');
+const auth = require('../../middleware/auth');
+const Note = require('../../models/Note');
+const User = require('../../models/User');
 
 // @route    POST api/notes
 // @desc     Create a note
 // @access   Private
 router.post(
-  "/",
+  '/',
   [
     multipartWare,
     auth,
     [
-      check("text", "Text is required")
+      check('text', 'Text is required')
         .not()
-        .isEmpty()
-    ]
+        .isEmpty(),
+    ],
   ],
   async (req, res) => {
     try {
-      const user = await User.findById(req.user.id).select("-password");
+      const user = await User.findById(req.user.id).select('-password');
       const { text, title, claps, description } = req.body;
 
       let noteParameters = {
@@ -33,19 +33,19 @@ router.post(
         title,
         claps,
         description,
-        feature_img: "",
-        author: req.user.id
+        feature_img: '',
+        author: req.user.id,
       };
 
       if (req.files && req.files.image) {
         const uploadedImage = cloudinary.uploader.upload(req.files.image.path, {
-          resource_type: "image",
-          eager: [{ effect: "sepia" }]
+          resource_type: 'image',
+          eager: [{ effect: 'sepia' }],
         });
 
         noteParameters = {
           ...noteParameters,
-          feature_img: uploadedImage.url
+          feature_img: uploadedImage.url,
         };
       }
 
@@ -53,12 +53,12 @@ router.post(
 
       const savedNote = await note.save();
 
-      const noteWithAuthor = savedNote.populate("author", "-password");
+      const noteWithAuthor = savedNote.populate('author', '-password');
 
       res.json(noteWithAuthor);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).send('Server Error');
     }
   }
 );
@@ -66,66 +66,66 @@ router.post(
 // @route    GET api/notes
 // @desc     Get all notes
 // @access   Private
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const notes = await Note.find()
-      .populate("author", "-password")
+      .populate('author', '-password')
       .sort({ date: -1 });
     res.json(notes);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(500).send('Server Error');
   }
 });
 
 // @route    GET api/notes/:id
 // @desc     Get note by ID
 // @access   Private
-router.get("/:id", async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const note = await Note.findById(req.params.id)
-      .populate("author", "-password")
-      .populate("comments.author");
+      .populate('author', '-password')
+      .populate('comments.author');
 
     if (!note) {
-      return res.status(404).json({ message: "Note not found" });
+      return res.status(404).json({ message: 'Note not found' });
     }
 
     res.json(note);
   } catch (err) {
     console.error(err.message);
-    if (err.kind === "ObjectId") {
-      return res.status(404).json({ message: "Post not found" });
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ message: 'Post not found' });
     }
-    res.status(500).send("Server Error");
+    res.status(500).send('Server Error');
   }
 });
 
 // @route    DELETE api/notes/:id
 // @desc     Delete a note
 // @access   Private
-router.delete("/:id", auth, async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
 
     if (!note) {
-      return res.status(404).json({ message: "Post not found" });
+      return res.status(404).json({ message: 'Post not found' });
     }
 
     // Check user
     if (note.author.toString() !== req.user.id) {
-      return res.status(401).json({ message: "User not authorized" });
+      return res.status(401).json({ message: 'User not authorized' });
     }
 
     await note.remove();
 
-    res.json({ message: "Post removed" });
+    res.json({ message: 'Post removed' });
   } catch (err) {
     console.error(err.message);
-    if (err.kind === "ObjectId") {
-      return res.status(404).json({ message: "Note not found" });
+    if (err.kind === 'ObjectId') {
+      return res.status(404).json({ message: 'Note not found' });
     }
-    res.status(500).send("Server Error");
+    res.status(500).send('Server Error');
   }
 });
 
@@ -133,14 +133,14 @@ router.delete("/:id", auth, async (req, res) => {
 // @desc     Comment on a post
 // @access   Private
 router.put(
-  "/comment/:id",
+  '/comment/:id',
   [
     auth,
     [
-      check("text", "Text is required")
+      check('text', 'Text is required')
         .not()
-        .isEmpty()
-    ]
+        .isEmpty(),
+    ],
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -149,14 +149,14 @@ router.put(
     }
 
     try {
-      const user = await User.findById(req.user.id).select("-password");
+      const user = await User.findById(req.user.id).select('-password');
       const note = await Note.findById(req.params.id);
 
       const newComment = {
         text: req.body.text,
         name: user.name,
         avatar: user.avatar,
-        author: req.user.id
+        author: req.user.id,
       };
 
       note.comments = [newComment, ...note.comments];
@@ -166,7 +166,7 @@ router.put(
       res.json(note.comments);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Server Error");
+      res.status(500).send('Server Error');
     }
   }
 );
@@ -174,7 +174,7 @@ router.put(
 // @route    DELETE api/notes/comment/:id/:comment_id
 // @desc     Delete comment
 // @access   Private
-router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
+router.delete('/comment/:id/:comment_id', auth, async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
 
@@ -185,12 +185,12 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
 
     // Make sure comment exists
     if (!comment) {
-      return res.status(404).json({ message: "Comment does not exist" });
+      return res.status(404).json({ message: 'Comment does not exist' });
     }
 
     // Check user
     if (comment.author.toString() !== req.user.id) {
-      return res.status(401).json({ message: "User not authorized" });
+      return res.status(401).json({ message: 'User not authorized' });
     }
 
     // Get remove index
@@ -205,25 +205,25 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
     res.json(note.comments);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
+    res.status(500).send('Server Error');
   }
 });
 
 // @route    PATCH api/notes/:id/
 // @desc     Update a note
 // @access   Private
-router.patch("/:id", auth, async (req, res) => {
+router.patch('/:id', auth, async (req, res) => {
   try {
     const note = await Note.findById(req.params.id);
 
     // Check if the note exists
     if (!note) {
-      return res.status(404).json({ message: "Note not found" });
+      return res.status(404).json({ message: 'Note not found' });
     }
 
     // Check user
     if (note.author.toString() !== req.user.id) {
-      return res.status(401).json({ message: "User not authorized" });
+      return res.status(401).json({ message: 'User not authorized' });
     }
 
     const updatedNote = await Note.findByIdAndUpdate(
@@ -235,12 +235,64 @@ router.patch("/:id", auth, async (req, res) => {
     res.json(updatedNote);
   } catch (err) {
     console.log(err);
-    res.status(500).send("Server Error");
+    res.status(500).send('Server Error');
   }
 });
 
-// TODO: Clap or like a note
+// @route    PUT api/notes/like/:id
+// @desc     Like a note
+// @access   Private
+router.put('/like/:id', auth, async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
 
-// TODO: Undo clap or unlike
+    // Check if the note has already been liked
+    if (
+      note.likes.filter(like => like.user.toString() === req.user.id).length > 0
+    ) {
+      return res.status(400).json({ msg: 'Note already liked' });
+    }
+
+    note.likes.unshift({ user: req.user.id });
+
+    await note.save();
+
+    res.json({ likes: note.likes.length });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+// @route    PUT api/notes/unlike/:id
+// @desc     Unlike a note
+// @access   Private
+router.put('/unlike/:id', auth, async (req, res) => {
+  try {
+    const note = await Note.findById(req.params.id);
+
+    // Check if the note has already been liked
+    if (
+      note.likes.filter(like => like.user.toString() === req.user.id).length ===
+      0
+    ) {
+      return res.status(400).json({ msg: 'Note has not yet been liked' });
+    }
+
+    // Get remove index
+    const removeIndex = note.likes
+      .map(like => like.user.toString())
+      .indexOf(req.user.id);
+
+    note.likes.splice(removeIndex, 1);
+
+    await note.save();
+
+    res.json({ likes: note.likes.length });
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;
