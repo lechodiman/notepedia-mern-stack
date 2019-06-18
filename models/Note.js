@@ -1,35 +1,42 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let NoteSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
-    ref: "user"
+    ref: 'user',
   },
   text: { type: String, required: true },
   title: { type: String, required: true },
   description: String,
   feature_img: String,
-  claps: Number,
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'users',
+      },
+    },
+  ],
   comments: [
     {
       author: {
         type: Schema.Types.ObjectId,
-        ref: "user"
+        ref: 'user',
       },
       text: { type: String, required: true },
       name: {
-        type: String
+        type: String,
       },
       avatar: {
-        type: String
+        type: String,
       },
       date: {
         type: Date,
-        default: Date.now
-      }
-    }
-  ]
+        default: Date.now,
+      },
+    },
+  ],
 });
 NoteSchema.methods.clap = function() {
   this.claps++;
@@ -49,4 +56,4 @@ NoteSchema.methods.getUserNotes = function(authorId) {
   });
 };
 
-module.exports = Note = mongoose.model("note", NoteSchema);
+module.exports = Note = mongoose.model('note', NoteSchema);
