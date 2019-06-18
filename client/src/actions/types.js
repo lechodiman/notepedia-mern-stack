@@ -26,3 +26,7 @@ export const ACCOUNT_DELETED = "ACCOUNT_DELETED";
 // Profile
 export const GET_PROFILE = "GET_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";
+
+// Notebook types
+export const LOAD_NOTEBOOKS = "LOAD_NOTEBOOKS";
+export const NOTEBOOK_ERROR = "NOTEBOOK_ERROR";

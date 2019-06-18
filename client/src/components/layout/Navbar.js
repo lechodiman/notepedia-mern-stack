@@ -27,6 +27,11 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </Link>
       </NavItem>
       <NavItem>
+        <Link to="/notebooks" className="nav-link" onClick={onToggle}>
+          Notebooks
+        </Link>
+      </NavItem>
+      <NavItem>
         <Link to="/dashboard" className="nav-link" onClick={onToggle}>
           Dashboard
         </Link>

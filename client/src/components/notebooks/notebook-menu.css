@@ -1,0 +1,17 @@
+.notebook-container {
+  width: 500px;
+  position: sticky;
+  position: -webkit-sticky;
+  padding: 0px;
+  top: 0px;
+}
+
+.notebook-item-link {
+  height: 100%;
+  width: 200px;
+  margin-right: 50px;
+}
+
+.item-button {
+  float: right;
+}

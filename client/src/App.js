@@ -2,7 +2,6 @@ import React, { Fragment, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Navbar from "./components/layout/Navbar";
-import NotebookMenu from "./components/NotebookMenu/NotebookMenu";
 
 import Routes from "./components/routing/Routes";
 
@@ -32,7 +31,6 @@ function App() {
       <Router>
         <Fragment>
           <Navbar />
-          <NotebookMenu />
 
           <Switch>
             <Route component={Routes} />
