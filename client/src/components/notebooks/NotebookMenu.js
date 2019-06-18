@@ -46,7 +46,7 @@ const NotebookMenu = ({ notebooks }) => {
   }
 
   const displayNotebooks = notebooks.map((notebook) => 
-      <Fragment>
+      <Fragment key={notebook.id}>
         <ListGroupItem key={notebook.id} action>
             <Link 
               className="notebook-item-link" 
