@@ -74,7 +74,7 @@ const NotebookMenu = ({ notebooks }) => {
           <h1 className="large text-secondary text-center">My Notebooks</h1>
           <button
             className="btn btn-default"
-            style={{ float: "right" }}
+            style={{ marginLeft: "105px" }}
             onClick={(e) => toggle(e)}
           >
             <i className="fas fa-plus-circle fa-2x"></i>
