@@ -95,4 +95,46 @@ router.put("/:id", auth, async (req, res) => {
   }
 });
 
+// @route    PUT api/notebooks/:notebook_id/notes/
+// @desc     Add a note to a notebook
+// @access   Private
+router.put("/:notebook_id/notes", auth, async (req, res) => {
+  try {
+    const { noteId } = req.body;
+
+    const notebook = Notebook.findById(req.params.notebook_id);
+
+    const note = Note.findById(noteId);
+
+    notebook.notes.push(noteId);
+
+    await notebook.save();
+
+    res.json(notebook);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ message: "Note not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
+// TODO: Delete note from notebook
+
+// @route    DELETE api/notebooks/:notebook_id/notes/:note_id
+// @desc     Remove a note from a notebook
+// @access   Private
+
+// TODO: Get a single notebook
+
+// @route    GET api/notebooks/:notebook_id
+// @desc     Get a single notebook
+// @access   Public
+
+// TODO: Delete a notebook
+
+// @route    DELETE api/notebooks/:notebook_id
+// @desc     Delete a single notebook
+// @access   Private
 module.exports = router;
