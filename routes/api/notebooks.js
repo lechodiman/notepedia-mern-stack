@@ -120,21 +120,82 @@ router.put("/:notebook_id/notes", auth, async (req, res) => {
   }
 });
 
-// TODO: Delete note from notebook
-
 // @route    DELETE api/notebooks/:notebook_id/notes/:note_id
 // @desc     Remove a note from a notebook
 // @access   Private
+router.delete("/:notebook_id/notes/:note_id", auth, async (req, res) => {
+  try {
+    const notebook = await Notebook.findById(req.params.notebook_id);
 
-// TODO: Get a single notebook
+    const note = await Note.findById(req.params.note_id);
+
+    if (!note) {
+      return res.status(404).json({
+        message: "Note does not exist"
+      });
+    }
+
+    const removeIndex = notebook.notes
+      .map(note => note.toString())
+      .indexOf(req.params.note_id);
+
+    notebook.notes.splice(removeIndex, 1);
+
+    await notebook.save();
+
+    res.json(notebook);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ message: "Notebook not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
 
 // @route    GET api/notebooks/:notebook_id
 // @desc     Get a single notebook
 // @access   Public
+router.get("/:id", async (req, res) => {
+  try {
+    const notebook = await Notebook.findById(req.params.id)
+      .populate("author", "-password")
+      .populate("notes")
+      .sort({ date: -1 });
 
-// TODO: Delete a notebook
+    res.json(notebook);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
-// @route    DELETE api/notebooks/:notebook_id
+// @route    DELETE api/notebooks/:id
 // @desc     Delete a single notebook
 // @access   Private
+router.delete("/:id", auth, async (req, res) => {
+  try {
+    const notebook = await Notebook.findById(req.params.id);
+
+    if (!notebook) {
+      return res.status(404).json({ message: "Notebook not found" });
+    }
+
+    // Check user
+    if (!notebook.isAuthor(req.user.id)) {
+      return res.status(401).json({ message: "User not authorized" });
+    }
+
+    await note.remove();
+
+    res.json({ message: "Notebook removed" });
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ message: "Notebook not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
