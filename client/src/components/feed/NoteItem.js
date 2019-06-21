@@ -15,7 +15,6 @@ const NoteItem = ({
   note: { _id, title, description, author, likes, comments, date },
   showActions
 }) => {
-  debugger;
   return (
     <div className="note-item bg-white p-1 my-1">
       <div>

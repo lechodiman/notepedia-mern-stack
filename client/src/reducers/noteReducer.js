@@ -11,7 +11,7 @@ import {
 
 const initialState = {
   notes: [],
-  note: {},
+  note: null,
   loading: true,
   error: {}
 };
