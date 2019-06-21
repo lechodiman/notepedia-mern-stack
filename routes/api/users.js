@@ -8,7 +8,7 @@ const config = require("config");
 const { check, validationResult } = require("express-validator/check");
 
 const User = require("../../models/User");
-
+const Notebook = require("../../models/Notebook");
 // @route   GET api/users/
 // @desc    Register a user
 // @access  Public
@@ -144,6 +144,20 @@ router.post("/follow/:id", auth, async (req, res) => {
     return res.json({
       message: "User followed"
     });
+  } catch (err) {
+    console.error(err.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET api/users/me/notebooks
+// @desc    Get all notebooks from current user
+// @access  Private
+router.get("/me/notebooks", auth, async (req, res) => {
+  try {
+    const notebooks = await Notebook.findUserNotebooks(req.user.id);
+
+    return res.json(notebooks);
   } catch (err) {
     console.error(err.message);
     return res.status(500).send("Server Error");
