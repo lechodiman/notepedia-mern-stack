@@ -1,5 +1,3 @@
-const multipart = require("connect-multiparty");
-
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator/check");
@@ -55,6 +53,7 @@ router.get("/", async (req, res) => {
       .populate("author", "-password")
       .populate("notes")
       .sort({ date: -1 });
+
     res.json(notebooks);
   } catch (err) {
     console.error(err.message);
@@ -102,15 +101,30 @@ router.put("/:notebook_id/notes", auth, async (req, res) => {
   try {
     const { noteId } = req.body;
 
-    const notebook = Notebook.findById(req.params.notebook_id);
+    const notebook = await Notebook.findById(req.params.notebook_id);
 
-    const note = Note.findById(noteId);
+    const isInNotebook = notebook.notes
+      .map(note => note.toString())
+      .includes(noteId);
 
-    notebook.notes.push(noteId);
+    // check if note is already in this notebook
+    if (isInNotebook) {
+      return res.status(400).json({
+        message: "Note is already in this notebook"
+      });
+    }
 
-    await notebook.save();
+    // check that note exists
+    const note = await Note.findById(noteId);
 
-    res.json(notebook);
+    await notebook.addNote(noteId);
+
+    // FIXME: populate notebook with notes and author
+    const populatedNotebook = await Notebook.findById(req.params.notebook_id)
+      .populate("author", "-password")
+      .populate("notes");
+
+    res.json(populatedNotebook);
   } catch (err) {
     console.error(err.message);
     if (err.kind === "ObjectId") {
