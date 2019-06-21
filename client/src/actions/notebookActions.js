@@ -6,9 +6,9 @@ import {
 
 
 // Loads all notes from the DB
-export const loadNotebooks = () => async dispatch => {
+export const loadNotebooks = (id) => async dispatch => {
   try {
-    const res = await axios.get("/api/notebooks");
+    const res = await axios.get(`/api/users/${id}/notebooks`);
     dispatch({ type: LOAD_NOTEBOOKS, payload: res.data });
   } catch (err) {
     dispatch({

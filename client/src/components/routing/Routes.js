@@ -7,7 +7,7 @@ import Dashboard from "../dashboard/Dashboard";
 import PrivateRoute from "../routing/PrivateRoute";
 import Note from "../note/Note";
 import Feed from "../feed/Feed";
-import NotebookMenu from "../notebooks/NotebookMenu"
+import Notebooks from "../notebooks/Notebooks"
 import { Route, Switch } from "react-router-dom";
 const Routes = () => {
   return (
@@ -19,7 +19,7 @@ const Routes = () => {
         <Route exact path="/login" component={Login} />
         <PrivateRoute exact path="/notes/new" component={NoteEditor} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/notebooks" component={NotebookMenu} />
+        <PrivateRoute exact path="/notebooks" component={Notebooks} />
         <Route path="/notes/:id" component={Note} />
       </Switch>
     </section>

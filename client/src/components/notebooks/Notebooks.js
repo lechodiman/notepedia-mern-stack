@@ -16,10 +16,10 @@ import {
 
 import "./notebook-menu.css"
 
-const NotebookMenu = ({ notebooks }) => {
+const Notebooks = ({ notebooks }) => {
 
-  // useEffect(() => {
-  //   loadNotebooks();
+  // useEffect((id) => {
+  //   loadNotebooks(id);
   // }, [loadNotebooks]);
 
   const [isOpen, setOpen] = useState(false);
@@ -45,6 +45,11 @@ const NotebookMenu = ({ notebooks }) => {
     console.log("Delete");
   }
 
+  const handleEdit = (e, id) => {
+    e.preventDefault();
+    console.log("Edit");
+  }
+
   const displayNotebooks = notebooks.map((notebook) => 
       <Fragment key={notebook.id}>
         <ListGroupItem key={notebook.id} action>
@@ -61,8 +66,17 @@ const NotebookMenu = ({ notebooks }) => {
             >
               <i className="fas fa-trash-alt" />
             </button>
-            
+            <button
+              className="btn btn-default"
+              style={{float: "right"}} 
+              onClick={(e) => handleEdit(e, notebook.id)}
+            >
+              <i className="fas fa-edit" />
+            </button>
         </ListGroupItem>
+        <Collapse>
+        sasdfasdf
+        </Collapse>
       </Fragment>
     );
 
@@ -108,4 +122,4 @@ const mapStateToProps = state => ({
   notebooks: state.notebook.notebooks
 });
 
-export default connect(mapStateToProps, { loadNotebooks })(NotebookMenu);
+export default connect(mapStateToProps, { loadNotebooks })(Notebooks);
