@@ -15,6 +15,7 @@ const NoteItem = ({
   note: { _id, title, description, author, likes, comments, date },
   showActions
 }) => {
+  debugger;
   return (
     <div className="note-item bg-white p-1 my-1">
       <div>
@@ -60,7 +61,7 @@ const NoteItem = ({
                 <span className="comment-count">{comments.length}</span>
               )}
             </Link>
-            {!auth.loading && author._id === auth.user._id && (
+            {auth.isAuthenticated && author._id === auth.user._id && (
               <button
                 onClick={() => deleteNote(_id)}
                 type="button"
