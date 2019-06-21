@@ -16,17 +16,6 @@ const Note = ({ notes: { note, loading }, match, getNote }) => {
     return <Spinner />;
   }
 
-  let featureImg = null;
-  if (note.feature_img) {
-    featureImg = (
-      <img
-        src={note.feature_img}
-        alt="feature_img"
-        className="img-responsive note-feature-img"
-      />
-    );
-  }
-
   return (
     <div className="note">
       <div className="row d-flex justify-content-center">
@@ -52,15 +41,13 @@ const Note = ({ notes: { note, loading }, match, getNote }) => {
         </div>
       </div>
 
-      <div className="row">{featureImg}</div>
-
       <div className="row mt-4">
         <p dangerouslySetInnerHTML={{ __html: note.text }} />
       </div>
 
-      {/* <div className="row">
+      <div className="row">
         <LikeButton _id={note._id} likes={note.likes} />
-      </div> */}
+      </div>
     </div>
   );
 };
