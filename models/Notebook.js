@@ -27,9 +27,12 @@ NotebookSchema.methods.isAuthor = function(userId) {
   return this.author.toString() === userId;
 };
 NotebookSchema.statics.findUserNotebooks = function(authorId) {
-  this.find({ author: authorId }).then(notebooks => {
-    return notebooks;
-  });
+  return this.find({ author: authorId })
+    .populate("notes")
+    .populate("author", "-password")
+    .then(notebooks => {
+      return notebooks;
+    });
 };
 
 module.exports = Notebook = mongoose.model("notebook", NotebookSchema);

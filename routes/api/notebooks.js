@@ -172,10 +172,13 @@ router.delete("/:notebook_id/notes/:note_id", auth, async (req, res) => {
 // @access   Public
 router.get("/:id", async (req, res) => {
   try {
-    // TODO: case when notebook is not found
     const notebook = await Notebook.findById(req.params.id)
       .populate("author", "-password")
       .populate("notes");
+
+    if (!notebook) {
+      return res.status(404).json({ message: "Notebook not found" });
+    }
 
     res.json(notebook);
   } catch (err) {
