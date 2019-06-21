@@ -26,13 +26,20 @@ const Notebooks = ({ notebooks }) => {
 
   const [newNotebookName, setNewName] = useState("");
 
+  const [activeIndex, setActiveIndex] = useState(undefined);
+
   const onChange = e => {
     setNewName(e.target.value);
   };
 
-  const toggle = (e) => {
+  const toggleNewNotebook = (e) => {
     e.preventDefault();
     setOpen(!isOpen);
+  }
+
+  const toggleEdit = (e, index) => {
+    e.preventDefault();
+    setActiveIndex(activeIndex === index ? undefined : index);
   }
 
   const handleCreate = (e) => {
@@ -69,13 +76,20 @@ const Notebooks = ({ notebooks }) => {
             <button
               className="btn btn-default"
               style={{float: "right"}} 
-              onClick={(e) => handleEdit(e, notebook.id)}
+              onClick={(e) => toggleEdit(e, notebook.id)}
             >
               <i className="fas fa-edit" />
             </button>
         </ListGroupItem>
-        <Collapse>
-        sasdfasdf
+        <Collapse isOpen={activeIndex === notebook.id}>
+          <Row>
+            <InputGroup style={{ width: "500px", margin: "0 auto", marginBottom: "5px", marginTop: "5px" }}>
+              <Input placeholder="New name" onChange={onChange} />
+              <InputGroupAddon addonType="append">
+                <Button onClick={(e, ) => handleEdit(e, notebook.id)}>Create</Button>
+              </InputGroupAddon>
+            </InputGroup>
+          </Row>
         </Collapse>
       </Fragment>
     );
@@ -89,7 +103,7 @@ const Notebooks = ({ notebooks }) => {
           <button
             className="btn btn-default"
             style={{ marginLeft: "105px" }}
-            onClick={(e) => toggle(e)}
+            onClick={(e) => toggleNewNotebook(e)}
           >
             <i className="fas fa-plus-circle fa-2x"></i>
           </button>
@@ -100,7 +114,7 @@ const Notebooks = ({ notebooks }) => {
           <InputGroup style={{ width: "500px", margin: "0 auto", marginBottom: "10px", marginTop: "5px" }}>
             <Input placeholder="Notebook name" onChange={onChange} />
             <InputGroupAddon addonType="append">
-              <Button onClick={(e, ) => handleCreate(e, )}>Create</Button>
+              <Button onClick={(e) => handleCreate(e)}>Create</Button>
             </InputGroupAddon>
           </InputGroup>
         </Row>
