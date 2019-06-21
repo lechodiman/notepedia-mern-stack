@@ -83,7 +83,7 @@ const Notebooks = ({ notebooks }) => {
         </ListGroupItem>
         <Collapse isOpen={activeIndex === notebook.id}>
           <Row>
-            <InputGroup style={{ width: "500px", margin: "0 auto", marginBottom: "5px", marginTop: "5px" }}>
+            <InputGroup className="notebook-edit-input">
               <Input placeholder="New name" onChange={onChange} />
               <InputGroupAddon addonType="append">
                 <Button onClick={(e, ) => handleEdit(e, notebook.id)}>Create</Button>
@@ -111,7 +111,7 @@ const Notebooks = ({ notebooks }) => {
       </Row>
       <Collapse isOpen={isOpen}>
         <Row>
-          <InputGroup style={{ width: "500px", margin: "0 auto", marginBottom: "10px", marginTop: "5px" }}>
+          <InputGroup style="notebook-create-inputss">
             <Input placeholder="Notebook name" onChange={onChange} />
             <InputGroupAddon addonType="append">
               <Button onClick={(e) => handleCreate(e)}>Create</Button>

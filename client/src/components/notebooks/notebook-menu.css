@@ -15,3 +15,17 @@
 .item-button {
   float: right;
 }
+
+.notebook-edit-input {
+  width: 500px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.notebook-edit-input {
+  width: 500px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
