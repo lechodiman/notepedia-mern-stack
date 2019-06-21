@@ -5,10 +5,10 @@ import {
 } from "./types";
 
 
-// Loads all notes from the DB
-export const loadNotebooks = (id) => async dispatch => {
+// Loads all current user notebooks 
+export const loadNotebooks = () => async dispatch => {
   try {
-    const res = await axios.get(`/api/users/${id}/notebooks`);
+    const res = await axios.get(`/api/users/me/notebooks`);
     dispatch({ type: LOAD_NOTEBOOKS, payload: res.data });
   } catch (err) {
     dispatch({

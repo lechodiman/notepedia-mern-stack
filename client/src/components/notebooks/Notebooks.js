@@ -111,7 +111,7 @@ const Notebooks = ({ notebooks }) => {
       </Row>
       <Collapse isOpen={isOpen}>
         <Row>
-          <InputGroup style="notebook-create-inputss">
+          <InputGroup className="notebook-create-inputss">
             <Input placeholder="Notebook name" onChange={onChange} />
             <InputGroupAddon addonType="append">
               <Button onClick={(e) => handleCreate(e)}>Create</Button>
