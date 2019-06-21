@@ -172,10 +172,10 @@ router.delete("/:notebook_id/notes/:note_id", auth, async (req, res) => {
 // @access   Public
 router.get("/:id", async (req, res) => {
   try {
+    // TODO: case when notebook is not found
     const notebook = await Notebook.findById(req.params.id)
       .populate("author", "-password")
-      .populate("notes")
-      .sort({ date: -1 });
+      .populate("notes");
 
     res.json(notebook);
   } catch (err) {
@@ -200,7 +200,7 @@ router.delete("/:id", auth, async (req, res) => {
       return res.status(401).json({ message: "User not authorized" });
     }
 
-    await note.remove();
+    await notebook.remove();
 
     res.json({ message: "Notebook removed" });
   } catch (err) {
