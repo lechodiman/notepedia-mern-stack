@@ -78,6 +78,21 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @route    GET api/notes/search
+// @desc     Search for a note
+// @access   Private
+
+router.get("/search", auth, async (req, res) => {
+  try {
+    const notes = await Note.find({ $text: { $search: req.body.text } });
+    console.log(notes);
+    res.json(notes);
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // @route    GET api/notes/:id
 // @desc     Get note by ID
 // @access   Private
