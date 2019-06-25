@@ -47,7 +47,8 @@ const Note = ({ notes: { note, loading }, match, getNote, auth }) => {
       {!auth.isAuthenticated ? (
         <p>
           You can't leave a comment if you don't have an account. Go ahead and{" "}
-          <Link to="/register">create one</Link>
+          <Link to="/register">create one</Link> or just{" "}
+          <Link to="/login">login</Link>
         </p>
       ) : (
         <CommentForm noteId={note._id} />
