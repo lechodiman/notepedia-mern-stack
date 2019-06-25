@@ -8,7 +8,7 @@ const CommentForm = ({ noteId, addComment }) => {
 
   return (
     <div class="post-form">
-      <div class="bg-primary p-2">
+      <div class="bg-primary p-2 text-white">
         <h3 className="lead">Leave a Comment</h3>
       </div>
       <form
@@ -27,6 +27,7 @@ const CommentForm = ({ noteId, addComment }) => {
             value={text}
             onChange={e => setText(e.target.value)}
             required
+            className="form-control"
           />
         </div>
         <input type="submit" class="btn btn-primary my-1" value="Submit" />
