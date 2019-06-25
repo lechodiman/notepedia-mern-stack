@@ -1,18 +1,14 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getNote, addLike, removeLike } from "../../actions/noteActions";
+import { getNote } from "../../actions/noteActions";
 import Spinner from "../layout/Spinner";
-import LikeButton from "../layout/LikeButton";
-import "./note.css";
+import CommentForm from "./CommentForm";
+import CommentItem from "./CommentItem";
 
-// TODO: Add comments section
-// TODO: Add Highlight feature
 const Note = ({ notes: { note, loading }, match, getNote }) => {
   useEffect(() => {
     getNote(match.params.id);
   }, [getNote, match.params.id]);
-
-  debugger;
 
   if (loading || note === null) {
     return <Spinner />;
@@ -47,8 +43,12 @@ const Note = ({ notes: { note, loading }, match, getNote }) => {
         <p dangerouslySetInnerHTML={{ __html: note.text }} />
       </div>
 
-      <div className="row">
-        <LikeButton _id={note._id} likes={note.likes} />
+      <CommentForm noteId={note._id} />
+
+      <div className="comments">
+        {note.comments.map(comment => (
+          <CommentItem key={comment._id} comment={comment} noteId={note._id} />
+        ))}
       </div>
     </div>
   );

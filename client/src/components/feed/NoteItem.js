@@ -1,11 +1,9 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { CardImg } from "reactstrap";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
-import "./feed.css";
 
 const NoteItem = ({
   addLike,
