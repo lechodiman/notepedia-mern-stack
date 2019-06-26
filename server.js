@@ -4,6 +4,7 @@ const connectDB = require("./config/db");
 const users = require("./routes/api/users");
 const notes = require("./routes/api/notes");
 const auth = require("./routes/api/auth");
+const notebooks = require("./routes/api/notebooks");
 const cors = require("cors");
 const cloudinary = require("cloudinary");
 
@@ -25,6 +26,7 @@ cloudinary.config({
 app.use("/api/users", users);
 app.use("/api/notes", notes);
 app.use("/api/auth", auth);
+app.use("/api/notebooks", notebooks);
 
 let port = 5000 || process.env.PORT;
 
