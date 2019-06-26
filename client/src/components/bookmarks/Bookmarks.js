@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const Bookmarks = ({ user: { bookmarks } }) => {
   return (
-    <div>
+    <Fragment>
       <h1 className="text-primary text-center">
         Reading List ({bookmarks.length})
       </h1>
@@ -20,7 +20,7 @@ const Bookmarks = ({ user: { bookmarks } }) => {
           <Link to="/">explore some notes</Link>
         </p>
       )}
-    </div>
+    </Fragment>
   );
 };
 
