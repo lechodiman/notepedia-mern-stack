@@ -1,8 +1,8 @@
-.note-feature-img {
-  margin: 20px 0;
-  width: 100%;
+.note-title {
+  font-size: 72px;
 }
 
-.note {
-  font-family: "Lato sans-serif";
+.note-description {
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 30px;
 }

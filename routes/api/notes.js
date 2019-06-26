@@ -257,7 +257,7 @@ router.put("/like/:id", auth, async (req, res) => {
 
     await note.save();
 
-    res.json({ likes: note.likes.length });
+    res.json(note.likes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
@@ -288,7 +288,7 @@ router.put("/unlike/:id", auth, async (req, res) => {
 
     await note.save();
 
-    res.json({ likes: note.likes.length });
+    res.json(note.likes);
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

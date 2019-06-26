@@ -9,7 +9,6 @@ let NoteSchema = new Schema({
   text: { type: String, required: true },
   title: { type: String, required: true },
   description: String,
-  feature_img: String,
   likes: [
     {
       user: {
@@ -36,12 +35,12 @@ let NoteSchema = new Schema({
         default: Date.now
       }
     }
-  ]
+  ],
+  date: {
+    type: Date,
+    default: Date.now
+  }
 });
-NoteSchema.methods.clap = function() {
-  this.claps++;
-  return this.save();
-};
 NoteSchema.methods.comment = function(comment) {
   this.comments.push(comment);
   return this.save();
