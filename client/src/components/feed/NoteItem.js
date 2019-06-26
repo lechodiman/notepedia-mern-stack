@@ -6,11 +6,14 @@ import { connect } from "react-redux";
 import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
 import "./feed.css";
+import { addBookmark, deleteBookmark } from "../../actions/bookmarkActions";
 
 const NoteItem = ({
   addLike,
   removeLike,
   deleteNote,
+  addBookmark,
+  deleteBookmark,
   auth,
   note: { _id, title, description, author, likes, comments, date },
   showActions
@@ -54,6 +57,24 @@ const NoteItem = ({
             >
               <i className="fas fa-thumbs-down" />
             </button>
+
+            <button
+              onClick={() => {
+                if (auth.user.bookmarks.map(b => b._id).includes(_id)) {
+                  return deleteBookmark(auth.user._id, _id);
+                }
+                return addBookmark(auth.user._id, _id);
+              }}
+              type="button"
+              className="btn btn-light"
+            >
+              {auth.user.bookmarks.map(b => b._id).includes(_id) ? (
+                <i className="fas fa-bookmark" />
+              ) : (
+                <i className="far fa-bookmark" />
+              )}
+            </button>
+
             <Link to={`/notes/${_id}`} className="btn btn-primary">
               Comments{" "}
               {comments.length > 0 && (
@@ -85,6 +106,8 @@ NoteItem.propTypes = {
   auth: PropTypes.object.isRequired,
   addLike: PropTypes.func.isRequired,
   removeLike: PropTypes.func.isRequired,
+  addBookmark: PropTypes.func.isRequired,
+  deleteBookmark: PropTypes.func.isRequired,
   deleteNote: PropTypes.func.isRequired
 };
 
@@ -94,5 +117,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addLike, removeLike, deleteNote }
+  { addLike, removeLike, deleteNote, addBookmark, deleteBookmark }
 )(NoteItem);
