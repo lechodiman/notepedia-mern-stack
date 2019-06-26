@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadNotebooks } from "../../actions/notebookActions"
+import { loadNotebooks, createNotebook, deleteNotebook } from "../../actions/notebookActions"
 import { 
   Container,
   ListGroup,
@@ -16,11 +16,12 @@ import {
 
 import "./notebook-menu.css"
 
-const Notebooks = ({ notebooks }) => {
+// TODO: Change "Edit" input OnChange function
+const Notebooks = ({ notebooks, loadNotebooks, createNotebook, deleteNotebook }) => {
 
-  // useEffect((id) => {
-  //   loadNotebooks(id);
-  // }, [loadNotebooks]);
+  useEffect(() => {
+    loadNotebooks();
+  }, );
 
   const [isOpen, setOpen] = useState(false);
 
@@ -28,8 +29,14 @@ const Notebooks = ({ notebooks }) => {
 
   const [activeIndex, setActiveIndex] = useState(undefined);
 
-  const onChange = e => {
+  const [editNotebookName, setEditName] = useState("");
+
+  const onChangeNew = e => {
     setNewName(e.target.value);
+  };
+
+  const onChangeEdit = e => {
+    setEditName(e.target.value);
   };
 
   const toggleNewNotebook = (e) => {
@@ -42,51 +49,51 @@ const Notebooks = ({ notebooks }) => {
     setActiveIndex(activeIndex === index ? undefined : index);
   }
 
-  const handleCreate = (e) => {
+  const handleCreate = async e => {
     e.preventDefault();
-    console.log("Create: " + newNotebookName);
+    await createNotebook({name: newNotebookName});
   }
 
-  const handleDelete = (e, id) => {
+  const handleDelete = async (e, id) => {
     e.preventDefault();
-    console.log("Delete");
+    await deleteNotebook(id);
   }
 
   const handleEdit = (e, id) => {
     e.preventDefault();
-    console.log("Edit");
+    console.log(editNotebookName);
   }
 
   const displayNotebooks = notebooks.map((notebook) => 
-      <Fragment key={notebook.id}>
-        <ListGroupItem key={notebook.id} action>
+      <Fragment key={notebook._id}>
+        <ListGroupItem action>
             <Link 
               className="notebook-item-link" 
-              to={`/notebooks/${notebook.id}`}
+              to={`/notebooks/${notebook._id}`}
             >
               {notebook.name}
             </Link>
             <button
               className="btn btn-default"
               style={{float: "right"}}
-              onClick={(e) => handleDelete(e, notebook.id)}
+              onClick={(e) => handleDelete(e, notebook._id)}
             >
               <i className="fas fa-trash-alt" />
             </button>
             <button
               className="btn btn-default"
               style={{float: "right"}} 
-              onClick={(e) => toggleEdit(e, notebook.id)}
+              onClick={(e) => toggleEdit(e, notebook._id)}
             >
               <i className="fas fa-edit" />
             </button>
         </ListGroupItem>
-        <Collapse isOpen={activeIndex === notebook.id}>
+        <Collapse isOpen={activeIndex === notebook._id}>
           <Row>
             <InputGroup className="notebook-edit-input">
-              <Input placeholder="New name" onChange={onChange} />
+              <Input placeholder="New name" onChange={onChangeEdit} />
               <InputGroupAddon addonType="append">
-                <Button onClick={(e, ) => handleEdit(e, notebook.id)}>Create</Button>
+                <Button onClick={(e, ) => handleEdit(e, notebook._id)}>Edit</Button>
               </InputGroupAddon>
             </InputGroup>
           </Row>
@@ -111,8 +118,8 @@ const Notebooks = ({ notebooks }) => {
       </Row>
       <Collapse isOpen={isOpen}>
         <Row>
-          <InputGroup className="notebook-create-inputss">
-            <Input placeholder="Notebook name" onChange={onChange} />
+          <InputGroup className="notebook-create-input">
+            <Input placeholder="Notebook name" onChange={onChangeNew} />
             <InputGroupAddon addonType="append">
               <Button onClick={(e) => handleCreate(e)}>Create</Button>
             </InputGroupAddon>
@@ -136,4 +143,4 @@ const mapStateToProps = state => ({
   notebooks: state.notebook.notebooks
 });
 
-export default connect(mapStateToProps, { loadNotebooks })(Notebooks);
+export default connect(mapStateToProps, { loadNotebooks, createNotebook, deleteNotebook })(Notebooks);
