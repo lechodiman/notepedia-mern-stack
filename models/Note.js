@@ -10,7 +10,14 @@ let NoteSchema = new Schema({
   title: { type: String, required: true },
   description: String,
   feature_img: String,
-  claps: Number,
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      }
+    }
+  ],
   comments: [
     {
       author: {
