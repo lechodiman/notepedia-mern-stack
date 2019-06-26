@@ -164,4 +164,123 @@ router.get("/me/notebooks", auth, async (req, res) => {
   }
 });
 
+// @route   GET api/:id/bookmarks/
+// @desc    Get the bookmarks of an given user
+// @access  Private
+
+router.get("/:id/bookmarks", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found"
+      });
+    }
+
+    res.json(user.bookmarks);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
+// @route   PUT api/:id/bookmarks/:noteid
+// @desc    Assign a note to an user bookmarks
+// @access  Private
+
+router.put("/:id/bookmarks/:noteid", auth, async (req, res) => {
+  try {
+    if (req.params.id !== req.user.id) {
+      return res.status(404).json({
+        message: "Unauthorized"
+      });
+    }
+
+    const note = await Note.findById(req.params.noteid);
+
+    if (!note) {
+      return res.status(404).json({
+        message: "Note not found"
+      });
+    }
+
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found"
+      });
+    }
+
+    // Check if the note is already bookmarked
+    if (
+      user.bookmarks.filter(note => note._id.toString() === req.params.noteid)
+        .length > 0
+    ) {
+      return res.status(400).json({ msg: "Note is already in bookmarks" });
+    }
+    // Associate the note with the user bookmarks
+
+    user.bookmarks.unshift(note);
+
+    await user.save();
+    res.json(user.bookmarks);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
+// @route   DELETE api/:id/bookmarks/:noteid
+// @desc    Delete a note from an user bookmarks
+// @access  Private
+router.delete("/:id/bookmarks/:noteid", auth, async (req, res) => {
+  try {
+    if (req.params.id !== req.user.id) {
+      return res.status(404).json({
+        message: "Unauthorized"
+      });
+    }
+
+    const note = await Note.findById(req.params.noteid);
+
+    if (!note) {
+      return res.status(404).json({
+        message: "Note not found"
+      });
+    }
+
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({
+        message: "User not found"
+      });
+    }
+
+    // Check if the note is already bookmarked
+    if (
+      user.bookmarks.filter(note => note._id.toString() === req.params.noteid)
+        .length === 0
+    ) {
+      return res.status(400).json({ msg: "Note isn't in bookmarks" });
+    }
+
+    // Get remove index
+    const removeIndex = user.bookmarks
+      .map(note => note._id.toString())
+      .indexOf(req.params.noteid);
+
+    user.bookmarks.splice(removeIndex, 1);
+
+    await user.save();
+
+    res.json(user.bookmarks);
+  } catch (err) {
+    console.log(err.message);
+    return res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;

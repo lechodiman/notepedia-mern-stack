@@ -16,7 +16,7 @@ import {
 
 import "./notebook-menu.css"
 
-// TODO: Change "Edit" input OnChange function
+
 const Notebooks = ({ notebooks, loadNotebooks, createNotebook, deleteNotebook }) => {
 
   useEffect(() => {
@@ -30,6 +30,7 @@ const Notebooks = ({ notebooks, loadNotebooks, createNotebook, deleteNotebook })
   const [activeIndex, setActiveIndex] = useState(undefined);
 
   const [editNotebookName, setEditName] = useState("");
+
 
   const onChangeNew = e => {
     setNewName(e.target.value);
@@ -46,6 +47,7 @@ const Notebooks = ({ notebooks, loadNotebooks, createNotebook, deleteNotebook })
 
   const toggleEdit = (e, index) => {
     e.preventDefault();
+    if (activeIndex !== index || activeIndex === undefined) setEditName("");
     setActiveIndex(activeIndex === index ? undefined : index);
   }
 
@@ -91,7 +93,7 @@ const Notebooks = ({ notebooks, loadNotebooks, createNotebook, deleteNotebook })
         <Collapse isOpen={activeIndex === notebook._id}>
           <Row>
             <InputGroup className="notebook-edit-input">
-              <Input placeholder="New name" onChange={onChangeEdit} />
+              <Input placeholder="New name" onChange={onChangeEdit} value={editNotebookName} />
               <InputGroupAddon addonType="append">
                 <Button onClick={(e, ) => handleEdit(e, notebook._id)}>Edit</Button>
               </InputGroupAddon>

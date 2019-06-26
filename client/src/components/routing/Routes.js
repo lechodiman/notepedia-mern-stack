@@ -8,7 +8,12 @@ import PrivateRoute from "../routing/PrivateRoute";
 import Note from "../note/Note";
 import Feed from "../feed/Feed";
 import Notebooks from "../notebooks/Notebooks"
+import Information from "../information/Information";
+import About from "../information/About";
+import CodeOfConduct from "../information/CodeOfConduct";
+
 import { Route, Switch } from "react-router-dom";
+
 const Routes = () => {
   return (
     <section className="container">
@@ -20,6 +25,9 @@ const Routes = () => {
         <PrivateRoute exact path="/notes/new" component={NoteEditor} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/notebooks" component={Notebooks} />
+        <Route path="/information" component={Information} />
+        <Route path="/about" component={About} />
+        <Route path="/code-of-conduct" component={CodeOfConduct} />
         <Route path="/notes/:id" component={Note} />
       </Switch>
     </section>

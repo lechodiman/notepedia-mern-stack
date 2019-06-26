@@ -33,6 +33,12 @@ const UserSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: "user"
     }
+  ],
+  bookmarks: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "note"
+    }
   ]
 });
 UserSchema.methods.follow = function(userId) {
