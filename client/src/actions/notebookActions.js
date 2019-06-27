@@ -2,6 +2,7 @@ import axios from "axios";
 import {
   LOAD_NOTEBOOKS,
   ADD_NOTEBOOK,
+  EDIT_NOTEBOOK,
   DELETE_NOTEBOOK,
   NOTEBOOK_ERROR,
 } from "./types";
@@ -24,7 +25,7 @@ export const loadNotebooks = () => async dispatch => {
   }
 };
 
-// Create or update note
+// Create notebook
 export const createNotebook = editorData => async dispatch => {
   const config = {
     headers: {
@@ -48,6 +49,32 @@ export const createNotebook = editorData => async dispatch => {
     });
   }
 };
+
+// Edit notebook
+export const editNotebook = editorData => async dispatch => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  try {
+    await axios.put(`/api/notebooks/${editorData["id"]}`, {name: editorData["name"]}, config);
+
+    dispatch({ type: EDIT_NOTEBOOK });
+
+    dispatch(setAlert("Notebook name changed", "success"));
+  } catch (err) {
+    dispatch({
+      type: NOTEBOOK_ERROR,
+      payload: {
+        message: err.response.statusText,
+        status: err.response.status
+      }
+    });
+  }
+};
+
 
 // Delete notebook
 export const deleteNotebook = id => async dispatch => {

@@ -2,6 +2,7 @@ import {
   LOAD_NOTEBOOKS,
   NOTEBOOK_ERROR,
   ADD_NOTEBOOK,
+  EDIT_NOTEBOOK,
   DELETE_NOTEBOOK,
 } from "../actions/types";
 
@@ -24,6 +25,8 @@ export default function(state = initialState, action) {
         notebooks: [...state.notebooks, payload],
         loading: false
       }
+    case EDIT_NOTEBOOK:
+      return state;
     case DELETE_NOTEBOOK:
       return {
         ...state,

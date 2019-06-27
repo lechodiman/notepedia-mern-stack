@@ -1,7 +1,7 @@
 import React, { Fragment, useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { loadNotebooks, createNotebook, deleteNotebook } from "../../actions/notebookActions"
+import { loadNotebooks, createNotebook, editNotebook, deleteNotebook } from "../../actions/notebookActions"
 import { 
   Container,
   ListGroup,
@@ -17,7 +17,7 @@ import {
 import "./notebook-menu.css"
 
 
-const Notebooks = ({ notebooks, loadNotebooks, createNotebook, deleteNotebook }) => {
+const Notebooks = ({ notebooks, loadNotebooks, createNotebook, editNotebook, deleteNotebook }) => {
 
   useEffect(() => {
     loadNotebooks();
@@ -61,9 +61,9 @@ const Notebooks = ({ notebooks, loadNotebooks, createNotebook, deleteNotebook })
     await deleteNotebook(id);
   }
 
-  const handleEdit = (e, id) => {
+  const handleEdit = async (e, id) => {
     e.preventDefault();
-    console.log(editNotebookName);
+    await editNotebook({id: id, name: editNotebookName});
   }
 
   const displayNotebooks = notebooks.map((notebook) => 
@@ -145,4 +145,4 @@ const mapStateToProps = state => ({
   notebooks: state.notebook.notebooks
 });
 
-export default connect(mapStateToProps, { loadNotebooks, createNotebook, deleteNotebook })(Notebooks);
+export default connect(mapStateToProps, { loadNotebooks, createNotebook, editNotebook, deleteNotebook })(Notebooks);
