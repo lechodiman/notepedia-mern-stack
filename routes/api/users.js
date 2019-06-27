@@ -156,7 +156,7 @@ router.post("/follow/:id", auth, async (req, res) => {
 
 router.get("/:id/bookmarks", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate("bookmarks");
 
     if (!user) {
       return res.status(404).json({
