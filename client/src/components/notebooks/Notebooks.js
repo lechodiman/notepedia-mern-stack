@@ -70,7 +70,7 @@ const Notebooks = ({ notebooks, loadNotebooks, createNotebook, editNotebook, del
       <Fragment key={notebook._id}>
         <ListGroupItem action>
             <Link 
-              className="notebook-item-link" 
+              className="notebook-item-link"
               to={`/notebooks/${notebook._id}`}
             >
               {notebook.name}

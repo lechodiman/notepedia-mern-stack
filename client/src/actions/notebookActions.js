@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   LOAD_NOTEBOOKS,
+  GET_NOTEBOOK,
   ADD_NOTEBOOK,
   EDIT_NOTEBOOK,
   DELETE_NOTEBOOK,
@@ -14,6 +15,26 @@ export const loadNotebooks = () => async dispatch => {
   try {
     const res = await axios.get(`/api/users/me/notebooks`);
     dispatch({ type: LOAD_NOTEBOOKS, payload: res.data });
+  } catch (err) {
+    dispatch({
+      type: NOTEBOOK_ERROR,
+      payload: {
+        msg: err.response.statusText,
+        status: err.response.status
+      }
+    });
+  }
+};
+
+// Load notebook
+export const getNotebook = id => async dispatch => {
+  try {
+    console.log("before fetch");
+    const res = await axios.get(`/api/notebooks/${id}`);
+    console.log("res: " + res);
+    console.log("res.data: " + res.data);
+    console.log("res.data.name: " + res.data.name);
+    dispatch({ type: GET_NOTEBOOK, payload: res.data });
   } catch (err) {
     dispatch({
       type: NOTEBOOK_ERROR,

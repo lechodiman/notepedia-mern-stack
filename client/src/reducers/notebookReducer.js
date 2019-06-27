@@ -1,5 +1,6 @@
 import {
   LOAD_NOTEBOOKS,
+  GET_NOTEBOOK,
   NOTEBOOK_ERROR,
   ADD_NOTEBOOK,
   EDIT_NOTEBOOK,
@@ -7,7 +8,10 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  notebooks: []
+  notebooks: [],
+  notes: [],
+  name: "",
+  loading: true
 };
 
 export default function(state = initialState, action) {
@@ -18,6 +22,13 @@ export default function(state = initialState, action) {
         ...state,
         notebooks: payload,
         loading: false
+      }
+    case GET_NOTEBOOK:
+      return {
+        ...state,
+        loading: false,
+        name: payload.name,
+        notes: payload.notes
       }
     case ADD_NOTEBOOK:
       return {

@@ -7,7 +7,8 @@ import Dashboard from "../dashboard/Dashboard";
 import PrivateRoute from "../routing/PrivateRoute";
 import Note from "../note/Note";
 import Feed from "../feed/Feed";
-import Notebooks from "../notebooks/Notebooks"
+import Notebooks from "../notebooks/Notebooks";
+import Notebook from "../notebooks/Notebook";
 import Information from "../information/Information";
 import About from "../information/About";
 import CodeOfConduct from "../information/CodeOfConduct";
@@ -25,6 +26,8 @@ const Routes = () => {
         <PrivateRoute exact path="/notes/new" component={NoteEditor} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/notebooks" component={Notebooks} />
+        {/* <PrivateRoute exact path="/notebooks/:id" component={Notebook} /> */}
+        <Route path="/notebooks/:id" component={Notebook} />
         <Route path="/information" component={Information} />
         <Route path="/about" component={About} />
         <Route path="/code-of-conduct" component={CodeOfConduct} />

@@ -29,6 +29,7 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 
 // Notebook types
 export const LOAD_NOTEBOOKS = "LOAD_NOTEBOOKS";
+export const GET_NOTEBOOK = "GET_NOTEBOOK";
 export const NOTEBOOK_ERROR = "NOTEBOOK_ERROR";
 export const ADD_NOTEBOOK = "ADD_NOTEBOOK";
 export const EDIT_NOTEBOOK = "EDIT_NOTEBOOK";
