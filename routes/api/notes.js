@@ -129,10 +129,10 @@ router.delete("/:id", auth, async (req, res) => {
   }
 });
 
-// @route    PUT api/notes/comment/:id
-// @desc     Comment on a post
+// @route    POST api/notes/comment/:id
+// @desc     Comment on a note
 // @access   Private
-router.put(
+router.post(
   "/comment/:id",
   [
     auth,
