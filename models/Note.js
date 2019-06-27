@@ -9,6 +9,13 @@ let NoteSchema = new Schema({
   text: { type: String, required: true },
   title: { type: String, required: true },
   description: String,
+  // Duplicate user data to avoid excessive populate()
+  avatar: {
+    type: String
+  },
+  name: {
+    type: String
+  },
   likes: [
     {
       user: {
@@ -43,10 +50,6 @@ let NoteSchema = new Schema({
 });
 NoteSchema.methods.comment = function(comment) {
   this.comments.push(comment);
-  return this.save();
-};
-NoteSchema.methods.addAuthor = function(authorId) {
-  this.author = authorId;
   return this.save();
 };
 NoteSchema.methods.getUserNotes = function(authorId) {
