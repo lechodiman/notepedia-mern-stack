@@ -3,7 +3,7 @@ import React, { Fragment, useEffect } from "react";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { getCurrentProfile } from "../../actions/profileActions";
-import FeedItem from "../feed/FeedItem";
+import NoteItem from "../feed/NoteItem";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -19,7 +19,7 @@ const Dashboard = ({
   }
 
   const userNotes = profile.notes.map(note => {
-    return <FeedItem note={note} key={note._id} />;
+    return <NoteItem note={note} key={note._id} />;
   });
 
   return (

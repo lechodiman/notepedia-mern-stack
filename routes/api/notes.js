@@ -101,7 +101,7 @@ router.get("/search", auth, async(req, res) => {
 
 // @route    GET api/notes/:id
 // @desc     Get note by ID
-// @access   Private
+// @access   Public
 router.get("/:id", async(req, res) => {
     try {
         const note = await Note.findById(req.params.id)
@@ -116,9 +116,8 @@ router.get("/:id", async(req, res) => {
     } catch (err) {
         console.error(err.message);
         if (err.kind === "ObjectId") {
-            return res.status(404).json({ message: "Post not found" });
+            return res.status(404).json({ message: "Note not found" });
         }
-        res.status(500).send("Server Error");
     }
 });
 
@@ -130,7 +129,7 @@ router.delete("/:id", auth, async(req, res) => {
         const note = await Note.findById(req.params.id);
 
         if (!note) {
-            return res.status(404).json({ message: "Post not found" });
+            return res.status(404).json({ message: "Note not found" });
         }
 
         // Check user
@@ -140,20 +139,19 @@ router.delete("/:id", auth, async(req, res) => {
 
         await note.remove();
 
-        res.json({ message: "Post removed" });
+        res.json({ message: "Note removed" });
     } catch (err) {
         console.error(err.message);
         if (err.kind === "ObjectId") {
             return res.status(404).json({ message: "Note not found" });
         }
-        res.status(500).send("Server Error");
     }
 });
 
-// @route    PUT api/notes/comment/:id
-// @desc     Comment on a post
+// @route    POST api/notes/comment/:id
+// @desc     Comment on a note
 // @access   Private
-router.put(
+router.post(
     "/comment/:id", [
         auth, [
             check("text", "Text is required")
@@ -272,7 +270,7 @@ router.put("/like/:id", auth, async(req, res) => {
 
         await note.save();
 
-        res.json({ likes: note.likes.length });
+        res.json(note.likes);
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");
@@ -301,9 +299,7 @@ router.put("/unlike/:id", auth, async(req, res) => {
 
         note.likes.splice(removeIndex, 1);
 
-        await note.save();
-
-        res.json({ likes: note.likes.length });
+        res.json(note.likes);
     } catch (err) {
         console.error(err.message);
         res.status(500).send("Server Error");

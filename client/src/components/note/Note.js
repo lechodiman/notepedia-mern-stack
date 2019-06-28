@@ -2,64 +2,70 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { getNote } from "../../actions/noteActions";
 import Spinner from "../layout/Spinner";
-import "./note.css";
+import CommentForm from "./CommentForm";
+import CommentItem from "./CommentItem";
+import { Link } from "react-router-dom";
 
-// TODO: Display note content (Analyze note model and how to display it correctly, considering images, fonts, quotes, etc)
-// TODO: Add clap & bookmark button
-// TODO: Add comments section
-// TODO: Add Highlight feature
-const Note = ({ notes: { note, loading }, match, getNote }) => {
+const Note = ({ notes: { note, loading }, match, getNote, auth }) => {
   useEffect(() => {
     getNote(match.params.id);
   }, [getNote, match.params.id]);
 
-  if (loading) {
+  if (loading || note === null) {
     return <Spinner />;
   }
 
-  let featureImg = null;
-  if (note.feature_img) {
-    featureImg = (
-      <img
-        src={note.feature_img}
-        alt="feature_img"
-        className="img-responsive note-feature-img"
-      />
-    );
-  }
-
-  // TODO: Add author avatar and name with link to profile
   return (
     <div className="note">
       <div className="row d-flex justify-content-center">
-        <h1 className="large text-primary">{note.title}</h1>
+        <h1 className="note-title">{note.title}</h1>
       </div>
 
       <div className="row">
-        <p className="lead">{note.description}</p>
+        <p className="note-description">{note.description}</p>
       </div>
 
-      <div className="row">{featureImg}</div>
-
       <div className="row">
+        <div className="col-1">
+          {note && (
+            <img
+              src={`${note.author.avatar}`}
+              alt={`${note.author.name}`}
+              className="rounded-circle img-fluid img-thumbnail"
+            />
+          )}
+        </div>
+        <div className="col-11">
+          <p className="text-primary">{note.author.name}</p>
+        </div>
+      </div>
+
+      <div className="row mt-4">
         <p dangerouslySetInnerHTML={{ __html: note.text }} />
       </div>
 
-      <div className="row">
-        <a
-          href="#!"
-          onClick={() => console.log("holi")}
-          className="btn btn-disabled"
-        >
-          <i className="far fa-heart" />
-        </a>
+      {!auth.isAuthenticated ? (
+        <p>
+          You can't leave a comment if you don't have an account. Go ahead and{" "}
+          <Link to="/register">create one</Link> or just{" "}
+          <Link to="/login">login</Link>
+        </p>
+      ) : (
+        <CommentForm noteId={note._id} />
+      )}
+
+      <div className="comments">
+        {note.comments.map(comment => (
+          <CommentItem key={comment._id} comment={comment} noteId={note._id} />
+        ))}
       </div>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  notes: state.notes
+  notes: state.notes,
+  auth: state.auth
 });
 
 export default connect(
