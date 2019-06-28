@@ -5,6 +5,8 @@ import FeedItem from "../feed/FeedItem";
 import Spinner from "../layout/Spinner";
 import { Container, ListGroup, ListGroupItem, Collapse } from "reactstrap";
 
+// TODO: Add/Remove note to/from notebook
+// TODO: Fix displayNotes
 const Notebook = ({ name, notes, loading, match, getNotebook}) => {
   useEffect(() => {
     console.log(match.params.id);
