@@ -167,7 +167,6 @@ router.get("/me/notebooks", auth, async (req, res) => {
 // @route   GET api/:id/bookmarks/
 // @desc    Get the bookmarks of an given user
 // @access  Private
-
 router.get("/:id/bookmarks", auth, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
