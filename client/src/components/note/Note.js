@@ -12,8 +12,6 @@ const Note = ({ notes: { note, loading }, match, getNote }) => {
     getNote(match.params.id);
   }, [getNote, match.params.id]);
 
-  debugger;
-
   if (loading || note === null) {
     return <Spinner />;
   }

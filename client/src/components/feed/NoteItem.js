@@ -1,12 +1,13 @@
 import React, { Fragment } from "react";
+import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { CardImg } from "reactstrap";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
 import "./feed.css";
 import { addBookmark, deleteBookmark } from "../../actions/bookmarkActions";
+import { setAlert } from "../../actions/alertActions";
 
 const NoteItem = ({
   addLike,
@@ -14,20 +15,28 @@ const NoteItem = ({
   deleteNote,
   addBookmark,
   deleteBookmark,
+  setAlert,
   auth,
-  note: { _id, title, description, author, likes, comments, date },
+  note: {
+    _id,
+    title,
+    description,
+    author,
+    likes,
+    comments,
+    date,
+    avatar,
+    name
+  },
+  history,
   showActions
 }) => {
   return (
     <div className="note-item bg-white p-1 my-1">
       <div>
         <Link to={`/profile/${author._id}`}>
-          <img
-            className="round-img"
-            src={author.avatar}
-            alt={`${author.name}`}
-          />
-          <h4>{author.name}</h4>
+          <img className="round-img" src={avatar} alt={`${name}`} />
+          <h4>{name}</h4>
         </Link>
       </div>
 
@@ -60,6 +69,15 @@ const NoteItem = ({
 
             <button
               onClick={() => {
+                if (!auth.isAuthenticated || !auth.user) {
+                  setAlert(
+                    "You must be logged in to bookmark a note",
+                    "danger"
+                  );
+                  history.push("/login");
+                  return;
+                }
+
                 if (auth.user.bookmarks.map(b => b._id).includes(_id)) {
                   return deleteBookmark(auth.user._id, _id);
                 }
@@ -68,7 +86,8 @@ const NoteItem = ({
               type="button"
               className="btn btn-light"
             >
-              {auth.user.bookmarks.map(b => b._id).includes(_id) ? (
+              {auth.isAuthenticated &&
+              auth.user.bookmarks.map(b => b._id).includes(_id) ? (
                 <i className="fas fa-bookmark" />
               ) : (
                 <i className="far fa-bookmark" />
@@ -108,14 +127,17 @@ NoteItem.propTypes = {
   removeLike: PropTypes.func.isRequired,
   addBookmark: PropTypes.func.isRequired,
   deleteBookmark: PropTypes.func.isRequired,
-  deleteNote: PropTypes.func.isRequired
+  deleteNote: PropTypes.func.isRequired,
+  setAlert: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(
-  mapStateToProps,
-  { addLike, removeLike, deleteNote, addBookmark, deleteBookmark }
-)(NoteItem);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    { addLike, removeLike, deleteNote, addBookmark, deleteBookmark, setAlert }
+  )(NoteItem)
+);
