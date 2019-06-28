@@ -1,13 +1,12 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { getNote, addLike, removeLike } from "../../actions/noteActions";
+import { getNote } from "../../actions/noteActions";
 import Spinner from "../layout/Spinner";
-import LikeButton from "../layout/LikeButton";
-import "./note.css";
+import CommentForm from "./CommentForm";
+import CommentItem from "./CommentItem";
+import { Link } from "react-router-dom";
 
-// TODO: Add comments section
-// TODO: Add Highlight feature
-const Note = ({ notes: { note, loading }, match, getNote }) => {
+const Note = ({ notes: { note, loading }, match, getNote, auth }) => {
   useEffect(() => {
     getNote(match.params.id);
   }, [getNote, match.params.id]);
@@ -45,15 +44,28 @@ const Note = ({ notes: { note, loading }, match, getNote }) => {
         <p dangerouslySetInnerHTML={{ __html: note.text }} />
       </div>
 
-      <div className="row">
-        <LikeButton _id={note._id} likes={note.likes} />
+      {!auth.isAuthenticated ? (
+        <p>
+          You can't leave a comment if you don't have an account. Go ahead and{" "}
+          <Link to="/register">create one</Link> or just{" "}
+          <Link to="/login">login</Link>
+        </p>
+      ) : (
+        <CommentForm noteId={note._id} />
+      )}
+
+      <div className="comments">
+        {note.comments.map(comment => (
+          <CommentItem key={comment._id} comment={comment} noteId={note._id} />
+        ))}
       </div>
     </div>
   );
 };
 
 const mapStateToProps = state => ({
-  notes: state.notes
+  notes: state.notes,
+  auth: state.auth
 });
 
 export default connect(
