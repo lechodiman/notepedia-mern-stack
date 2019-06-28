@@ -5,12 +5,11 @@ import {
   ADD_NOTEBOOK,
   EDIT_NOTEBOOK,
   DELETE_NOTEBOOK,
-  NOTEBOOK_ERROR,
+  NOTEBOOK_ERROR
 } from "./types";
 import { setAlert } from "./alertActions";
 
-
-// Loads all current user notebooks 
+// Loads all current user notebooks
 export const loadNotebooks = () => async dispatch => {
   try {
     const res = await axios.get(`/api/users/me/notebooks`);
@@ -80,7 +79,11 @@ export const editNotebook = editorData => async dispatch => {
   };
 
   try {
-    await axios.put(`/api/notebooks/${editorData["id"]}`, {name: editorData["name"]}, config);
+    await axios.put(
+      `/api/notebooks/${editorData["id"]}`,
+      { name: editorData["name"] },
+      config
+    );
 
     dispatch({ type: EDIT_NOTEBOOK });
 
@@ -96,7 +99,6 @@ export const editNotebook = editorData => async dispatch => {
   }
 };
 
-
 // Delete notebook
 export const deleteNotebook = id => async dispatch => {
   try {
@@ -107,7 +109,7 @@ export const deleteNotebook = id => async dispatch => {
       payload: id
     });
 
-    dispatch(setAlert("Notebook Deleted", "success"));
+    dispatch(setAlert("Notebook Deleted", "danger"));
   } catch (err) {
     dispatch({
       type: NOTEBOOK_ERROR,
