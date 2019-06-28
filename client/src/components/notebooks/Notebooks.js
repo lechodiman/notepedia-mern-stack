@@ -20,9 +20,10 @@ import {
 } from "reactstrap";
 
 import "./notebook-menu.css";
+import Spinner from "../layout/Spinner";
 
 const Notebooks = ({
-  notebooks,
+  notebooks: { notebooks, loading },
   loadNotebooks,
   createNotebook,
   editNotebook,
@@ -107,8 +108,10 @@ const Notebooks = ({
     </Fragment>
   ));
 
-  return (
-    <div>
+  return loading ? (
+    <Spinner />
+  ) : (
+    <Fragment>
       <Row>
         <div style={{ margin: "0 auto" }}>
           <h1 className="large text-secondary text-center">My Notebooks</h1>
@@ -142,12 +145,12 @@ const Notebooks = ({
       ) : (
         <p className="text-center"> You don´t have any notebooks yet!</p>
       )}
-    </div>
+    </Fragment>
   );
 };
 
 const mapStateToProps = state => ({
-  notebooks: state.notebook.notebooks
+  notebooks: state.notebooks
 });
 
 export default connect(

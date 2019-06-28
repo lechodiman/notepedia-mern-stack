@@ -28,7 +28,7 @@ const Notebook = ({ notebook: { notebook, loading }, match, getNotebook }) => {
   );
 };
 const mapStateToProps = state => ({
-  notebook: state.notebook,
+  notebook: state.notebooks,
   loading: state.notebook.loading
 });
 
