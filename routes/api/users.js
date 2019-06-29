@@ -129,27 +129,6 @@ router.get("/profile/me", auth, async (req, res) => {
   }
 });
 
-// Follow a user
-// TODO: Check if this routes works as expected
-router.post("/follow/:id", auth, async (req, res) => {
-  try {
-    const userToFollowId = req.params.id;
-
-    const user = User.findById(req.user.id);
-
-    user.follow(userToFollowId);
-
-    // TODO: Followed user must have this user as a follower
-
-    return res.json({
-      message: "User followed"
-    });
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).send("Server Error");
-  }
-});
-
 // @route   GET api/:id/bookmarks/
 // @desc    Get the bookmarks of an given user
 // @access  Private
