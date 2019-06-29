@@ -4,15 +4,18 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
-import AddToNotebookButton from "../layout/AddToNotebookButton"
+import { removeNoteFromNotebook } from "../../actions/notebookActions";
+import AddToNotebookButton from "../layout/AddToNotebookButton";
 
 const NoteItem = ({
   addLike,
   removeLike,
   deleteNote,
+  removeNoteFromNotebook,
   auth,
   note: { _id, title, description, author, likes, comments, date },
-  showActions
+  showActions,
+  notebook_id,
 }) => {
   return (
     <div className="note-item bg-white p-1 my-1">
@@ -69,6 +72,15 @@ const NoteItem = ({
               </button>
             )}
             <AddToNotebookButton note_id={_id} />
+            {window.location.href.includes("notebooks") && (
+              <button
+              onClick={() => removeNoteFromNotebook(_id, notebook_id)}
+              type="button"
+              className="btn btn-danger"
+            >
+              Remove
+            </button>
+            )}
           </Fragment>
         )}
       </div>
@@ -94,5 +106,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addLike, removeLike, deleteNote }
+  { addLike, removeLike, deleteNote, removeNoteFromNotebook }
 )(NoteItem);

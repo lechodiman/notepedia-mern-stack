@@ -19,7 +19,7 @@ const Notebook = ({ notebook: { notebook, loading }, match, getNotebook }) => {
       <h1 className="large text-secondary text-center">{notebook.name}</h1>
 
       {notebook.notes.length > 0 ? (
-        notebook.notes.map(note => <NoteItem note={note} key={note._id} />)
+        notebook.notes.map(note => <NoteItem note={note} notebook_id={match.params.id} key={note._id} />)
       ) : (
         <p className="text-center">This notebook doesn't have any notes yet!</p>
       )}

@@ -6,6 +6,7 @@ import {
   EDIT_NOTEBOOK,
   DELETE_NOTEBOOK,
   NOTE_TO_NOTEBOOK,
+  NOTE_FROM_NOTEBOOK,
 } from "../actions/types";
 
 const initialState = {
@@ -52,6 +53,12 @@ export default function(state = initialState, action) {
     case NOTE_TO_NOTEBOOK:
       return {
         ...state,
+        loading: false
+      }
+    case NOTE_FROM_NOTEBOOK:
+      return {
+        ...state,
+        notebook: payload,
         loading: false
       }
     default:
