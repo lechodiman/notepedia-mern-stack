@@ -14,11 +14,6 @@ const AddToNotebookButton = ( { notebooks, loadNotebooks, addNoteToNotebook, not
     setOpen(!isOpen);
   }
 
-  // const handleOnClick = async (e, note_id, notebook_id) => {
-  //   console.log(note_id + ", " + notebook_id);
-  //   addNoteToNotebook(note_id, notebook_id);
-  // }
-
   const displayNotebooks = (notebooks.length > -1 ?
     notebooks.map(notebook => (
     <Fragment key={notebook._id}>

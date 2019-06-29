@@ -30,10 +30,6 @@ export const loadNotebooks = () => async dispatch => {
 export const getNotebook = id => async dispatch => {
   try {
     const res = await axios.get(`/api/notebooks/${id}`);
-    console.log("res: " + res);
-    console.log("res.data: " + res.data);
-    console.log("res.data.keys: " + Object.keys(res.data));
-    console.log("res.data.notes: " + res.data.notes);
     dispatch({ type: GET_NOTEBOOK, payload: res.data });
   } catch (err) {
     dispatch({
@@ -121,6 +117,7 @@ export const deleteNotebook = id => async dispatch => {
 
 
 // Add a note to a notebook
+// FIX
 export const addNoteToNotebook = (note_id, notebook_id) => async dispatch => {
   try {
     const res = await axios.put(`/api/notebooks/${notebook_id}/notes`, {note_id});

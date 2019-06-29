@@ -18,12 +18,11 @@ const Notebook = ({ notebook: { notebook, loading }, match, getNotebook }) => {
     <Fragment>
       <h1 className="large text-secondary text-center">{notebook.name}</h1>
 
-      <div>{console.log(notebook.notes)}</div>
-      {/* {notebook.notes.length > 0 ? (
+      {notebook.notes.length > 0 ? (
         notebook.notes.map(note => <NoteItem note={note} key={note._id} />)
       ) : (
         <p className="text-center">This notebook doesn't have any notes yet!</p>
-      )} */}
+      )}
     </Fragment>
   );
 };

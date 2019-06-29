@@ -99,13 +99,13 @@ router.put("/:id", auth, async (req, res) => {
 // @access   Private
 router.put("/:notebook_id/notes", auth, async (req, res) => {
   try {
-    const { noteId } = req.body;
+    const { note_id } = req.body;
 
     const notebook = await Notebook.findById(req.params.notebook_id);
 
     const isInNotebook = notebook.notes
       .map(note => note.toString())
-      .includes(noteId);
+      .includes(note_id);
 
     // check if note is already in this notebook
     if (isInNotebook) {
@@ -115,9 +115,9 @@ router.put("/:notebook_id/notes", auth, async (req, res) => {
     }
 
     // check that note exists
-    const note = await Note.findById(noteId);
+    const note = await Note.findById(note_id);
 
-    await notebook.addNote(noteId);
+    await notebook.addNote(note_id);
 
     // FIXME: populate notebook with notes and author
     const populatedNotebook = await Notebook.findById(req.params.notebook_id)
@@ -174,7 +174,13 @@ router.get("/:id", async (req, res) => {
   try {
     const notebook = await Notebook.findById(req.params.id)
       .populate("author", "-password")
-      .populate("notes");
+      .populate({ 
+        path: 'notes',
+        populate: {
+          path: 'author',
+          model: 'user'
+        } 
+     });
 
     if (!notebook) {
       return res.status(404).json({ message: "Notebook not found" });
