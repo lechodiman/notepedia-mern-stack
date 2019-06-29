@@ -5,7 +5,8 @@ import {
   ADD_NOTEBOOK,
   EDIT_NOTEBOOK,
   DELETE_NOTEBOOK,
-  NOTEBOOK_ERROR
+  NOTEBOOK_ERROR,
+  NOTE_TO_NOTEBOOK,
 } from "./types";
 import { setAlert } from "./alertActions";
 
@@ -28,11 +29,11 @@ export const loadNotebooks = () => async dispatch => {
 // Load notebook
 export const getNotebook = id => async dispatch => {
   try {
-    console.log("before fetch");
     const res = await axios.get(`/api/notebooks/${id}`);
     console.log("res: " + res);
     console.log("res.data: " + res.data);
-    console.log("res.data.name: " + res.data.name);
+    console.log("res.data.keys: " + Object.keys(res.data));
+    console.log("res.data.notes: " + res.data.notes);
     dispatch({ type: GET_NOTEBOOK, payload: res.data });
   } catch (err) {
     dispatch({
@@ -110,6 +111,26 @@ export const deleteNotebook = id => async dispatch => {
     });
 
     dispatch(setAlert("Notebook Deleted", "danger"));
+  } catch (err) {
+    dispatch({
+      type: NOTEBOOK_ERROR,
+      payload: { message: err.response.statusText, status: err.response.status }
+    });
+  }
+};
+
+
+// Add a note to a notebook
+export const addNoteToNotebook = (note_id, notebook_id) => async dispatch => {
+  try {
+    const res = await axios.put(`/api/notebooks/${notebook_id}/notes`, {note_id});
+
+    dispatch({
+      type: NOTE_TO_NOTEBOOK,
+      payload: res.data
+    });
+
+    dispatch(setAlert("Note added", "success"));
   } catch (err) {
     dispatch({
       type: NOTEBOOK_ERROR,

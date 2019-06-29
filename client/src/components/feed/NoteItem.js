@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
+import AddToNotebookButton from "../layout/AddToNotebookButton"
 
 const NoteItem = ({
   addLike,
@@ -67,6 +68,7 @@ const NoteItem = ({
                 <i className="fas fa-times" />
               </button>
             )}
+            <AddToNotebookButton note_id={_id} />
           </Fragment>
         )}
       </div>

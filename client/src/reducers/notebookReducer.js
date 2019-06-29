@@ -4,7 +4,8 @@ import {
   NOTEBOOK_ERROR,
   ADD_NOTEBOOK,
   EDIT_NOTEBOOK,
-  DELETE_NOTEBOOK
+  DELETE_NOTEBOOK,
+  NOTE_TO_NOTEBOOK,
 } from "../actions/types";
 
 const initialState = {
@@ -48,6 +49,11 @@ export default function(state = initialState, action) {
         error: payload,
         loading: false
       };
+    case NOTE_TO_NOTEBOOK:
+      return {
+        ...state,
+        loading: false
+      }
     default:
       return state;
   }
