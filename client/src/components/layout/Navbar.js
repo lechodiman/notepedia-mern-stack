@@ -12,7 +12,10 @@ import {
   NavItem
 } from "reactstrap";
 
-export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+export const Navbar = ({
+  auth: { isAuthenticated, loading, user },
+  logout
+}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const onToggle = e => {
@@ -27,9 +30,15 @@ export const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
         </Link>
       </NavItem>
       <NavItem>
-        <Link to="/dashboard" className="nav-link" onClick={onToggle}>
-          Dashboard
-        </Link>
+        {isAuthenticated && (
+          <Link
+            to={`/profile/${user._id}`}
+            className="nav-link"
+            onClick={onToggle}
+          >
+            My profile
+          </Link>
+        )}
       </NavItem>
       <NavItem>
         <a href="#!" onClick={logout} className="nav-link">
