@@ -90,3 +90,12 @@ a {
   color: rgba(0, 0, 0, 0.54);
   font-size: 30px;
 }
+
+.register,
+.login {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
