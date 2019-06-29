@@ -68,9 +68,14 @@ router.post(
 // @access   Public
 router.get("/", async (req, res) => {
   try {
-    const notes = await Note.find()
-      .populate("author", "-password")
-      .sort({ date: -1 });
+    const perPage = 5;
+    const notes = await Note.find({}, null, {
+      limit: perPage,
+      skip: perPage * req.body.page
+    })
+      .sort("desc")
+      .populate("author", "-password");
+
     res.json(notes);
   } catch (err) {
     console.error(err.message);
