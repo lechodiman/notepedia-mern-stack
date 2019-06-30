@@ -35,8 +35,6 @@ export const addBookmark = (userId, noteId) => async dispatch => {
       type: ADD_BOOKMARK,
       payload: res.data
     });
-
-    dispatch(setAlert("Note bookmarked", "success"));
   } catch (err) {
     dispatch({
       type: BOOKMARK_ERROR,
@@ -54,8 +52,6 @@ export const deleteBookmark = (userId, noteId) => async dispatch => {
       type: DELETE_BOOKMARK,
       payload: noteId
     });
-
-    dispatch(setAlert("Bookmark removed", "success"));
   } catch (err) {
     dispatch({
       type: BOOKMARK_ERROR,

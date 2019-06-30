@@ -129,27 +129,6 @@ router.get("/profile/me", auth, async (req, res) => {
   }
 });
 
-// Follow a user
-// TODO: Check if this routes works as expected
-router.post("/follow/:id", auth, async (req, res) => {
-  try {
-    const userToFollowId = req.params.id;
-
-    const user = User.findById(req.user.id);
-
-    user.follow(userToFollowId);
-
-    // TODO: Followed user must have this user as a follower
-
-    return res.json({
-      message: "User followed"
-    });
-  } catch (err) {
-    console.error(err.message);
-    return res.status(500).send("Server Error");
-  }
-});
-
 // @route   GET api/users/me/notebooks
 // @desc    Get all notebooks from current user
 // @access  Private
@@ -169,7 +148,7 @@ router.get("/me/notebooks", auth, async (req, res) => {
 // @access  Private
 router.get("/:id/bookmarks", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate("bookmarks");
 
     if (!user) {
       return res.status(404).json({
@@ -224,7 +203,7 @@ router.put("/:id/bookmarks/:noteid", auth, async (req, res) => {
     user.bookmarks.unshift(note);
 
     await user.save();
-    res.json(user.bookmarks);
+    res.json(note);
   } catch (err) {
     console.log(err.message);
     return res.status(500).send("Server Error");

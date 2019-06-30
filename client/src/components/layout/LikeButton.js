@@ -5,16 +5,20 @@ import { connect } from "react-redux";
 const LikeButton = ({ addLike, removeLike, _id, likes }) => {
   return (
     <Fragment>
-      <button onClick={e => addLike(_id)} type="button" class="btn btn-light">
-        <i class="fas fa-thumbs-up" />{" "}
+      <button
+        onClick={e => addLike(_id)}
+        type="button"
+        className="btn btn-light"
+      >
+        <i className="fas fa-thumbs-up" />{" "}
         <span>{likes.length > 0 && <span>{likes.length}</span>}</span>
       </button>
       <button
         onClick={e => removeLike(_id)}
         type="button"
-        class="btn btn-light"
+        className="btn btn-light"
       >
-        <i class="fas fa-thumbs-down" />
+        <i className="fas fa-thumbs-down" />
       </button>
     </Fragment>
   );
