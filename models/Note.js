@@ -9,6 +9,13 @@ let NoteSchema = new Schema({
   text: { type: String, required: true },
   title: { type: String, required: true },
   description: String,
+  // Duplicate user data to avoid excessive populate()
+  avatar: {
+    type: String
+  },
+  name: {
+    type: String
+  },
   likes: [
     {
       user: {
@@ -45,14 +52,14 @@ NoteSchema.methods.comment = function(comment) {
   this.comments.push(comment);
   return this.save();
 };
-NoteSchema.methods.addAuthor = function(authorId) {
-  this.author = authorId;
-  return this.save();
-};
 NoteSchema.methods.getUserNotes = function(authorId) {
   Note.find({ author: authorId }).then(notes => {
     return notes;
   });
 };
+NoteSchema.index(
+  { title: "text", description: "text", text: "text" },
+  { weights: { title: 20, description: 5 }, name: "TextIndex" }
+);
 
 module.exports = Note = mongoose.model("note", NoteSchema);
