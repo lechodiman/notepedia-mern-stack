@@ -18,7 +18,7 @@ const Feed = ({ notes: { notes, loading }, loadNotes }) => {
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className="large text-secondary text-center">Recent Notes</h1>
+      <h1 className="large text-primary text-center">Recent Notes</h1>
 
       <p className="lead mb-3 text-center">
         <i className="fas fa-user" />
