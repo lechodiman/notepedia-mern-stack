@@ -57,5 +57,9 @@ NoteSchema.methods.getUserNotes = function(authorId) {
     return notes;
   });
 };
+NoteSchema.index(
+  { title: "text", description: "text", text: "text" },
+  { weights: { title: 20, description: 5 }, name: "TextIndex" }
+);
 
 module.exports = Note = mongoose.model("note", NoteSchema);

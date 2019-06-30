@@ -53,7 +53,7 @@ router.post(
 
 // @route    GET api/notes
 // @desc     Get all notes
-// @access   Public
+// @access   Private
 router.get("/", async (req, res) => {
   try {
     const perPage = 5;
@@ -67,6 +67,32 @@ router.get("/", async (req, res) => {
     res.json(notes);
   } catch (err) {
     console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route    GET api/notes/search
+// @desc     Search for notes given a text
+// @access   Private
+
+router.get("/search", auth, async (req, res) => {
+  try {
+    const perPage = 5;
+    const notes = await Note.find(
+      {
+        $text: {
+          $search: req.body.text
+        }
+      },
+      { score: { $meta: "textScore" } },
+      {
+        limit: perPage,
+        skip: perPage * req.body.page,
+        sort: { score: { $meta: "textScore" } }
+      }
+    );
+    res.json(notes);
+  } catch (err) {
     res.status(500).send("Server Error");
   }
 });
@@ -202,7 +228,7 @@ router.delete("/comment/:id/:comment_id", auth, async (req, res) => {
   }
 });
 
-// @route    PATCH api/notes/:id/
+// @route    PATCH api/notes/:id/s
 // @desc     Update a note
 // @access   Private
 router.patch("/:id", auth, async (req, res) => {
