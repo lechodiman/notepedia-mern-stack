@@ -135,7 +135,7 @@ router.get("/profile/me", auth, async (req, res) => {
 
 router.get("/:id/bookmarks", auth, async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.params.id).populate("bookmarks");
 
     if (!user) {
       return res.status(404).json({
@@ -190,7 +190,7 @@ router.put("/:id/bookmarks/:noteid", auth, async (req, res) => {
     user.bookmarks.unshift(note);
 
     await user.save();
-    res.json(user.bookmarks);
+    res.json(note);
   } catch (err) {
     console.log(err.message);
     return res.status(500).send("Server Error");

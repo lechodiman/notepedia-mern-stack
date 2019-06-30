@@ -41,6 +41,11 @@ export const Navbar = ({
         )}
       </NavItem>
       <NavItem>
+        <Link to="/bookmarks" className="nav-link" onClick={onToggle}>
+          Bookmarks
+        </Link>
+      </NavItem>
+      <NavItem>
         <a href="#!" onClick={logout} className="nav-link">
           <i className="fas fa-sign-out-alt" />{" "}
           <span className="hide-sm">Logout</span>

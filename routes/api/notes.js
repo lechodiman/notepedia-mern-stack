@@ -31,23 +31,11 @@ router.post(
       let noteParameters = {
         text,
         title,
-        claps,
         description,
-        feature_img: "",
-        author: req.user.id
+        author: req.user.id,
+        name: user.name,
+        avatar: user.avatar
       };
-
-      if (req.files && req.files.image) {
-        const uploadedImage = cloudinary.uploader.upload(req.files.image.path, {
-          resource_type: "image",
-          eager: [{ effect: "sepia" }]
-        });
-
-        noteParameters = {
-          ...noteParameters,
-          feature_img: uploadedImage.url
-        };
-      }
 
       const note = new Note(noteParameters);
 
@@ -68,9 +56,14 @@ router.post(
 // @access   Public
 router.get("/", async (req, res) => {
   try {
-    const notes = await Note.find()
-      .populate("author", "-password")
-      .sort({ date: -1 });
+    const perPage = 5;
+    const notes = await Note.find({}, null, {
+      limit: perPage,
+      skip: perPage * req.body.page
+    })
+      .sort("desc")
+      .populate("author", "-password");
+
     res.json(notes);
   } catch (err) {
     console.error(err.message);
