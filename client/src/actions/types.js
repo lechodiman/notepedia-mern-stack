@@ -31,6 +31,7 @@ export const REMOVE_COMMENT = "REMOVE_COMMENT";
 export const GET_BOOKMARKS = "GET_BOOKMARKS";
 export const ADD_BOOKMARK = "ADD_BOOKMARK";
 export const DELETE_BOOKMARK = "DELETE_BOOKMARK";
+export const BOOKMARK_ERROR = "BOOKMARK_ERROR";
 
 // Profile
 export const GET_PROFILE = "GET_PROFILE";

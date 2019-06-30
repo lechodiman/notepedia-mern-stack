@@ -6,7 +6,9 @@ import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  ACCOUNT_DELETED
+  ACCOUNT_DELETED,
+  ADD_BOOKMARK,
+  DELETE_BOOKMARK
 } from "../actions/types";
 
 const initialState = {
@@ -53,6 +55,21 @@ export default function(state = initialState, action) {
         token: null,
         isAuthenticated: false,
         loading: false
+      };
+    case ADD_BOOKMARK:
+      return {
+        ...state,
+        user: { ...state.user, bookmarks: [payload, ...state.user.bookmarks] }
+      };
+    case DELETE_BOOKMARK:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          bookmarks: state.user.bookmarks.filter(
+            bookmark => bookmark._id !== payload
+          )
+        }
       };
     default:
       return state;

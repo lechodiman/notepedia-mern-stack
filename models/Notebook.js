@@ -19,10 +19,6 @@ NotebookSchema.methods.addNote = function(noteId) {
   this.notes.push(noteId);
   return this.save();
 };
-NotebookSchema.methods.addAuthor = function(authorId) {
-  this.author = authorId;
-  return this.save();
-};
 NotebookSchema.methods.isAuthor = function(userId) {
   return this.author.toString() === userId;
 };

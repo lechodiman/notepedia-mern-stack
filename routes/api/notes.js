@@ -31,23 +31,11 @@ router.post(
       let noteParameters = {
         text,
         title,
-        claps,
         description,
-        feature_img: "",
-        author: req.user.id
+        author: req.user.id,
+        name: user.name,
+        avatar: user.avatar
       };
-
-      if (req.files && req.files.image) {
-        const uploadedImage = cloudinary.uploader.upload(req.files.image.path, {
-          resource_type: "image",
-          eager: [{ effect: "sepia" }]
-        });
-
-        noteParameters = {
-          ...noteParameters,
-          feature_img: uploadedImage.url
-        };
-      }
 
       const note = new Note(noteParameters);
 

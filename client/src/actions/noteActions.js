@@ -15,6 +15,7 @@ import { setAlert } from "./alertActions";
 export const loadNotes = () => async dispatch => {
   try {
     const res = await axios.get("/api/notes");
+
     dispatch({ type: LOAD_NOTES, payload: res.data });
   } catch (err) {
     dispatch({

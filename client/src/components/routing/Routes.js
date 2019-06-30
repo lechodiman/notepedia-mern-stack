@@ -10,6 +10,7 @@ import Feed from "../feed/Feed";
 import Information from "../information/Information";
 import About from "../information/About";
 import CodeOfConduct from "../information/CodeOfConduct";
+import Bookmarks from "../bookmarks/Bookmarks";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -27,6 +28,7 @@ const Routes = () => {
         <Route path="/about" component={About} />
         <Route path="/code-of-conduct" component={CodeOfConduct} />
         <Route path="/notes/:id" component={Note} />
+        <PrivateRoute path="/bookmarks" component={Bookmarks} />
       </Switch>
     </section>
   );
