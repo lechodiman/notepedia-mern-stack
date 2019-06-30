@@ -94,7 +94,6 @@ router.get("/search", auth, async(req, res) => {
         });
         res.json(notes);
     } catch (err) {
-        throw err;
         res.status(500).send("Server Error");
     }
 });
@@ -118,6 +117,7 @@ router.get("/:id", async(req, res) => {
         if (err.kind === "ObjectId") {
             return res.status(404).json({ message: "Note not found" });
         }
+        res.status(500).send("Server Error");
     }
 });
 
@@ -298,6 +298,8 @@ router.put("/unlike/:id", auth, async(req, res) => {
             .indexOf(req.user.id);
 
         note.likes.splice(removeIndex, 1);
+
+        await note.save();
 
         res.json(note.likes);
     } catch (err) {
