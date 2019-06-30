@@ -151,6 +151,7 @@ router.delete("/:id", auth, async (req, res) => {
     if (err.kind === "ObjectId") {
       return res.status(404).json({ message: "Note not found" });
     }
+    res.status(500).send("Server Error");
   }
 });
 
