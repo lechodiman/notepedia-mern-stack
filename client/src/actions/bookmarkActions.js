@@ -1,5 +1,4 @@
 import axios from "axios";
-import { setAlert } from "./alertActions";
 
 import {
   GET_BOOKMARKS,
@@ -44,9 +43,9 @@ export const addBookmark = (userId, noteId) => async dispatch => {
 };
 
 // Delete bookmark
-export const deleteBookmark = (userId, noteId) => async dispatch => {
+export const deleteBookmark = noteId => async dispatch => {
   try {
-    await axios.delete(`api/users/${userId}/bookmarks/${noteId}`);
+    await axios.delete(`api/users/bookmarks/${noteId}`);
 
     dispatch({
       type: DELETE_BOOKMARK,
