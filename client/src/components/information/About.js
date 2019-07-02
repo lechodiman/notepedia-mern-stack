@@ -16,19 +16,31 @@ const Information = () => {
       <ul>
         <li>
           <strong>Luis Chodiman</strong>{" "}
-          <a href="https://github.com/lechodiman" target="_blank">
+          <a
+            href="https://github.com/lechodiman"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             lechodiman
           </a>
         </li>
         <li>
           <strong>César Meneses</strong>{" "}
-          <a href="https://github.com/cameneses" target="_blank">
+          <a
+            href="https://github.com/cameneses"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             cameneses
           </a>
         </li>
         <li>
           <strong>Klaus Ribbeck</strong>{" "}
-          <a href="https://github.com/kpribbeck" target="_blank">
+          <a
+            href="https://github.com/kpribbeck"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             kpribbeck
           </a>
         </li>

@@ -7,8 +7,7 @@ import {
   ADD_NOTE,
   UPDATE_LIKES,
   ADD_COMMENT,
-  REMOVE_COMMENT,
-  DELETE_BOOKMARK
+  REMOVE_COMMENT
 } from "./types";
 import { setAlert } from "./alertActions";
 import { deleteBookmark } from "./bookmarkActions";
