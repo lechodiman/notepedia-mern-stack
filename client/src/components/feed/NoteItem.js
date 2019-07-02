@@ -7,7 +7,7 @@ import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
 import { removeNoteFromNotebook } from "../../actions/notebookActions";
 import AddToNotebookButton from "../layout/AddToNotebookButton";
-import { addBookmark, deleteBookmark } from "../../actions/bookmarkActions";
+  import { addBookmark, deleteBookmark } from "../../actions/bookmarkActions";
 import { setAlert } from "../../actions/alertActions";
 
 const NoteItem = ({
@@ -114,16 +114,18 @@ const NoteItem = ({
                 <i className="fas fa-times" />
               </button>
             )}
-            <AddToNotebookButton note_id={_id} />
-            {window.location.href.includes("notebooks") && (
-              <button
-                onClick={() => removeNoteFromNotebook(_id, notebook_id)}
-                type="button"
-                className="btn btn-danger"
-              >
-                Remove
-              </button>
-            )}
+            <div class="row">
+              <AddToNotebookButton note_id={_id} />
+              {window.location.href.includes("notebooks") && (
+                <button
+                  onClick={() => removeNoteFromNotebook(_id, notebook_id)}
+                  type="button"
+                  className="btn btn-danger"
+                >
+                  <i class="fas fa-trash" />
+                </button>
+              )}
+            </div>
           </Fragment>
         )}
       </div>

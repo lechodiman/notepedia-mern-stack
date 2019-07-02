@@ -28,9 +28,9 @@ const AddToNotebookButton = ( { notebooks, loadNotebooks, addNoteToNotebook, not
 
   return (
     <Fragment>
-      <Dropdown isOpen={isOpen} toggle={toggle} >
+      <Dropdown isOpen={isOpen} toggle={toggle} style={{marginLeft: "15px"}}>
         <DropdownToggle>
-          Add to Notebook
+          <i class="fas fa-plus-circle" />
         </DropdownToggle>
         <DropdownMenu>
           <DropdownItem header>Choose a notebook</DropdownItem>
