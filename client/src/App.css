@@ -68,6 +68,11 @@ img {
   width: 100px;
 }
 
+.note-item-title {
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+}
+
 .note-item .comment-count {
   background: var(--light-color);
   color: var(--primary-color);

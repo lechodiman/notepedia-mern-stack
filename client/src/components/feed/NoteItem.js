@@ -44,10 +44,27 @@ const NoteItem = ({
         </Link>
       </div>
 
-      <div>
-        <Link to={`/notes/${_id}`}>
-          <h3 className="my-1">{title}</h3>
-        </Link>
+      <div className="container">
+        <div className="note-item-title">
+          <div className="col">
+            <Link to={`/notes/${_id}`}>
+                <h3 className="my-1">{title}</h3>
+            </Link>
+          </div>
+          <div className="col">
+            <AddToNotebookButton note_id={_id} />
+          
+            {window.location.href.includes("notebooks") && (
+            <button
+              onClick={() => removeNoteFromNotebook(_id, notebook_id)}
+              type="button"
+              className="btn btn"
+            >
+              <i className="fas fa-trash" />
+            </button>
+            )}
+          </div>
+        </div>
         <p>{description}</p>
         <p className="note-date">
           Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
@@ -115,17 +132,7 @@ const NoteItem = ({
               </button>
             )}
             <div class="row">
-              <AddToNotebookButton note_id={_id} />
-              {window.location.href.includes("notebooks") && (
-                <button
-                  onClick={() => removeNoteFromNotebook(_id, notebook_id)}
-                  type="button"
-                  className="btn"
-                  
-                >
-                  <i class="fas fa-trash" />
-                </button>
-              )}
+              
             </div>
           </Fragment>
         )}
