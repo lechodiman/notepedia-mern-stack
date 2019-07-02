@@ -29,29 +29,6 @@ export const loadNotes = () => async dispatch => {
   }
 };
 
-// get note by query string param
-export const getNoteByQuery = (text, page) => async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
-  try {
-    const res = await axios.get("/api/notes/search", { text, page }, config);
-
-    dispatch({ type: LOAD_NOTES, payload: res.data });
-  } catch (err) {
-    dispatch({
-      type: NOTE_ERROR,
-      payload: {
-        msg: err.response.statusText,
-        status: err.response.status
-      }
-    });
-  }
-};
-
 // Add like
 export const addLike = id => async dispatch => {
   try {
