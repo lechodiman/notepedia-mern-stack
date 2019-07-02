@@ -1,9 +1,9 @@
-import React, { useEffect, useState, createRef } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import queryString from "query-string";
 import { searchNotesByQuery } from "../../actions/searchActions";
 
-const Search = ({ match, location }) => {
+const Search = ({ location }) => {
   const { text } = queryString.parse(location.search);
   const [page, setPage] = useState(0);
 
