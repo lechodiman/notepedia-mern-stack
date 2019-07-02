@@ -1,26 +1,52 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Fragment } from "react";
 import PropTypes from "prop-types";
 import queryString from "query-string";
 import { searchNotesByQuery } from "../../actions/searchActions";
+import { connect } from "react-redux";
+import Spinner from "../layout/Spinner";
+import NoteItem from "../feed/NoteItem";
 
-const Search = ({ location }) => {
+const Search = ({
+  search: { results, loading },
+  location,
+  searchNotesByQuery
+}) => {
   const { text } = queryString.parse(location.search);
   const [page, setPage] = useState(0);
 
   useEffect(() => {
     searchNotesByQuery(text, page);
 
-    setPage(page + 1);
-  }, []);
+    setPage(page => page + 1);
+  }, [searchNotesByQuery, text]);
 
-  return (
-    <div>
-      <strong>Values Props: </strong>
-      {JSON.stringify(text, null, 2)}
-    </div>
+  return loading ? (
+    <Spinner />
+  ) : (
+    <Fragment>
+      <h1 className="large text-primary text-center">Results</h1>
+
+      {results.map(note => (
+        <NoteItem note={note} key={note._id} />
+      ))}
+    </Fragment>
   );
 };
 
-Search.propTypes = {};
+Search.propTypes = {
+  search: PropTypes.object.isRequired,
+  searchNotesByQuery: PropTypes.func.isRequired
+};
 
-export default Search;
+const mapStateToProps = state => ({
+  search: state.search
+});
+
+const mapDispatchToProps = {
+  searchNotesByQuery
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Search);

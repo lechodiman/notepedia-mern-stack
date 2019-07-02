@@ -39,3 +39,4 @@ export const PROFILE_ERROR = "PROFILE_ERROR";
 
 // Search bar
 export const UPDATE_RESULTS = "UPDATE_RESULTS";
+export const SEARCH_ERROR = "SEARCH_ERROR";
