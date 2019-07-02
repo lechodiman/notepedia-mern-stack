@@ -30,7 +30,7 @@ export const Navbar = ({
         </Link>
       </NavItem>
       <NavItem>
-        {isAuthenticated && (
+        {isAuthenticated && user && (
           <Link
             to={`/profile/${user._id}`}
             className="nav-link"
