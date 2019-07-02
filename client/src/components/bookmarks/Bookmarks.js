@@ -15,7 +15,7 @@ const Bookmarks = ({ user: { bookmarks } }) => {
           <NoteItem key={bookmark._id} note={bookmark} />
         ))
       ) : (
-        <p>
+        <p className="text-center">
           You don't have any bookmarks yet. Go ahead and{" "}
           <Link to="/">explore some notes</Link>
         </p>
