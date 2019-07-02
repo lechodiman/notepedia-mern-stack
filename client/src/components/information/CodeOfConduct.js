@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 const Information = () => {
   return (
     <Fragment>
-      <h1>Code of Conduct</h1>
+      <h1 className="large text-primary">Code of Conduct</h1>
 
       <p>
         All participants of Notepedia are expected to abide by our Code of
@@ -11,14 +11,14 @@ const Information = () => {
         associated with Notepedia.
       </p>
 
-      <h2>Our Standards</h2>
+      <h2 className="text-primary">Our Standards</h2>
 
       <p>
         Examples of behavior that contributes to creating a positive environment
         include:
       </p>
 
-      <ul>
+      <ul className="conduct-list">
         <li>Using welcoming and inclusive language</li>
         <li>Being respectful of differing viewpoints and experiences</li>
         <li>
@@ -29,7 +29,7 @@ const Information = () => {
 
       <p>Examples of unacceptable behavior by participants include:</p>
 
-      <ul>
+      <ul className="conduct-list">
         <li>
           The use of sexualized language or imagery and unwelcome sexual
           attention or advances

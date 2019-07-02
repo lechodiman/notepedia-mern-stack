@@ -20,8 +20,8 @@ const Profile = ({
     <Spinner />
   ) : (
     <Fragment>
-      <Link to="/profiles" className="btn btn-light mt-2">
-        Back To Profiles
+      <Link to="/" className="btn btn-light mt-2">
+        Back To Feed
       </Link>
 
       <h2 className="large text-secondary text-center">

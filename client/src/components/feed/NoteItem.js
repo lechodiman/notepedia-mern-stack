@@ -7,7 +7,6 @@ import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
 import { removeNoteFromNotebook } from "../../actions/notebookActions";
 import AddToNotebookButton from "../layout/AddToNotebookButton";
-import "./feed.css";
 import { addBookmark, deleteBookmark } from "../../actions/bookmarkActions";
 import { setAlert } from "../../actions/alertActions";
 
@@ -84,7 +83,7 @@ const NoteItem = ({
                 }
 
                 if (auth.user.bookmarks.map(b => b._id).includes(_id)) {
-                  return deleteBookmark(auth.user._id, _id);
+                  return deleteBookmark(_id);
                 }
                 return addBookmark(auth.user._id, _id);
               }}
@@ -92,6 +91,7 @@ const NoteItem = ({
               className="btn btn-light"
             >
               {auth.isAuthenticated &&
+              auth.user &&
               auth.user.bookmarks.map(b => b._id).includes(_id) ? (
                 <i className="fas fa-bookmark" />
               ) : (

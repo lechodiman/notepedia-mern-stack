@@ -213,14 +213,8 @@ router.put("/:id/bookmarks/:noteid", auth, async (req, res) => {
 // @route   DELETE api/:id/bookmarks/:noteid
 // @desc    Delete a note from an user bookmarks
 // @access  Private
-router.delete("/:id/bookmarks/:noteid", auth, async (req, res) => {
+router.delete("/bookmarks/:noteid", auth, async (req, res) => {
   try {
-    if (req.params.id !== req.user.id) {
-      return res.status(404).json({
-        message: "Unauthorized"
-      });
-    }
-
     const note = await Note.findById(req.params.noteid);
 
     if (!note) {
@@ -229,7 +223,7 @@ router.delete("/:id/bookmarks/:noteid", auth, async (req, res) => {
       });
     }
 
-    const user = await User.findById(req.params.id);
+    const user = await User.findById(req.user.id);
 
     if (!user) {
       return res.status(404).json({
