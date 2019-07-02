@@ -7,11 +7,13 @@ import {
   ADD_NOTE,
   UPDATE_LIKES,
   ADD_COMMENT,
-  REMOVE_COMMENT
+  REMOVE_COMMENT,
+  DELETE_BOOKMARK
 } from "./types";
 import { setAlert } from "./alertActions";
+import { deleteBookmark } from "./bookmarkActions";
 
-// Loads all notes from the DB
+// Load all notes
 export const loadNotes = () => async dispatch => {
   try {
     const res = await axios.get("/api/notes");
@@ -84,6 +86,8 @@ export const getNote = id => async dispatch => {
 // Delete note by id
 export const deleteNote = id => async dispatch => {
   try {
+    dispatch(deleteBookmark(id));
+
     await axios.delete(`/api/notes/${id}`);
 
     dispatch({
