@@ -82,7 +82,7 @@ export const Navbar = ({
 
   return (
     <BootNavbar
-      className="navbar navbar-expand-lg navbar-light"
+      className="navbar navbar-expand-md navbar-light"
       style={{ backgroundColor: "#e3f2fd" }}
     >
       <Link to="/" className="navbar-brand">
@@ -92,7 +92,7 @@ export const Navbar = ({
       <Nav className="mr-auto" navbar>
         <NavItem>
           <Link to="/information" className="nav-link">
-            <i className="fas fa-question-circle" /> Information
+            <i className="fas fa-question-circle" />
           </Link>
         </NavItem>
       </Nav>
