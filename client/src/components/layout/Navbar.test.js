@@ -21,7 +21,7 @@ describe("<Navbar />", () => {
   });
 
   it("should render two <NavItem /> if not authenticated", () => {
-    expect(wrapper.find(NavItem)).toHaveLength(2);
+    expect(wrapper.find(NavItem)).toHaveLength(3);
   });
 
   it("should render three <NavItem /> if authenticated", () => {
@@ -32,7 +32,7 @@ describe("<Navbar />", () => {
 
     wrapper.setProps({ auth });
 
-    expect(wrapper.find(NavItem)).toHaveLength(3);
+    expect(wrapper.find(NavItem)).toHaveLength(6);
   });
 
   it("should render the logout link if authenticated", () => {
@@ -43,7 +43,7 @@ describe("<Navbar />", () => {
 
     wrapper.setProps({ auth });
 
-    expect(wrapper.contains(<span className="hide-sm">Logout</span>)).toEqual(
+    expect(wrapper.contains(<i className="fas fa-sign-out-alt" />)).toEqual(
       true
     );
   });
