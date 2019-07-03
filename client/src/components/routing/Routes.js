@@ -16,6 +16,7 @@ import Profile from "../profile/Profile";
 import Bookmarks from "../bookmarks/Bookmarks";
 
 import { Route, Switch } from "react-router-dom";
+import Search from "../search/Search";
 
 const Routes = () => {
   return (
@@ -35,6 +36,7 @@ const Routes = () => {
         <Route path="/notes/:id" component={Note} />
         <Route path="/profile/:id" component={Profile} />
         <PrivateRoute path="/bookmarks" component={Bookmarks} />
+        <Route path="/search" component={Search} />
       </Switch>
     </section>
   );

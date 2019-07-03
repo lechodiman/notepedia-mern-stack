@@ -7,7 +7,6 @@ import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
 import { removeNoteFromNotebook } from "../../actions/notebookActions";
 import AddToNotebookButton from "../layout/AddToNotebookButton";
-import "./feed.css";
 import { addBookmark, deleteBookmark } from "../../actions/bookmarkActions";
 import { setAlert } from "../../actions/alertActions";
 
@@ -16,7 +15,6 @@ const NoteItem = ({
   removeLike,
   deleteNote,
   removeNoteFromNotebook,
-  // TODO: sería mejor hacer un NotebookItem que tenga dentro un NoteItem y este boton para removerlo del notebook
   notebook_id,
   addBookmark,
   deleteBookmark,
@@ -84,7 +82,7 @@ const NoteItem = ({
                 }
 
                 if (auth.user.bookmarks.map(b => b._id).includes(_id)) {
-                  return deleteBookmark(auth.user._id, _id);
+                  return deleteBookmark(_id);
                 }
                 return addBookmark(auth.user._id, _id);
               }}
@@ -92,6 +90,7 @@ const NoteItem = ({
               className="btn btn-light"
             >
               {auth.isAuthenticated &&
+              auth.user &&
               auth.user.bookmarks.map(b => b._id).includes(_id) ? (
                 <i className="fas fa-bookmark" />
               ) : (
@@ -105,7 +104,7 @@ const NoteItem = ({
                 <span className="comment-count">{comments.length}</span>
               )}
             </Link>
-            {auth.isAuthenticated && author._id === auth.user._id && (
+            {auth.isAuthenticated && author && author._id === auth.user._id && (
               <button
                 onClick={() => deleteNote(_id)}
                 type="button"

@@ -66,7 +66,7 @@ const NoteEditor = ({ createNote, history }) => {
 
   return (
     <Fragment>
-      <h1 className="large text-primary">Notepedia Editor</h1>
+      <h1 className="large text-primary text-center">Notepedia Editor</h1>
       <Form onSubmit={e => onSubmit(e)}>
         <FormGroup>
           <Label for="exampleTitle">Title</Label>
@@ -101,7 +101,8 @@ const NoteEditor = ({ createNote, history }) => {
 };
 
 NoteEditor.propTypes = {
-  createNote: PropTypes.func.isRequired
+  createNote: PropTypes.func.isRequired,
+  note: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

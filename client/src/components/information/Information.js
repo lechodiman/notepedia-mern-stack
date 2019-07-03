@@ -4,17 +4,20 @@ import { Link } from "react-router-dom";
 const Information = () => {
   return (
     <Fragment>
-      <h1>More information about Notepedia!</h1>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/about">About</Link>
-        </li>
-        <li>
-          <Link to="/code-of-conduct">Code of Conduct</Link>
-        </li>
+      <h1 className="large text-primary">More information about Notepedia!</h1>
+      <ul className="list-group">
+        <Link to="/" className="list-group-item list-group-item-action">
+          Home
+        </Link>
+        <Link to="/about" className="list-group-item list-group-item-action">
+          About
+        </Link>
+        <Link
+          to="/code-of-conduct"
+          className="list-group-item list-group-item-action"
+        >
+          Code of Conduct
+        </Link>
       </ul>
     </Fragment>
   );
