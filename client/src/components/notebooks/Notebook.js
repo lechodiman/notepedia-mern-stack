@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { getNotebook } from "../../actions/notebookActions";
 import NoteItem from "../feed/NoteItem";
 import Spinner from "../layout/Spinner";
+import { Link } from "react-router-dom";
 
 const Notebook = ({ notebook: { notebook, loading }, match, getNotebook }) => {
   useEffect(() => {
@@ -15,6 +16,20 @@ const Notebook = ({ notebook: { notebook, loading }, match, getNotebook }) => {
 
   return (
     <Fragment>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-white">
+          <li class="breadcrumb-item">
+            <Link to="/">Home</Link>
+          </li>
+          <li class="breadcrumb-item">
+            <Link to="/notebooks">Notebooks</Link>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            {notebook.name}
+          </li>
+        </ol>
+      </nav>
+
       <h1 className="large text-secondary text-center">{notebook.name}</h1>
 
       {notebook.notes.length > 0 ? (

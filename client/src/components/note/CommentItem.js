@@ -11,7 +11,7 @@ const CommentItem = ({
   auth,
   deleteComment
 }) => (
-  <div className="note-item bg-white p-1 my-1">
+  <div className="note-item border p-3 mb-2 bg-white rounded">
     <div>
       <Link to={`/profile/${author}`}>
         <img className="round-img" src={avatar} alt="" />

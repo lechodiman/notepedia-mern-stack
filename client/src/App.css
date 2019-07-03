@@ -107,3 +107,8 @@ img {
 .editable {
   min-height: 400px;
 }
+
+.btn-light {
+  background: var(--light-color);
+  color: #333;
+}

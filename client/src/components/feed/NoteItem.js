@@ -35,7 +35,7 @@ const NoteItem = ({
   showActions
 }) => {
   return (
-    <div className="note-item bg-white p-1 my-1">
+    <div className="note-item border shadow-sm p-3 mb-3 bg-white rounded">
       <div>
         <Link to={`/profile/${author._id}`}>
           <img className="round-img" src={avatar} alt={`${name}`} />

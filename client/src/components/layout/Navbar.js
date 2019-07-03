@@ -81,7 +81,10 @@ export const Navbar = ({
   );
 
   return (
-    <BootNavbar className="navbar navbar-expand-lg navbar-light bg-light">
+    <BootNavbar
+      className="navbar navbar-expand-lg navbar-light"
+      style={{ backgroundColor: "#e3f2fd" }}
+    >
       <Link to="/" className="navbar-brand">
         Notepedia
       </Link>

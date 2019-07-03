@@ -5,6 +5,7 @@ import { createNote } from "../../actions/noteActions";
 import MediumEditor from "medium-editor";
 import { withRouter } from "react-router";
 import { Form, FormGroup, Label, Input } from "reactstrap";
+import { Link } from "react-router-dom";
 
 const NoteEditor = ({ createNote, history }) => {
   const [formData, setFormData] = useState({
@@ -74,6 +75,10 @@ const NoteEditor = ({ createNote, history }) => {
 
   return (
     <Fragment>
+      <Link to="/" className="btn btn-light mt-2">
+        <i className="fas fa-chevron-left" /> Back To Feed
+      </Link>
+
       <h1 className="large text-primary text-center">Notepedia Editor</h1>
       <Form onSubmit={e => onSubmit(e)}>
         <FormGroup>
@@ -109,8 +114,7 @@ const NoteEditor = ({ createNote, history }) => {
 };
 
 NoteEditor.propTypes = {
-  createNote: PropTypes.func.isRequired,
-  note: PropTypes.object.isRequired
+  createNote: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
