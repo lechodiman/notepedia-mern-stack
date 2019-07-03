@@ -17,14 +17,14 @@ const Notebook = ({ notebook: { notebook, loading }, match, getNotebook }) => {
   return (
     <Fragment>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-white">
-          <li class="breadcrumb-item">
+        <ol className="breadcrumb bg-white">
+          <li className="breadcrumb-item">
             <Link to="/">Home</Link>
           </li>
-          <li class="breadcrumb-item">
+          <li className="breadcrumb-item">
             <Link to="/notebooks">Notebooks</Link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             {notebook.name}
           </li>
         </ol>

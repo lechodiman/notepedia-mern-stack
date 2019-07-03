@@ -147,8 +147,6 @@ export const removeNoteFromNotebook = (
       `/api/notebooks/${notebook_id}/notes/${note_id}`
     );
 
-    debugger;
-
     dispatch({
       type: NOTE_FROM_NOTEBOOK,
       payload: res.data
@@ -156,7 +154,6 @@ export const removeNoteFromNotebook = (
 
     dispatch(setAlert("Note removed", "danger"));
   } catch (err) {
-    debugger;
     dispatch({
       type: NOTEBOOK_ERROR,
       payload: { message: err.response.statusText, status: err.response.status }

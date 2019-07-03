@@ -30,9 +30,14 @@ const Profile = ({
       </h2>
 
       <div className="user-notes">
-        {profile.notes.map(note => (
-          <NoteItem note={note} key={note._id} />
-        ))}
+        {profile.notes.length > 0 ? (
+          profile.notes.map(note => <NoteItem note={note} key={note._id} />)
+        ) : (
+          <p className="text-center">
+            You don't have any notes yet. Go ahead and{" "}
+            <Link to="/notes/new">write one!</Link>
+          </p>
+        )}
       </div>
     </Fragment>
   );
