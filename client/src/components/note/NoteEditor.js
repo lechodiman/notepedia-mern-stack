@@ -101,7 +101,8 @@ const NoteEditor = ({ createNote, history }) => {
 };
 
 NoteEditor.propTypes = {
-  createNote: PropTypes.func.isRequired
+  createNote: PropTypes.func.isRequired,
+  note: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({

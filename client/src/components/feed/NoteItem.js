@@ -7,7 +7,7 @@ import Moment from "react-moment";
 import { addLike, removeLike, deleteNote } from "../../actions/noteActions";
 import { removeNoteFromNotebook } from "../../actions/notebookActions";
 import AddToNotebookButton from "../layout/AddToNotebookButton";
-  import { addBookmark, deleteBookmark } from "../../actions/bookmarkActions";
+import { addBookmark, deleteBookmark } from "../../actions/bookmarkActions";
 import { setAlert } from "../../actions/alertActions";
 
 const NoteItem = ({
@@ -15,7 +15,6 @@ const NoteItem = ({
   removeLike,
   deleteNote,
   removeNoteFromNotebook,
-  // TODO: sería mejor hacer un NotebookItem que tenga dentro un NoteItem y este boton para removerlo del notebook
   notebook_id,
   addBookmark,
   deleteBookmark,
@@ -48,20 +47,20 @@ const NoteItem = ({
         <div className="note-item-title">
           <div className="col">
             <Link to={`/notes/${_id}`}>
-                <h3 className="my-1">{title}</h3>
+              <h3 className="my-1">{title}</h3>
             </Link>
           </div>
           <div className="col">
             <AddToNotebookButton note_id={_id} />
-          
+
             {window.location.href.includes("notebooks") && (
-            <button
-              onClick={() => removeNoteFromNotebook(_id, notebook_id)}
-              type="button"
-              className="btn btn"
-            >
-              <i className="fas fa-trash" />
-            </button>
+              <button
+                onClick={() => removeNoteFromNotebook(_id, notebook_id)}
+                type="button"
+                className="btn btn"
+              >
+                <i className="fas fa-trash" />
+              </button>
             )}
           </div>
         </div>
@@ -122,7 +121,7 @@ const NoteItem = ({
                 <span className="comment-count">{comments.length}</span>
               )}
             </Link>
-            {auth.isAuthenticated && author._id === auth.user._id && (
+            {auth.isAuthenticated && auth.user && author._id === auth.user._id && (
               <button
                 onClick={() => deleteNote(_id)}
                 type="button"
@@ -131,9 +130,18 @@ const NoteItem = ({
                 <i className="fas fa-times" />
               </button>
             )}
-            <div class="row">
-              
-            </div>
+
+            {/* {auth.user && <AddToNotebookButton note_id={_id} />}
+
+            {window.location.href.includes("notebooks") && (
+              <button
+                onClick={() => removeNoteFromNotebook(_id, notebook_id)}
+                type="button"
+                className="btn btn-danger"
+              >
+                Remove
+              </button>
+            )} */}
           </Fragment>
         )}
       </div>

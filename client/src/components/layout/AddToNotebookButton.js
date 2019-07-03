@@ -1,9 +1,22 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { loadNotebooks, addNoteToNotebook } from "../../actions/notebookActions";
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import {
+  loadNotebooks,
+  addNoteToNotebook
+} from "../../actions/notebookActions";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
+} from "reactstrap";
 import { connect } from "react-redux";
 
-const AddToNotebookButton = ( { notebooks, loadNotebooks, addNoteToNotebook, note_id}) => {
+const AddToNotebookButton = ({
+  notebooks,
+  loadNotebooks,
+  addNoteToNotebook,
+  note_id
+}) => {
   useEffect(() => {
     loadNotebooks();
   }, [loadNotebooks]);
@@ -12,19 +25,20 @@ const AddToNotebookButton = ( { notebooks, loadNotebooks, addNoteToNotebook, not
 
   const toggle = () => {
     setOpen(!isOpen);
-  }
+  };
 
-  const displayNotebooks = (notebooks.length > -1 ?
-    notebooks.map(notebook => (
-    <Fragment key={notebook._id}>
-      <DropdownItem onClick={(e) => addNoteToNotebook(note_id, notebook._id)}>
-        {notebook.name}
-      </DropdownItem>
-    </Fragment>
-  )) : (
-    <DropdownItem disabled>You don´t have any notebooks yet!</DropdownItem>
-  )
-  );
+  const displayNotebooks =
+    notebooks.length > -1 ? (
+      notebooks.map(notebook => (
+        <Fragment key={notebook._id}>
+          <DropdownItem onClick={e => addNoteToNotebook(note_id, notebook._id)}>
+            {notebook.name}
+          </DropdownItem>
+        </Fragment>
+      ))
+    ) : (
+      <DropdownItem disabled>You don´t have any notebooks yet!</DropdownItem>
+    );
 
   return (
     <Fragment>

@@ -56,11 +56,7 @@ router.post(
 // @access   Private
 router.get("/", async (req, res) => {
   try {
-    const perPage = 5;
-    const notes = await Note.find({}, null, {
-      limit: perPage,
-      skip: perPage * req.body.page
-    })
+    const notes = await Note.find()
       .sort("desc")
       .populate("author", "-password");
 
@@ -73,21 +69,18 @@ router.get("/", async (req, res) => {
 
 // @route    GET api/notes/search
 // @desc     Search for notes given a text
-// @access   Private
+// @access   Public
 
-router.get("/search", auth, async (req, res) => {
+router.get("/search", async (req, res) => {
   try {
-    const perPage = 5;
     const notes = await Note.find(
       {
         $text: {
-          $search: req.body.text
+          $search: req.query.text
         }
       },
       { score: { $meta: "textScore" } },
       {
-        limit: perPage,
-        skip: perPage * req.body.page,
         sort: { score: { $meta: "textScore" } }
       }
     );

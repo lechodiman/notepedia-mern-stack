@@ -31,7 +31,7 @@ const Notebooks = ({
 }) => {
   useEffect(() => {
     loadNotebooks();
-  });
+  }, [loadNotebooks]);
 
   const [isOpen, setOpen] = useState(false);
 
@@ -143,7 +143,7 @@ const Notebooks = ({
           <ListGroup>{displayNotebooks}</ListGroup>
         </Container>
       ) : (
-        <p className="text-center"> You don´t have any notebooks yet!</p>
+        <p className="text-center"> You don't have any notebooks yet!</p>
       )}
     </Fragment>
   );

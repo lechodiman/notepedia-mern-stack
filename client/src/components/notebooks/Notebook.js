@@ -4,7 +4,6 @@ import { getNotebook } from "../../actions/notebookActions";
 import NoteItem from "../feed/NoteItem";
 import Spinner from "../layout/Spinner";
 
-// TODO: Add/Remove note to/from notebook
 const Notebook = ({ notebook: { notebook, loading }, match, getNotebook }) => {
   useEffect(() => {
     getNotebook(match.params.id);
@@ -19,7 +18,9 @@ const Notebook = ({ notebook: { notebook, loading }, match, getNotebook }) => {
       <h1 className="large text-secondary text-center">{notebook.name}</h1>
 
       {notebook.notes.length > 0 ? (
-        notebook.notes.map(note => <NoteItem note={note} notebook_id={match.params.id} key={note._id} />)
+        notebook.notes.map(note => (
+          <NoteItem note={note} notebook_id={match.params.id} key={note._id} />
+        ))
       ) : (
         <p className="text-center">This notebook doesn't have any notes yet!</p>
       )}
