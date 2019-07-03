@@ -33,12 +33,12 @@ export const Navbar = ({
     <Fragment>
       <NavItem>
         <Link to="/notes/new" className="nav-link" onClick={onToggle}>
-          New Note
+          Write a note
         </Link>
       </NavItem>
       <NavItem>
         <Link to="/notebooks" className="nav-link" onClick={onToggle}>
-          Notebooks
+          <i className="fas fa-book-open" />
         </Link>
       </NavItem>
       <NavItem>
@@ -48,19 +48,18 @@ export const Navbar = ({
             className="nav-link"
             onClick={onToggle}
           >
-            My profile
+            <i className="fas fa-user" />
           </Link>
         )}
       </NavItem>
       <NavItem>
         <Link to="/bookmarks" className="nav-link" onClick={onToggle}>
-          Bookmarks
+          <i className="fas fa-bookmark" />
         </Link>
       </NavItem>
       <NavItem>
         <a href="#!" onClick={logout} className="nav-link">
-          <i className="fas fa-sign-out-alt" />{" "}
-          <span className="hide-sm">Logout</span>
+          <i className="fas fa-sign-out-alt" />
         </a>
       </NavItem>
     </Fragment>
@@ -70,12 +69,12 @@ export const Navbar = ({
     <Fragment>
       <NavItem>
         <Link to="/register" className="nav-link" onClick={onToggle}>
-          Register
+          <i className="fas fa-user-plus" /> Register
         </Link>
       </NavItem>
       <NavItem>
         <Link to="/login" className="nav-link" onClick={onToggle}>
-          Login
+          <i className="fas fa-sign-in-alt" /> Login
         </Link>
       </NavItem>
     </Fragment>
@@ -90,7 +89,7 @@ export const Navbar = ({
       <Nav className="mr-auto" navbar>
         <NavItem>
           <Link to="/information" className="nav-link">
-            All about Notepedia
+            <i className="fas fa-question-circle" /> Information
           </Link>
         </NavItem>
       </Nav>

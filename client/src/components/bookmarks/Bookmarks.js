@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 const Bookmarks = ({ user: { bookmarks } }) => {
   return (
     <Fragment>
+      <Link to="/" className="btn btn-light mt-2">
+        <i className="fas fa-chevron-left" /> Back To Feed
+      </Link>
+
       <h1 className="text-primary text-center">
         Reading List ({bookmarks.length})
       </h1>

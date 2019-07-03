@@ -21,7 +21,7 @@ const Profile = ({
   ) : (
     <Fragment>
       <Link to="/" className="btn btn-light mt-2">
-        Back To Feed
+        <i className="fas fa-chevron-left" /> Back To Feed
       </Link>
 
       <h2 className="large text-secondary text-center">

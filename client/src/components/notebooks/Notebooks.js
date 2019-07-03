@@ -112,6 +112,10 @@ const Notebooks = ({
     <Spinner />
   ) : (
     <Fragment>
+      <Link to="/" className="btn btn-light mt-2">
+        <i className="fas fa-chevron-left" /> Back To Feed
+      </Link>
+
       <Row>
         <div style={{ margin: "0 auto" }}>
           <h1 className="large text-secondary text-center">My Notebooks</h1>

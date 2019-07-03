@@ -18,6 +18,10 @@ const Note = ({ notes: { note, loading }, match, getNote, auth }) => {
 
   return (
     <Fragment>
+      <Link to="/" className="btn btn-light mt-2">
+        <i className="fas fa-chevron-left" /> Back To Feed
+      </Link>
+
       <div className="mt-3">
         <NoteItem note={note} />
       </div>
