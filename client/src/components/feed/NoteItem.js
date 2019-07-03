@@ -104,7 +104,7 @@ const NoteItem = ({
                 <span className="comment-count">{comments.length}</span>
               )}
             </Link>
-            {auth.isAuthenticated && author && author._id === auth.user._id && (
+            {auth.isAuthenticated && auth.user && author._id === auth.user._id && (
               <button
                 onClick={() => deleteNote(_id)}
                 type="button"
@@ -113,7 +113,9 @@ const NoteItem = ({
                 <i className="fas fa-times" />
               </button>
             )}
-            <AddToNotebookButton note_id={_id} />
+
+            {auth.user && <AddToNotebookButton note_id={_id} />}
+
             {window.location.href.includes("notebooks") && (
               <button
                 onClick={() => removeNoteFromNotebook(_id, notebook_id)}
