@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { getNote } from "../../actions/noteActions";
 import Spinner from "../layout/Spinner";
 import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
 import { Link } from "react-router-dom";
+import NoteItem from "../feed/NoteItem";
 
 const Note = ({ notes: { note, loading }, match, getNote, auth }) => {
   useEffect(() => {
@@ -16,28 +17,9 @@ const Note = ({ notes: { note, loading }, match, getNote, auth }) => {
   }
 
   return (
-    <div className="note">
-      <div className="row d-flex justify-content-center">
-        <h1 className="note-title">{note.title}</h1>
-      </div>
-
-      <div className="row">
-        <p className="note-description">{note.description}</p>
-      </div>
-
-      <div className="row">
-        <div className="col-1">
-          {note && (
-            <img
-              src={`${note.author.avatar}`}
-              alt={`${note.author.name}`}
-              className="rounded-circle img-fluid img-thumbnail"
-            />
-          )}
-        </div>
-        <div className="col-11">
-          <p className="text-primary">{note.author.name}</p>
-        </div>
+    <Fragment>
+      <div className="mt-3">
+        <NoteItem note={note} />
       </div>
 
       <div className="row mt-4">
@@ -59,7 +41,7 @@ const Note = ({ notes: { note, loading }, match, getNote, auth }) => {
           <CommentItem key={comment._id} comment={comment} noteId={note._id} />
         ))}
       </div>
-    </div>
+    </Fragment>
   );
 };
 
