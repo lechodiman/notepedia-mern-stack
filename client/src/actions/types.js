@@ -38,5 +38,5 @@ export const GET_PROFILE = "GET_PROFILE";
 export const PROFILE_ERROR = "PROFILE_ERROR";
 
 // Search bar
-export const UPDATE_RESULTS = "UPDATE_RESULTS";
+export const GET_SEARCH_RESULTS = "GET_SEARCH_RESULTS";
 export const SEARCH_ERROR = "SEARCH_ERROR";

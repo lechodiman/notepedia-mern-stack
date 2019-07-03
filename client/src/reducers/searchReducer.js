@@ -1,18 +1,17 @@
-import { UPDATE_RESULTS } from "../actions/types";
+import { GET_SEARCH_RESULTS } from "../actions/types";
 
 const initialState = {
   results: [],
-  loading: true,
-  error: {}
+  loading: true
 };
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case UPDATE_RESULTS:
+    case GET_SEARCH_RESULTS:
       return {
         ...state,
-        results: [...state.results, ...payload],
+        results: payload,
         loading: false
       };
     default:

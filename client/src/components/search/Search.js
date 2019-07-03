@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, Fragment } from "react";
 import PropTypes from "prop-types";
 import queryString from "query-string";
 import { searchNotesByQuery } from "../../actions/searchActions";
@@ -12,12 +12,9 @@ const Search = ({
   searchNotesByQuery
 }) => {
   const { text } = queryString.parse(location.search);
-  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    searchNotesByQuery(text, page);
-
-    setPage(page => page + 1);
+    searchNotesByQuery(text);
   }, [searchNotesByQuery, text]);
 
   return loading ? (
@@ -26,9 +23,13 @@ const Search = ({
     <Fragment>
       <h1 className="large text-primary text-center">Results</h1>
 
-      {results.map(note => (
-        <NoteItem note={note} key={note._id} />
-      ))}
+      {results.length > 0 ? (
+        results.map(note => <NoteItem note={note} key={note._id} />)
+      ) : (
+        <p className="text-center">
+          We could not find anything related :( Try using other words.
+        </p>
+      )}
     </Fragment>
   );
 };

@@ -100,7 +100,7 @@ const NoteItem = ({
                 <span className="comment-count">{comments.length}</span>
               )}
             </Link>
-            {auth.isAuthenticated && author._id === auth.user._id && (
+            {auth.isAuthenticated && author && author._id === auth.user._id && (
               <button
                 onClick={() => deleteNote(_id)}
                 type="button"
