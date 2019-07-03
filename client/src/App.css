@@ -103,3 +103,7 @@ img {
 .conduct-list li {
   list-style-type: circle;
 }
+
+.editable {
+  min-height: 400px;
+}

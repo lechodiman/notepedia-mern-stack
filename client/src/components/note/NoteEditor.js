@@ -18,23 +18,31 @@ const NoteEditor = ({ createNote, history }) => {
 
   useEffect(() => {
     const editor = new MediumEditor(".editable", {
+      activeButtonClass: "medium-editor-button-active",
       autoLink: true,
-      imageDragging: true,
       delay: 1000,
       toolbar: {
         buttons: [
           "bold",
           "italic",
           "quote",
+          "justifyCenter",
+          "orderedlist",
+          "unorderedlist",
+          "justifyLeft",
+          "justifyCenter",
+          "justifyRight",
+          "justifyFull",
           "underline",
           "anchor",
           "h1",
           "h2",
-          "h3",
-          "strikethrough"
+          "h3"
         ],
-        diffLeft: 25,
-        diffTop: 10
+        static: true,
+        align: "center",
+        sticky: true,
+        updateOnEmptySelection: true
       },
       placeholder: {
         text: "Write your note..."
@@ -90,7 +98,7 @@ const NoteEditor = ({ createNote, history }) => {
             required
           />
         </FormGroup>
-        <FormGroup>
+        <FormGroup className="mt-5">
           <Label for="exampleBody">Note: </Label>
           <div className="editable" />
         </FormGroup>
