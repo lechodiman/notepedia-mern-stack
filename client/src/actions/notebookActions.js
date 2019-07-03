@@ -147,6 +147,8 @@ export const removeNoteFromNotebook = (
       `/api/notebooks/${notebook_id}/notes/${note_id}`
     );
 
+    debugger;
+
     dispatch({
       type: NOTE_FROM_NOTEBOOK,
       payload: res.data

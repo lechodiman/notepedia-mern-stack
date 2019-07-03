@@ -157,7 +157,11 @@ router.delete("/:notebook_id/notes/:note_id", auth, async (req, res) => {
 
     await notebook.save();
 
-    res.json(notebook);
+    const populatedNotebook = await Notebook.findById(
+      req.params.notebook_id
+    ).populate("notes");
+
+    res.json(populatedNotebook);
   } catch (err) {
     console.error(err.message);
     if (err.kind === "ObjectId") {
@@ -174,13 +178,13 @@ router.get("/:id", async (req, res) => {
   try {
     const notebook = await Notebook.findById(req.params.id)
       .populate("author", "-password")
-      .populate({ 
-        path: 'notes',
+      .populate({
+        path: "notes",
         populate: {
-          path: 'author',
-          model: 'user'
-        } 
-     });
+          path: "author",
+          model: "user"
+        }
+      });
 
     if (!notebook) {
       return res.status(404).json({ message: "Notebook not found" });
