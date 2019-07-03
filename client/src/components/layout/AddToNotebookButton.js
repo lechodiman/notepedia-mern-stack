@@ -43,7 +43,7 @@ const AddToNotebookButton = ({
   return (
     <Dropdown isOpen={isOpen} toggle={toggle} className="d-inline-block">
       <DropdownToggle color="light">
-        <i class="fas fa-ellipsis-v" />
+        <i className="fas fa-ellipsis-v" />
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem header>Choose a notebook</DropdownItem>

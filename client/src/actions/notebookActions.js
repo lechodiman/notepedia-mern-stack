@@ -7,7 +7,7 @@ import {
   DELETE_NOTEBOOK,
   NOTEBOOK_ERROR,
   NOTE_TO_NOTEBOOK,
-  NOTE_FROM_NOTEBOOK,
+  NOTE_FROM_NOTEBOOK
 } from "./types";
 import { setAlert } from "./alertActions";
 
@@ -116,12 +116,13 @@ export const deleteNotebook = id => async dispatch => {
   }
 };
 
-
 // Add a note to a notebook
 // FIX
 export const addNoteToNotebook = (note_id, notebook_id) => async dispatch => {
   try {
-    const res = await axios.put(`/api/notebooks/${notebook_id}/notes`, {note_id});
+    const res = await axios.put(`/api/notebooks/${notebook_id}/notes`, {
+      note_id
+    });
 
     dispatch({
       type: NOTE_TO_NOTEBOOK,
@@ -137,9 +138,14 @@ export const addNoteToNotebook = (note_id, notebook_id) => async dispatch => {
   }
 };
 
-export const removeNoteFromNotebook = (note_id, notebook_id) => async dispatch => {
+export const removeNoteFromNotebook = (
+  note_id,
+  notebook_id
+) => async dispatch => {
   try {
-    const res = await axios.delete(`/api/notebooks/${notebook_id}/notes/${note_id}`);
+    const res = await axios.delete(
+      `/api/notebooks/${notebook_id}/notes/${note_id}`
+    );
 
     dispatch({
       type: NOTE_FROM_NOTEBOOK,
@@ -148,6 +154,7 @@ export const removeNoteFromNotebook = (note_id, notebook_id) => async dispatch =
 
     dispatch(setAlert("Note removed", "danger"));
   } catch (err) {
+    debugger;
     dispatch({
       type: NOTEBOOK_ERROR,
       payload: { message: err.response.statusText, status: err.response.status }
