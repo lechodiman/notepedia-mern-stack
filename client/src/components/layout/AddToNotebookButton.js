@@ -41,16 +41,18 @@ const AddToNotebookButton = ({
     );
 
   return (
-    <Dropdown isOpen={isOpen} toggle={toggle} className="d-inline-block">
-      <DropdownToggle color="light">
-        <i className="fas fa-ellipsis-v" />
-      </DropdownToggle>
-      <DropdownMenu>
-        <DropdownItem header>Choose a notebook</DropdownItem>
-        <DropdownItem divider />
-        {displayNotebooks}
-      </DropdownMenu>
-    </Dropdown>
+    <Fragment>
+      <Dropdown isOpen={isOpen} toggle={toggle}>
+        <DropdownToggle>
+          <i class="fas fa-plus-circle" />
+        </DropdownToggle>
+        <DropdownMenu>
+          <DropdownItem header>Choose a notebook</DropdownItem>
+          <DropdownItem divider />
+          {displayNotebooks}
+        </DropdownMenu>
+      </Dropdown>
+    </Fragment>
   );
 };
 
